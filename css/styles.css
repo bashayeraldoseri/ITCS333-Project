@@ -1,3 +1,17 @@
+
+body{
+    
+
+}
+
+.custom-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 900px;
+    height: 500px;
+  }
+
 .form-check-input {
     display: flex;
     align-items: center;
