@@ -4,6 +4,10 @@ body{
 
 }
 
+img {
+   
+}
+
 .custom-box {
     display: flex;
     align-items: center;
@@ -25,3 +29,4 @@ body{
     padding-left:10px;
     padding-right:10px;
 }
+
