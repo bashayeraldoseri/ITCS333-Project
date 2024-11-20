@@ -21,12 +21,43 @@ img {
     align-items: center;
 }
 
-.container{
-    margin-top:30px;
-}
-
 .filter-col{
     padding-left:10px;
     padding-right:10px;
 }
 
+.container {
+    margin-top:30px;
+    display: flex;
+    justify-content: center;  /* Centers the scrollable container */
+    padding: 20px;            /* Margin around the entire scrollable area */
+}
+
+.scrollable-container {
+    display: flex;
+    flex-wrap: wrap;          /* Allow wrapping of the cards */
+    justify-content: space-between; /* Distribute the cards evenly */
+    max-width: 100%;          /* Container width will fill available space */
+    height: 400px;            /* Fixed height for the scrollable container */
+    overflow-y: auto;         /* Vertical scroll when content exceeds */
+    padding: 10px;            /* Optional padding inside the container */
+    margin: 10px;             /* Margin around the scrollable container */
+    border: 1px solid #ccc;   /* Optional border for styling */
+    border-radius: 8px;       /* Optional: rounded corners for a cleaner look */
+}
+
+.card {
+    width: 18rem;             /* Fixed width for each card */
+    margin-bottom: 10px;      /* Space between the cards */
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Optional: for smaller screens */
+@media (max-width: 600px) {
+    .card {
+        width: 100%;          /* Card takes full width on smaller screens */
+    }
+}

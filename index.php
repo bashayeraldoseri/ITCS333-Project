@@ -31,7 +31,7 @@
                     <a class="nav-link" href="templates/profile.php">Profile</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="templates/dashboard.html">Dashboard</a>
+                    <a class="nav-link" href="dashboard.php">Dashboard</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="templates/login.html">Login</a>
@@ -136,48 +136,50 @@
         </div>
 
 
-        <div class="col-lg-3">
-          <div class="card" style="width: 18rem">
-            <div class="card-body">
-              <h5 class="card-title">IS Class</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="card-link">View</a>
-              <a href="#" class="card-link">Book</a>
+        <div class="col-lg-9 container">
+    <div class="scrollable-container">
+    <?php
+// Include the existing database connection
+include('db.php');
+
+// Fetch class data from the database
+$sql = "SELECT * FROM rooms";
+$stmt = $conn->prepare($sql);  // Prepare the query
+$stmt->execute();  // Execute the query
+
+// Check if there are rows
+if ($stmt->rowCount() > 0) {
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        // Card content
+        $class_name = $row['department'] . " Class";
+        $class_subtitle = "S40- " . $row['number'];
+        $class_description = $row['Description'];
+        ?>
+        <div class="col-lg-3 row g-3">
+            <div class="card" style="width: 18rem">
+                <div class="card-body m-3">
+                    <h5 class="card-title"><?php echo $class_name; ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $class_subtitle; ?></h6>
+                    <p class="card-text">
+                        <?php echo $class_description; ?>
+                    </p>
+                    <a href="#" class="card-link">View</a>
+                    <a href="#" class="card-link">Book</a>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="card" style="width: 18rem">
-            <div class="card-body">
-              <h5 class="card-title">CS Class</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="card-link">View</a>
-              <a href="#" class="card-link">Book</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="card" style="width: 18rem">
-            <div class="card-body">
-              <h5 class="card-title">CE Class</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="card-link">View</a>
-              <a href="#" class="card-link">Book</a>
-            </div>
-          </div>
-        </div>
+      </div>
+      <?php
+    }
+} else {
+    echo "No classes available.";
+}
+
+// Close the connection (optional, as PDO will handle it when the script ends)
+$conn = null;
+?>
+    </div>
+</div>
+
       </div>
     </main>
 
