@@ -9,9 +9,9 @@
     <div class = "userdash-container">
         <?php
         session_start();
-        include('db.php');
+        include('database/db.php');
         $sql = "SELECT ProfilePic FROM users WHERE ID = ?";
-        $statement = $conn->prepare($sql);
+        $statement = $pdo->prepare($sql);
         $id = $_SESSION['user_id'];
         $statement->execute([$id]);
         $picture = $statement->fetch();

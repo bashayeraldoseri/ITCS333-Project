@@ -140,11 +140,12 @@
     <div class="scrollable-container">
     <?php
 // Include the existing database connection
-include('db.php');
+include('database/db.php');
+include('helpers/functions.php');
 
 // Fetch class data from the database
 $sql = "SELECT * FROM rooms";
-$stmt = $conn->prepare($sql);  // Prepare the query
+$stmt = $pdo->prepare($sql);  // Prepare the query
 $stmt->execute();  // Execute the query
 
 // Check if there are rows
@@ -175,7 +176,7 @@ if ($stmt->rowCount() > 0) {
 }
 
 // Close the connection (optional, as PDO will handle it when the script ends)
-$conn = null;
+$pdo = null;
 ?>
     </div>
 </div>
