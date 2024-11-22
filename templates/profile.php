@@ -123,7 +123,4 @@ session_start();
 <?php
 include('../database/db.php');
 
-
-
-
 ?>

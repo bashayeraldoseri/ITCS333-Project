@@ -1,6 +1,13 @@
-
+ 
+:root {
+        --whitish: #EFF1F3;
+        --blue: #8ecae6;
+        --yellow: #FED766;
+        --balckish: #272727;
+        --gray: #696773;
+}
 body{
-    
+     background-color: var(--whitish);
 
 }
 
@@ -13,7 +20,8 @@ img {
     align-items: center;
     justify-content: center;
     width: 900px;
-    height: 600px;
+    height: 600px; 
+    background-color: var(--blue);
   }
 
 .form-check-input {
@@ -31,6 +39,7 @@ img {
     display: flex;
     justify-content: center;  /* Centers the scrollable container */
     padding: 20px;            /* Margin around the entire scrollable area */
+    background-color: var(--gray);
 }
 
 .scrollable-container {
