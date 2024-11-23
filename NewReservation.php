@@ -49,6 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Close the connection
     $pdo = null;
+
+    // Redirect to home page
+    header('Location: home.php');
 }
 ?>
 
