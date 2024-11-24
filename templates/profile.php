@@ -42,7 +42,7 @@ session_start();
             aria-labelledby="v-pills-profile-tab">
 
             <div class="row">
-              <div class="col-sm-5">
+              <div class="col-sm-3">
                 <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center">
                   <!-- Profile Pictures here -->
                   <img class="card-img-top rounded-circle mx-auto d-block" src="../static/user.jpg" alt="pfp"
@@ -58,18 +58,14 @@ session_start();
               <div class="col-sm-5">
                 <form action="">
                   <fieldset disabled>
-                    <div class="row">
-                      <div class="col-lg-5">
-                        <div class="form-group">
-                          <input type="text" id="Department" class="form-control" placeholder="Department" />
-                        </div>
+                    <div class="row d-flex justify-content-center align-items-center m-3" >
+                      <div class="col-lg-10">
+                        <div class="form-group ">
+                          <input type="text" id="Department: " class="form-control" placeholder="Department" />
+                          <input type="text" id="email: " class="form-control" placeholder="Email" />
 
-                      </div>
-                      <div class="col-lg-5">
-                        <div class="form-group">
-                          <input type="text" id="email" class="form-control" placeholder="email" />
-                        </div>
 
+                        </div>
                       </div>
                     </div>
                   </fieldset>
@@ -83,7 +79,7 @@ session_start();
           <!-- ------------------------------------------------------------------------- -->
           <div class="tab-pane fade" id="v-pills-bookings" role="tabpanel" aria-labelledby="v-pills-bookings-tab">
             <div class="row">
-            <div class="col-sm-5">
+              <div class="col-sm-5">
                 <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center">
                   <!-- Profile Pictures here -->
                   <img class="card-img-top rounded-circle mx-auto d-block" src="../static/user.jpg" alt="pfp"
@@ -91,6 +87,7 @@ session_start();
                   <div class="card-body">
                     <h5 class="card-title d-flex justify-content-center">Name</h5>
                     <p class="card-text d-flex justify-content-center">Role: Student</p>
+                    <p class="card-text"><small>Last time booked: 3 months ago</small></p>
                   </div>
                 </div>
 
@@ -122,5 +119,4 @@ session_start();
 
 <?php
 include('../database/db.php');
-
 ?>
