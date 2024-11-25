@@ -56,12 +56,11 @@
       <div class="row g-50">
         <!-- Sidebar Search Menu -->
         <div id="searchSidebar" class="search-sidebar">
-          <div class="sidebar-header">
+          <!-- <div class="sidebar-header">
             <button class="btn-close" id="closeSidebar">&times;</button>
-          </div>
+          </div> -->
           <div class="sidebar-body p-5 ">
             <input class="form-control me-2 mb-4" type="search" placeholder="Search" aria-label="Search" />
-
 
             <label>Choose a department:</label>
             <div class="form-check form-check-inline mb-4">
@@ -145,7 +144,10 @@
                         <p class="card-text">
                           <?php echo $class_description; ?>
                         </p>
-                        <a href="#" class="card-link">Book</a>
+                        <hr>
+
+                        
+                        <a href="#" class="book-link"><p class="book-link">Book</p></a>
                       </div>
                     </div>
                   </a>

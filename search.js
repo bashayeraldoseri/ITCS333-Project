@@ -1,23 +1,25 @@
 
 const toggleIcon = document.querySelector('.toggle-icon');
 const searchSidebar = document.getElementById('searchSidebar');
+const closeicon = document.getElementById('closeSidebar');
 
 
 toggleIcon.addEventListener('mouseenter', () => {
   searchSidebar.style.left = '0'; // Show the sidebar on hover
-  searchSidebar.
 });
 
-toggleIcon.addEventListener('mouseleave', () => {
-    toggleIcon.display = "hidden";
-    
+// closeicon.addEventListener('click', ()=> {
+//     console.log("Close Button Clicked")
+//     searchSidebar.style.left = '-300px';
+// });
 
-});
+
+searchSidebar.addEventListener('mouseleave', ()=> {
+        searchSidebar.style.left = '-300px';
+    });
 
 
-document.getElementById('closeSidebar').addEventListener('click', function () {
-    //return the icon
-    searchSidebar.classList.remove('');
-  });
+
+
   
 

@@ -12,6 +12,8 @@ session_start();
   <title>Profile</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/profile.css">
 </head>
@@ -20,42 +22,42 @@ session_start();
 
 
   <div class="container-fluid">
-  <header>
-        <div class="container-fluid p-2">
-          <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">UOB Booking System</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="me-auto"></div>
-                <ul class="nav nav-tabs">
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="../index.php">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" href="#">Profile</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="register.html">Register</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
-                  </li>
-                </ul>
-              </div>
+    <header>
+      <div class="container-fluid p-2">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">UOB Booking System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <div class="me-auto"></div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="../index.php">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="login.html">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="register.html">Register</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">About Us</a>
+                </li>
+              </ul>
             </div>
-          </nav>
-        </div>
-      </header>
+          </div>
+        </nav>
+      </div>
+    </header>
 
     <div class="row">
       <div class="col-sm-2 left-box d-flex flex-column justify-content-center align-items-center ">
@@ -84,8 +86,10 @@ session_start();
                 <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center"
                   id="profile-card">
                   <!-- Profile Pictures here -->
-                  <img class="card-img-top rounded-circle mx-auto d-block" src="../static/user.jpg" alt="pfp"
-                    style="width: 100px; height: 100px; object-fit: cover;" />
+                    <img class="card-img-top rounded-circle mx-auto d-block" src="../static/user.jpg" alt="pfp"
+                      style="width: 100px; height: 100px; object-fit: cover;" />
+                   
+
                   <div class="card-body">
                     <h5 class="card-title d-flex justify-content-center">Name</h5>
                     <p class="card-text d-flex justify-content-center">Role: Student</p>
@@ -162,15 +166,21 @@ session_start();
                         Account Settings
                       </div>
                       <div class="card-body">
-                        <div class="mb-3">
-                          <label for="username" class="form-label">Change username</label>
-                          <input type="text" class="form-control" id="username" placeholder="Enter new username"
-                            value="current_user" />
-                        </div>
+                        
                         <div class="mb-3">
                           <label for="email" class="form-label">Change Linked Email</label>
                           <input type="email" class="form-control" id="email" placeholder="Enter new email"
                             value="user@example.com" />
+                        </div>
+
+                        
+                        <div class="mb-3">
+                        <label class="form-label">Edit Profile Picture</label>
+                        <img class="card-img-top rounded-circle mx-auto d-block mb-3" src="../static/user.jpg" alt="pfp"
+                        style="width: 100px; height: 100px; object-fit: cover;" />
+                        <form action="<?php echo $SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data" class="mt-3">
+                          <input type="file" name="fileToUpload" id="fileToUpload">
+                        </form>
                         </div>
                       </div>
                     </div>
@@ -180,22 +190,29 @@ session_start();
                   <div class="col-md-4">
                     <div class="card h-100">
                       <div class="card-header bg-dark text-white">
-                        Edit Personal Information
+                        Personal Information
                       </div>
                       <div class="card-body">
-                      <div class="mb-3">
+                        <div class="mb-3">
                           <label for="Dob" class="form-label">Choose Date of Birth</label>
                           <input type="date" class="form-control" id="DoB" placeholder="Enter new DoB"
-                            value="user@example.com" />
+                            value="2004-02-21" />
                         </div>
 
                         <div class="mb-3">
                           <label for="Phone" class="form-label">Change Phone number</label>
-                          <input type="number" class="form-control" id="username" placeholder="Enter new Phone number"
+                          <input type="phone" class="form-control" id="phone" placeholder="Enter new Phone number"
+                            value="+379138918" />
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="username" class="form-label">Change username</label>
+                          <input type="text" class="form-control" id="username" placeholder="Enter new username"
                             value="current_user" />
                         </div>
+
                       </div>
-                    
+
                     </div>
                   </div>
 
@@ -206,41 +223,40 @@ session_start();
                         Privacy Settings
                       </div>
                       <div class="mt-3">
-                          <label for="password" class="form-label">Change Password</label>
-                          <input type="password" class="form-control" id="password"
-                            placeholder="Change your password" />
-                        </div>
-                        <div class="mt-3 mb-3">
-                          <label for="rp-password" class="form-label">Repeat Password</label>
-                          <input type="Password" class="form-control" id="rp-password"
-                            placeholder="Change your password" />
-                        </div>
-                        <div class="form-check mb-3">
-                          <input class="form-check-input" type="checkbox" id="trackActivity" checked />
-                          <label class="form-check-label" for="trackActivity">
-                            Allow tracking of my activity
-                          </label>
-                        </div>
+                        <label for="password" class="form-label">Change Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="New password" />
+                      </div>
+                      <div class="mt-3 mb-3">
+                        <label for="rp-password" class="form-label">Repeat Password</label>
+                        <input type="Password" class="form-control" id="rp-password"
+                          placeholder="Repeated password" />
+                      </div>
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="trackActivity" checked />
+                        <label class="form-check-label" for="trackActivity">
+                          Allow tracking of my activity
+                        </label>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                <!-- Save Changes Button -->
-                <div class="d-flex justify-content-center mt-4">
-                  <button type="submit" class="btn btn-success">Save Changes</button>
-                </div>
-              </form>
             </div>
-          </div>
 
-          <!-- ------------------------------------------------------------------------- -->
-          <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-help-tab">
-            pn
+            <!-- Save Changes Button -->
+            <div class="d-flex justify-content-center mt-4">
+              <button type="submit" class="btn btn-success">Save Changes</button>
+            </div>
+            </form>
           </div>
+        </div>
+
+        <!-- ------------------------------------------------------------------------- -->
+        <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-help-tab">
+          النجدة
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -252,4 +268,9 @@ session_start();
 
 <?php
 include('../database/db.php');
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+  
+
+}
 ?>
