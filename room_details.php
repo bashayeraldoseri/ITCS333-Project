@@ -35,6 +35,16 @@ $stmt2 = $pdo->prepare($equipmentQuery);
 $stmt2->execute([$roomId]);
 $equipment = $stmt2->fetch(PDO::FETCH_ASSOC);
 
+// Determine background color based on department
+$departmentColors = [
+    'CS' => '#ffd60a',
+    'CE' => '#003566',
+    'IS' => '#c1121f',
+    // Add more departments as needed
+];
+
+$department = $room['department'];
+$bgColor = isset($departmentColors[$department]) ? $departmentColors[$department] : '#f1f3f4';
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +58,7 @@ $equipment = $stmt2->fetch(PDO::FETCH_ASSOC);
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f1f3f4;
+            background-color: #EFF1F3;
         }
         .container {
             max-width: 800px;
@@ -57,6 +67,7 @@ $equipment = $stmt2->fetch(PDO::FETCH_ASSOC);
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: <?php echo htmlspecialchars($bgColor); ?>;
         }
         h1 {
             text-align: center;
