@@ -72,15 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php
-// Get room data (e.g., room name and room_id)
-$room_id = $_GET['room_id']; // Assuming you are passing the room_id via the URL or session
-$query = "SELECT * FROM rooms WHERE room_id = ?";
-$stmt = $pdo->prepare($query);
-$stmt->execute([$room_id]);
-$room = $stmt->fetch();
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
