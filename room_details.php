@@ -38,8 +38,8 @@ $equipment = $stmt2->fetch(PDO::FETCH_ASSOC);
 // Determine background color based on department
 $departmentColors = [
     'CS' => '#ffd60a',
-    'CE' => '#003566',
-    'IS' => '#c1121f',
+    'CE' => '#0077b6',
+    'IS' => '#e63946',
     // Add more departments as needed
 ];
 
@@ -54,33 +54,49 @@ $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Details</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #EFF1F3;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: <?php echo htmlspecialchars($bgColor); ?>;
-        }
-        h1 {
-            text-align: center;
-            color: #1a73e8;
-        }
-        .details {
-            background-color: #d2e3fc;
-            padding: 15px;
-            border-radius: 6px;
-        }
-        .details p {
-            margin: 10px 0;
-        }
+      <style> 
+       body {
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+         margin: 0; 
+         padding: 0; 
+         background-color: #f8f9fa; } 
+
+      .container { 
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); } 
+
+       h1 { 
+        text-align: center;
+        color: #333333;
+        margin-bottom: 20px; } 
+
+      .details { 
+       background-color: <?php echo htmlspecialchars($bgColor); ?>;
+       padding: 20px; border-radius: 10px; 
+       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+      .details p {
+         margin: 10px 0;
+         line-height: 1.6; } 
+
+      .details strong { 
+        color: #333333; } 
+
+       a { 
+            display: inline-block; 
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #007bff;
+            padding: 10px 20px; border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s; }
+        a:hover {
+             background-color: #007bff; 
+             color: #ffffff; }
     </style>
 </head>
 <body>
