@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2024 at 10:20 AM
+-- Generation Time: Nov 25, 2024 at 03:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,17 +31,18 @@ CREATE TABLE `bookings` (
   `Booking_ID` int(11) NOT NULL,
   `user_ID` int(11) NOT NULL,
   `Room_ID` int(11) NOT NULL,
-  `Start_Time` date NOT NULL,
-  `End_Time` date NOT NULL
+  `Title` varchar(255) NOT NULL,
+  `Start_Time` datetime NOT NULL,
+  `End_Time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
+--
 -- Dumping data for table `bookings`
 --
 
-INSERT INTO `bookings` (`Booking_ID`, `user_ID`, `Room_ID`, `Start_Time`, `End_Time`) VALUES
-(1, 2, 28, '2023-11-10', '2023-11-12'),
-(2, 2, 30, '2024-12-01', '2024-12-05');
+INSERT INTO `bookings` (`Booking_ID`, `user_ID`, `Room_ID`, `Title`, `Start_Time`, `End_Time`) VALUES
+(1, 2, 28, 'Team Meeting', '2023-11-10 09:00:00', '2023-11-12 17:00:00'),
+(2, 2, 30, 'Project Discussion', '2024-12-01 14:00:00', '2024-12-05 16:00:00');
 
 -- --------------------------------------------------------
 
@@ -658,6 +659,34 @@ ALTER TABLE `rooms`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `email` (`email`) USING HASH;
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `Booking_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `equipment`
+--
+ALTER TABLE `equipment`
+  MODIFY `Equipment_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT for table `rooms`
+--
+ALTER TABLE `rooms`
+  MODIFY `Room_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
