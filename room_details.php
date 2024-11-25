@@ -7,7 +7,7 @@ $dbname = 'booking_system';
 $port = 3306;
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
@@ -15,6 +15,7 @@ try {
 
 // Get room ID from the query string
 $roomId = isset($_GET['Room_ID']) ? intval($_GET['Room_ID']) : 0;
+$equipmentid = isset ($_GET['Room_equipment_ID']) ? intval($_GET['Room_equipment_ID']) : 0;
 
 // Fetch room details from the database
 $query = "SELECT * FROM rooms WHERE Room_ID = ?";
@@ -24,8 +25,10 @@ $room = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$room) {
     die("Room not found.");
-}
-?>
+} 
+
+?> 
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,13 +67,19 @@ if (!$room) {
 </head>
 <body>
     <div class="container">
-        <h1><?php echo htmlspecialchars($room['room_name']); ?></h1>
+        <h1><?php echo htmlspecialchars($room['Room_ID']); ?></h1>
         <div class="details">
+            <p><strong>Room ID:</strong> <?php echo htmlspecialchars($room['Room_ID']); ?></p>
+            <p><strong>Room Number :</strong> <?php echo htmlspecialchars($room['number']); ?></p>
             <p><strong>Capacity:</strong> <?php echo htmlspecialchars($room['Capacity']); ?></p>
-            <p><strong>Equipment:</strong> <?php echo htmlspecialchars($room['equipment']); ?></p>
-            <p><strong>Availability:</strong> <?php echo htmlspecialchars($room['Availability']); ?></p>
+            <p><strong>Room Type:</strong> <?php echo htmlspecialchars($room['Type']); ?></p>
+            <p><strong>Room Availability:</strong> <?php echo htmlspecialchars($room['Availability']); ?></p>
+            <p><strong>Room Description:</strong> <?php echo htmlspecialchars($room['Description']); ?></p>
+            <p><strong>Department:</strong> <?php echo htmlspecialchars($room['department']); ?></p>
+            <p><strong>Floor:</strong> <?php echo htmlspecialchars($room['floor']); ?></p>
+            <p><strong>Room Equipment:</strong> </p> 
         </div>
-        <p><a href="room_browsing.php">Back to Room Browsing</a></p>
+        <p><a href="index.php">Back to Room Browsing</a></p>
     </div>
 </body>
 </html>

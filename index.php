@@ -164,7 +164,7 @@ if ($stmt->rowCount() > 0) {
                     <p class="card-text">
                         <?php echo $class_description; ?>
                     </p>
-                    <a href="#" class="card-link">View</a>
+                    <a href="room_details.php?Room_ID=<?php echo $row['Room_ID']; ?> " class="card-link"> View </a>
                     <a href="#" class="card-link">Book</a>
                 </div>
             </div>
