@@ -85,8 +85,15 @@ $total_reservations = count($reservations);
             <td><?php echo $reservation['End_Time']; ?></td>
             <td><?php echo $reservation['Capacity']; ?></td>
             <td>
-              <a href="update_reservation.php?id=<?php echo $reservation['Booking_ID']; ?>" class="btn btn-info">Update</a>
-              <a href="delete_reservation.php?id=<?php echo $reservation['Booking_ID']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this reservation?')">Delete</a>
+              <form action="update_reservation.php" method="get" style="display:inline;">
+                 <input type="hidden" name="id" value="<?php echo $reservation['Booking_ID']; ?>">
+                 <button type="submit" class="btn btn-info">Update...</button>
+                </form>
+
+                <form action="delete_reservation.php" method="get" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this reservation?')">
+                 <input type="hidden" name="id" value="<?php echo $reservation['Booking_ID']; ?>">
+                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this reservation?')">Delete</button>
+                </form>
             </td>
           </tr>
         <?php endforeach; ?>
