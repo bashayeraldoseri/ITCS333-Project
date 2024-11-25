@@ -39,7 +39,7 @@ img {
     display: flex;
     justify-content: center;  /* Centers the scrollable container */
     padding: 20px;            /* Margin around the entire scrollable area */
-    background-color: var(--gray);
+    /* background-color: var(--gray); */
 }
 
 .scrollable-container {

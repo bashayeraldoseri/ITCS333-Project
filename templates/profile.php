@@ -13,14 +13,15 @@ session_start();
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/profile.css">
 </head>
 
 <body>
 
 
-  <div class="container-fluid p-4">
+  <div class="container-fluid p-2">
     <div class="row">
-      <div class="col-sm-2 left-box">
+      <div class="col-sm-2 left-box d-flex flex-column justify-content-center align-items-center ">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab"
             aria-controls="v-pills-profile" aria-selected="true">Profile</a>
@@ -41,9 +42,10 @@ session_start();
           <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel"
             aria-labelledby="v-pills-profile-tab">
 
-            <div class="row">
-              <div class="col-sm-3">
-                <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center">
+            <div class="row d-flex justify-content-center align-items-center m-2">
+              <div class="col-sm-4">
+                <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center"
+                  id="profile-card">
                   <!-- Profile Pictures here -->
                   <img class="card-img-top rounded-circle mx-auto d-block" src="../static/user.jpg" alt="pfp"
                     style="width: 100px; height: 100px; object-fit: cover;" />
@@ -55,21 +57,36 @@ session_start();
 
 
               </div>
-              <div class="col-sm-5">
+              <div class="col-sm-7 ">
                 <form action="">
                   <fieldset disabled>
-                    <div class="row d-flex justify-content-center align-items-center m-3" >
+                    <div class="row d-flex justify-content-center align-items-center m-3">
                       <div class="col-lg-10">
-                        <div class="form-group ">
-                          <input type="text" id="Department: " class="form-control" placeholder="Department" />
-                          <input type="text" id="email: " class="form-control" placeholder="Email" />
-
-
+                        <div class="card p-3 d-flex justify-content-center align-items-center">
+                          <div class="mb-3">
+                            <h5>Department</h5>
+                            <p>Computer Science</p>
+                          </div>
+                          <div class="row mb-3">
+                            <div class="col-md-6">
+                              <h5>Email</h5>
+                              <p>user@example.com</p>
+                            </div>
+                            <div class="col-md-6">
+                              <h5>Phone</h5>
+                              <p>+123456789</p>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <h5>Date of Birth</h5>
+                            <input type="date" id="dob" class="form-control" value="1995-01-01" />
+                          </div>
                         </div>
                       </div>
                     </div>
                   </fieldset>
                 </form>
+
               </div>
 
             </div>
@@ -96,9 +113,90 @@ session_start();
             </div>
           </div>
 
-          <!-- ------------------------------------------------------------------------- -->
+          <!-- ----------------------------------SETTINGS--------------------------------------- -->
           <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-            jj
+            <div class="container">
+              <form>
+                <div class="row g-3">
+                  <!-- Account Settings -->
+                  <div class="col-md-4">
+                    <div class="card h-100">
+                      <div class="card-header bg-dark text-white">
+                        Account Settings
+                      </div>
+                      <div class="card-body">
+                        <div class="mb-3">
+                          <label for="username" class="form-label">Edit username</label>
+                          <input type="text" class="form-control" id="username" placeholder="Enter new username"
+                            value="current_user" />
+                        </div>
+                        <div class="mb-3">
+                          <label for="email" class="form-label">Change Linked Email</label>
+                          <input type="email" class="form-control" id="email" placeholder="Enter new email"
+                            value="user@example.com" />
+                        </div>
+                        <div class="mb-3">
+                          <label for="password" class="form-label">Change Password</label>
+                          <input type="password" class="form-control" id="password"
+                            placeholder="Change your password" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Preferences -->
+                  <div class="col-md-4">
+                    <div class="card h-100">
+                      <div class="card-header bg-dark text-white">
+                        Preferences
+                      </div>
+                      <div class="card-body">
+                        <div class="mb-3">
+                          <label for="language" class="form-label">Language</label>
+                          <select class="form-select" id="language">
+                            <option value="en" selected>English</option>
+                          </select>
+                        </div>
+                        <div class="form-check mb-3">
+                          <input class="form-check-input" type="checkbox" id="notifications" checked />
+                          <label class="form-check-label" for="notifications">
+                            Enable notifications
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Privacy Settings -->
+                  <div class="col-md-4">
+                    <div class="card h-100">
+                      <div class="card-header bg-dark text-white">
+                        Privacy Settings
+                      </div>
+                      <div class="card-body">
+                        <div class="form-check mb-3">
+                          <input class="form-check-input" type="checkbox" id="shareProfile" />
+                          <label class="form-check-label" for="shareProfile">
+                            Share my profile information with others
+                          </label>
+                        </div>
+                        <div class="form-check mb-3">
+                          <input class="form-check-input" type="checkbox" id="trackActivity" checked />
+                          <label class="form-check-label" for="trackActivity">
+                            Allow tracking of my activity
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Save Changes Button -->
+                <div class="d-flex justify-content-center mt-4">
+                  <button type="submit" class="btn btn-success">Save Changes</button>
+                </div>
+              </form>
+            </div>
           </div>
 
           <!-- ------------------------------------------------------------------------- -->
