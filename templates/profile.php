@@ -126,7 +126,7 @@ session_start();
                       </div>
                       <div class="card-body">
                         <div class="mb-3">
-                          <label for="username" class="form-label">Edit username</label>
+                          <label for="username" class="form-label">Change username</label>
                           <input type="text" class="form-control" id="username" placeholder="Enter new username"
                             value="current_user" />
                         </div>
@@ -134,11 +134,6 @@ session_start();
                           <label for="email" class="form-label">Change Linked Email</label>
                           <input type="email" class="form-control" id="email" placeholder="Enter new email"
                             value="user@example.com" />
-                        </div>
-                        <div class="mb-3">
-                          <label for="password" class="form-label">Change Password</label>
-                          <input type="password" class="form-control" id="password"
-                            placeholder="Change your password" />
                         </div>
                       </div>
                     </div>
@@ -148,22 +143,22 @@ session_start();
                   <div class="col-md-4">
                     <div class="card h-100">
                       <div class="card-header bg-dark text-white">
-                        Preferences
+                        Edit Personal Information
                       </div>
                       <div class="card-body">
-                        <div class="mb-3">
-                          <label for="language" class="form-label">Language</label>
-                          <select class="form-select" id="language">
-                            <option value="en" selected>English</option>
-                          </select>
+                      <div class="mb-3">
+                          <label for="Dob" class="form-label">Choose you Date of Birth</label>
+                          <input type="date" class="form-control" id="DoB" placeholder="Enter new DoB"
+                            value="user@example.com" />
                         </div>
-                        <div class="form-check mb-3">
-                          <input class="form-check-input" type="checkbox" id="notifications" checked />
-                          <label class="form-check-label" for="notifications">
-                            Enable notifications
-                          </label>
+
+                        <div class="mb-3">
+                          <label for="Phone" class="form-label">Change Phone number</label>
+                          <input type="number" class="form-control" id="username" placeholder="Enter new Phone number"
+                            value="current_user" />
                         </div>
                       </div>
+                    
                     </div>
                   </div>
 
@@ -173,12 +168,15 @@ session_start();
                       <div class="card-header bg-dark text-white">
                         Privacy Settings
                       </div>
-                      <div class="card-body">
-                        <div class="form-check mb-3">
-                          <input class="form-check-input" type="checkbox" id="shareProfile" />
-                          <label class="form-check-label" for="shareProfile">
-                            Share my profile information with others
-                          </label>
+                      <div class="mt-3">
+                          <label for="password" class="form-label">Change Password</label>
+                          <input type="password" class="form-control" id="password"
+                            placeholder="Change your password" />
+                        </div>
+                        <div class="mt-3 mb-3">
+                          <label for="rp-password" class="form-label">Repeat Password</label>
+                          <input type="Password" class="form-control" id="rp-password"
+                            placeholder="Change your password" />
                         </div>
                         <div class="form-check mb-3">
                           <input class="form-check-input" type="checkbox" id="trackActivity" checked />
