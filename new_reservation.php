@@ -1,5 +1,5 @@
 <?php
-// process-NewReservation.php
+// process-new_reservation.php
 
 // PDO connection 
 $host = 'localhost';
@@ -26,12 +26,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $Edatetime = $_POST['Edatetime'];
     $capacity = $_POST['capacity'];
 
-    // Prepare SQL to insert the reservation into the database
-    $sql = "INSERT INTO bookings (Room_ID, Title, Start_Time, End_Time, Capacity)
-            VALUES (:Room_ID, :title, :Sdatetime, :Edatetime, :capacity)";
+    // Fetch the room's capacity based on room_id
+    $query = "SELECT capacity FROM rooms WHERE room_id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$room_id]);
+    $room = $stmt->fetch();
 
-    // Prepare the statement for execution
-    $stmt = $pdo->prepare($sql);
+     // If room exists, check if the entered capacity is less than or equal to room capacity
+     if ($room) {
+        $roomCapacity = $room['capacity'];
+        if ($capacity > $roomCapacity) {
+            // Capacity does not fit
+            echo "The entered capacity exceeds the room's capacity of " . $roomCapacity . ". Please adjust the capacity.";
+        } else {
+            // Proceed with inserting the reservation into the bookings table
+            $sql = "INSERT INTO bookings (Room_ID, Title, Start_Time, End_Time, Capacity)
+                    VALUES (:room_id, :title, :Sdatetime, :Edatetime, :capacity)";
+
+             // Prepare the statement for execution
+             $stmt = $pdo->prepare($sql);
 
     // Bind parameters to prevent SQL injection
     $stmt->bindParam(':room_id', $Room_ID, PDO::PARAM_INT);
@@ -40,23 +53,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(':Edatetime', $End_Time, PDO::PARAM_STR);
     $stmt->bindParam(':capacity', $Capacity, PDO::PARAM_INT); 
 
-    // Execute the query
-    if ($stmt->execute()) {
-        echo "Reservation successful!";
+             // Execute the query
+             if ($stmt->execute()) {
+                 echo "Reservation successful!";
+             } else {
+                echo "Error occurred during reservation.";
+            }
+        }
     } else {
-        echo "Error occurred during reservation.";
+        echo "Room not found!";
     }
 
     // Close the connection
     $pdo = null;
 
     // Redirect to home page
-    header('Location: home.php');
+    header('Location: index.php');
 }
 ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -77,9 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  </div>
  <h1>Reserve Room: <?php echo $room['room_name']; ?></h1>
 
- <
  <div class="container">
-  <form action="NewReservation.php" method="POST">
+  <form action="new_reservation.php" method="POST">
 
   <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
 
