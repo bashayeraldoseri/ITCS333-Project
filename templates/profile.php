@@ -19,7 +19,44 @@ session_start();
 <body>
 
 
-  <div class="container-fluid p-2">
+  <div class="container-fluid">
+  <header>
+        <div class="container-fluid p-2">
+          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">UOB Booking System</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="me-auto"></div>
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../index.php">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="register.html">Register</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+
     <div class="row">
       <div class="col-sm-2 left-box d-flex flex-column justify-content-center align-items-center ">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -93,7 +130,7 @@ session_start();
 
           </div>
 
-          <!-- ------------------------------------------------------------------------- -->
+          <!-- ---------------------------------Bookings---------------------------------------- -->
           <div class="tab-pane fade" id="v-pills-bookings" role="tabpanel" aria-labelledby="v-pills-bookings-tab">
             <div class="row">
               <div class="col-sm-5">
@@ -147,7 +184,7 @@ session_start();
                       </div>
                       <div class="card-body">
                       <div class="mb-3">
-                          <label for="Dob" class="form-label">Choose you Date of Birth</label>
+                          <label for="Dob" class="form-label">Choose Date of Birth</label>
                           <input type="date" class="form-control" id="DoB" placeholder="Enter new DoB"
                             value="user@example.com" />
                         </div>
