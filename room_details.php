@@ -1,8 +1,8 @@
 <?php
 // Database Connection
 $host = 'localhost';
-$user = 'root'; 
-$password = ''; 
+$user = 'root';
+$password = '';
 $dbname = 'booking_system';
 $port = 3306;
 
@@ -15,7 +15,6 @@ try {
 
 // Get room ID from the query string
 $roomId = isset($_GET['Room_ID']) ? intval($_GET['Room_ID']) : 0;
-$equipmentid = isset ($_GET['Room_equipment_ID']) ? intval($_GET['Room_equipment_ID']) : 0;
 
 // Fetch room details from the database
 $query = "SELECT * FROM rooms WHERE Room_ID = ?";
@@ -25,10 +24,18 @@ $room = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$room) {
     die("Room not found.");
-} 
+}
 
-?> 
+// Fetch room equipment details from the database
+$equipmentQuery = "SELECT GROUP_CONCAT(equipment.equipment_name SEPARATOR ', ') AS equipment_list
+                   FROM room_equipment
+                   JOIN equipment ON room_equipment.Room_equipment_id = equipment.equipment_id
+                   WHERE room_equipment.room_id = ?";
+$stmt2 = $pdo->prepare($equipmentQuery);
+$stmt2->execute([$roomId]);
+$equipment = $stmt2->fetch(PDO::FETCH_ASSOC);
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,14 +77,14 @@ if (!$room) {
         <h1><?php echo htmlspecialchars($room['Room_ID']); ?></h1>
         <div class="details">
             <p><strong>Room ID:</strong> <?php echo htmlspecialchars($room['Room_ID']); ?></p>
-            <p><strong>Room Number :</strong> <?php echo htmlspecialchars($room['number']); ?></p>
+            <p><strong>Room Number:</strong> <?php echo htmlspecialchars($room['number']); ?></p>
             <p><strong>Capacity:</strong> <?php echo htmlspecialchars($room['Capacity']); ?></p>
             <p><strong>Room Type:</strong> <?php echo htmlspecialchars($room['Type']); ?></p>
             <p><strong>Room Availability:</strong> <?php echo htmlspecialchars($room['Availability']); ?></p>
             <p><strong>Room Description:</strong> <?php echo htmlspecialchars($room['Description']); ?></p>
             <p><strong>Department:</strong> <?php echo htmlspecialchars($room['department']); ?></p>
             <p><strong>Floor:</strong> <?php echo htmlspecialchars($room['floor']); ?></p>
-            <p><strong>Room Equipment:</strong> </p> 
+            <p><strong>Room Equipment:</strong> <?php echo htmlspecialchars($equipment['equipment_list']); ?></p>
         </div>
         <p><a href="index.php">Back to Room Browsing</a></p>
     </div>
