@@ -56,7 +56,6 @@ $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department
     <style>
       <style> 
        body {
-         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
          margin: 0; 
          padding: 0; 
          background-color: #f8f9fa; } 
@@ -76,8 +75,10 @@ $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department
 
       .details { 
        background-color: <?php echo htmlspecialchars($bgColor); ?>;
-       padding: 20px; border-radius: 10px; 
-       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+       padding: 20px; 
+       border-radius: 10px; 
+       font: 1em sans-serif;
+       }
 
       .details p {
          margin: 10px 0;
@@ -92,8 +93,12 @@ $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department
             text-decoration: none;
             color: #007bff;
             border: 1px solid #007bff;
-            padding: 10px 20px; border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s; }
+            padding: 10px 20px; 
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            font: 1em sans-serif;
+         }
+
         a:hover {
              background-color: #007bff; 
              color: #ffffff; }

@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
  
 :root {
         --whitish: #EFF1F3;
@@ -9,22 +8,10 @@
         --red:#a4161a; 
 }
 body{
-=======
- :root {
-     --whitish: #EFF1F3;
-     --blue: #8ecae6;
-     --yellow: #FED766;
-     --balckish: #272727;
-     --gray: #696773;
- }
-
- body {
->>>>>>> Stashed changes
      background-color: var(--whitish);
 
  }
 
-<<<<<<< Updated upstream
 .card-link {
     display: block;
     text-decoration: none; 
@@ -51,16 +38,6 @@ body{
     height: 600px; 
     /* background-color: var(--blue); */
   }
-=======
- .custom-box {
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     width: 900px;
-     height: 600px;
-     /* background-color: var(--blue); */
- }
->>>>>>> Stashed changes
 
  .form-check-input {
      display: flex;
