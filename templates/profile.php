@@ -1,7 +1,13 @@
 <?php
 session_start();
-?>
+//testing
+print_r($_SESSION);
+echo "Username: " . $_SESSION['username'] . "<br>";
+echo "Role: " . $_SESSION['role'] . "<br>";
+echo $_SESSION['test'] ?? "Session data missing.";
+echo "logged in:" . $_SESSION['loggedin'];
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -266,11 +272,3 @@ session_start();
 
 </html>
 
-<?php
-include('../database/db.php');
-
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
-  
-
-}
-?>

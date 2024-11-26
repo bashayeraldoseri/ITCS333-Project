@@ -1,3 +1,13 @@
+<?php
+session_start();
+//testing
+print_r($_SESSION);
+echo "Username: " . $_SESSION['username'] . "<br>";
+echo "Role: " . $_SESSION['role'] . "<br>";
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -146,8 +156,10 @@
                         </p>
                         <hr>
 
-                        
-                        <a href="#" class="book-link"><p class="book-link">Book</p></a>
+
+                        <a href="#" class="book-link">
+                          <p class="book-link">Book</p>
+                        </a>
                       </div>
                     </div>
                   </a>
