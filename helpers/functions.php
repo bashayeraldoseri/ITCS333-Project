@@ -55,8 +55,6 @@ function getBookingBYId ($pdo, $id) {
 }
 
 
-
-
 //add booking
 //update bookings
 //remove booking

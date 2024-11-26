@@ -4,105 +4,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Optional: Add your custom styles -->
+    <link href="css/style.css" rel="stylesheet">
+    <title>Document</title>
+
     <style>
-        /* Ensure that the body and html take full height */
-        html,
         body {
-            height: 100%;
-            margin: 0;
+            background-color: #edebeb;
         }
 
-        /* Set the height of the container to fill the screen */
-        .container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+        h1 {
+            margin-left: 10vw;
+            margin-top: 5vh;
         }
+        .Statistics {
+            padding-top: 7vh;
+            padding-bottom: 7vh;
+            padding-right: 7vw;
+            padding-left: 7vw;
 
-        /* Header Styles */
-        .dashboard-header {
             display: flex;
+            /* Enables flexbox */
+            justify-content: space-around;
+            /* Distributes space evenly between items */
             align-items: center;
-            /* Vertically center the content */
-            margin-top: 20px;
+            /* Aligns items vertically in the center */
+            gap: 30px;
+            /* Optional: Adds space between the items */
         }
 
-        .profile-pic {
-            width: 60px;
-            /* Smaller image for compact layout */
-            height: 60px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-right: 15px;
-            /* Space between image and title */
+        .Statistics>div {
+            text-align: center;
+            padding-top: 2vh;
+            padding-bottom: 1vh;
+            padding-right: 2vw;
+            padding-left: 2vw;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .card-container {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+        .ChartsContainer {
+            /* border: 0.25vw, solid, black ;*/
         }
-
-        .card {
-            margin-bottom: 20px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-body {
-            overflow-y: auto;
-            flex-grow: 1;
-        }
-
-        .card-header {
-            flex-shrink: 0;
-        }
-
-        /* Adjustments for small screens: picture and title next to each other */
-        @media (max-width: 576px) {
-            .dashboard-header {
-                justify-content: flex-start;
-                /* Align to the left */
-            }
-
-            .dashboard-header h2 {
-                font-size: 16px;
-                /* Smaller font size for small screens */
-            }
+        
+        form {
+            margin-left: 10vw;
+            margin-right: 10vw;
+            padding: 2vh;
+            text-align:left;
+            background-color: white;
         }
     </style>
+
+    <script>
+        // JavaScript to update the output value dynamically as the user interacts with the slider
+        const rangeInput = document.getElementById('range');
+        const rangeOutput = document.getElementById('range-output');
+
+        rangeInput.addEventListener('input', function () {
+            rangeOutput.textContent = 'Value: ' + rangeInput.value;
+        });
+    </script>
 </head>
 
 <body>
-
     <?php
-    session_start();  // Start the session
-    
-    // Check if the user is logged in
-    /*if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-        header('Location: templates/login.html');  // Redirect to login if not logged in
-        exit();
-    }*/
+    include('database/db.php');
+    $query = "SELECT COUNT(*) FROM bookings";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $total = $stmt->fetchColumn();
 
-    // Access session data
-    $username = $_SESSION['username'];  // Retrieve the username from session
+    $query = "SELECT COUNT(*) FROM bookings WHERE  Start_Time > NOW()";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $totalUp = $stmt->fetchColumn();
+
+    $query = "SELECT COUNT(*) FROM bookings WHERE  Start_Time < NOW()";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $totalPast = $stmt->fetchColumn();
     ?>
 
     <header>
-        <div class="container">
-            <!-- Dashboard Header -->
-            <div class="dashboard-header" style="margin-bottom: 15px;">
-                <img src="https://via.placeholder.com/100" alt="User Picture" class="profile-pic">
-                <h2><?php echo $username; ?> Dashboard</h2>
+        <h1> Reports Dashboard </h1>
+        <div class="Statistics">
+            <div id="total">
+                <h2>Total No. Bookings</h2>
+                <hr>
+                <h4><?php echo $total; ?></h4>
+            </div>
+
+            <div id="totalUp">
+                <h2>No. Upcoming Bookings</h2>
+                <hr>
+                <h4><?php echo $totalUp; ?></h4>
+            </div>
+
+            <div id="totalpast">
+                <h2>No. Past Bookings</h2>
+                <hr>
+                <h4><?php echo $totalPast; ?></h4>
             </div>
         </div>
     </header>
 
+    <main>
+        
+    <form>
+            <label for="sdate">Choose a starting date: </label>
+            <input type="date" id="date" name="sdate"> <br> 
+
+            <label for="edate">Choose an ending date: </label>
+            <input type="date" id="date" name="edate"> <br> <br>
+
+            <!-- checkbox input-->
+            <input type="checkbox" id="checkbox">
+            <label for="checkbox">Upcoming</label>
+
+            <input type="checkbox" id="checkbox">
+            <label for="checkbox">Past</label> <br> <br>
+
+            <!-- Range Input -->
+            <label for="range">Select the number of records to consider:</label> <br>
+            <input type="range" id="range" name="range" min="0" max=<?php echo $total ?> value=<?php echo $total ?> oninput="this.nextElementSibling.value = this.value">
+            <output><?php echo $total ?></output> <br> <br> <br>
+
+            <!-- Submit Button -->
+            <button type="submit">Apply Filters</button>
+        </form>
+
+        <div class = "ChartsContainer">
+            <div id = "Popularity">
+                <!-- number of bookings for each room -->
+            </div>
+
+            <div id = "Usage">
+                <!-- Show the status of each room at the current time (Occupied or not) -->
+            </div>
+
+            <div id = "cancelation rate">
+                <!-- Show the cancelation rate of each room -->
+            </div>
+
+            <div id = "booking trends">
+                <!-- Show booking numbers in a period of time for each room -->
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>

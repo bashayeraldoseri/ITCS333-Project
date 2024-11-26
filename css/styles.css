@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
  
 :root {
         --whitish: #EFF1F3;
@@ -8,10 +9,22 @@
         --red:#a4161a; 
 }
 body{
+=======
+ :root {
+     --whitish: #EFF1F3;
+     --blue: #8ecae6;
+     --yellow: #FED766;
+     --balckish: #272727;
+     --gray: #696773;
+ }
+
+ body {
+>>>>>>> Stashed changes
      background-color: var(--whitish);
 
-}
+ }
 
+<<<<<<< Updated upstream
 .card-link {
     display: block;
     text-decoration: none; 
@@ -38,16 +51,26 @@ body{
     height: 600px; 
     /* background-color: var(--blue); */
   }
+=======
+ .custom-box {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width: 900px;
+     height: 600px;
+     /* background-color: var(--blue); */
+ }
+>>>>>>> Stashed changes
 
-.form-check-input {
-    display: flex;
-    align-items: center;
-}
+ .form-check-input {
+     display: flex;
+     align-items: center;
+ }
 
-.filter-col{
-    padding-left:10px;
-    padding-right:10px;
-}
+ .filter-col {
+     padding-left: 10px;
+     padding-right: 10px;
+ }
 
 .container {
     margin-top:30px;
@@ -57,126 +80,141 @@ body{
     background-color: var(--gray);
 }
 
-.scrollable-container {
-    display: flex;
-    flex-wrap: wrap;          /* Allow wrapping of the cards */
-    justify-content: space-between; /* Distribute the cards evenly */
-    max-width: 100%;          /* Container width will fill available space */
-    height: 500px;            /* Fixed height for the scrollable container */
-    overflow-y: auto;         /* Vertical scroll when content exceeds */
-    padding-left: 15px;
-    padding-right: 15px ;
-    border: 1px solid #ccc;   /* Optional border for styling */
-    border-radius: 8px;       /* Optional: rounded corners for a cleaner look */
-}
+ .scrollable-container {
+     display: flex;
+     flex-wrap: wrap;
+     /* Allow wrapping of the cards */
+     justify-content: space-between;
+     /* Distribute the cards evenly */
+     max-width: 100%;
+     /* Container width will fill available space */
+     height: 500px;
+     /* Fixed height for the scrollable container */
+     overflow-y: auto;
+     /* Vertical scroll when content exceeds */
+     padding-left: 15px;
+     padding-right: 15px;
+     border: 1px solid #ccc;
+     /* Optional border for styling */
+     border-radius: 8px;
+     /* Optional: rounded corners for a cleaner look */
+ }
 
-.card {
-    width: 18rem;             /* Fixed width for each card */
-    margin-bottom: 10px;      /* Space between the cards */
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 4px; 
-    /* background-color: var(--blue); */
-}
+ .card {
+     width: 18rem;
+     /* Fixed width for each card */
+     margin-bottom: 10px;
+     /* Space between the cards */
+     padding: 10px;
+     background-color: #f9f9f9;
+     border: 1px solid #ddd;
+     border-radius: 4px;
+     /* background-color: var(--blue); */
+ }
 
-/* Optional: for smaller screens */
-@media (max-width: 600px) {
-    .card {
-        width: 100%;          /* Card takes full width on smaller screens */
-    }
-}
+ /* Optional: for smaller screens */
+ @media (max-width: 600px) {
+     .card {
+         width: 100%;
+         /* Card takes full width on smaller screens */
+     }
+ }
 
 
-.search-sidebar {
-    position: fixed;
-    top: 0;
-    left: -300px; /* Initially hidden */
-    width: 300px;
-    height: 100%;
-    background: #f8f9fa;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    transition: left 0.3s ease;
-    overflow-y: auto;
-    z-index: 1050;
-  }
-  
-  .search-sidebar.active {
-    left: 0; /* Slide into view */
-  }
-  
-  .sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background: #343a40;
-    color: #fff;
-  }
-  
-  .btn-close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .sidebar-body {
-    padding: 15px;
-  }
-  
+ .search-sidebar {
+     position: fixed;
+     top: 0;
+     left: -300px;
+     /* Initially hidden */
+     width: 300px;
+     height: 100%;
+     background: #f8f9fa;
+     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+     transition: left 0.3s ease;
+     overflow-y: auto;
+     z-index: 1050;
+ }
 
-/* Sidebar Toggle Button */
-.toggle-icon {
-    position: fixed;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    background-color: #8ecae6;
-    color: #ffffff;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s, left 0.3s;
-  }
-  
-  .toggle-icon:hover {
-    background-color: transparent;
-    background-color: #272727;
-    transform: scale(1.1);
-  }
-  
-  /* Sidebar */
-  .search-sidebar {
-    position: fixed;
-    top: 0;
-    left: -300px; /* Hidden initially */
-    width: 300px;
-    height: 100%;
-    background: #f8f9fa;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    transition: left 0.3s ease;
-    overflow-y: auto;
-    z-index: 1050;
-  }
-  
-  .search-sidebar:hover {
-    left: 0; /* Slide into view on hover */
-  }
-  
-  .toggle-icon i {
-    font-size: 24px;
-    transition: transform 0.3s ease;
-  }
-  
-  /* Change arrow direction on hover */
-  .toggle-icon:hover i {
-    transform: rotate(180deg); /* Rotate the arrow */
-  }
-  
+ .search-sidebar.active {
+     left: 0;
+     /* Slide into view */
+ }
+
+ .sidebar-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 15px;
+     background: #343a40;
+     color: #fff;
+ }
+
+ .btn-close {
+     background: none;
+     border: none;
+     font-size: 1.5rem;
+     color: #fff;
+     cursor: pointer;
+ }
+
+ .sidebar-body {
+     padding: 15px;
+ }
+
+
+ /* Sidebar Toggle Button */
+ .toggle-icon {
+     position: fixed;
+     top: 50%;
+     left: 15px;
+     transform: translateY(-50%);
+     background-color: #8ecae6;
+     color: #ffffff;
+     width: 50px;
+     height: 50px;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     cursor: pointer;
+     transition: background-color 0.3s, transform 0.3s, left 0.3s;
+ }
+
+ .toggle-icon:hover {
+     background-color: transparent;
+     background-color: #272727;
+     transform: scale(1.1);
+ }
+
+ /* Sidebar */
+ .search-sidebar {
+     position: fixed;
+     top: 0;
+     left: -300px;
+     /* Hidden initially */
+     width: 300px;
+     height: 100%;
+     background: #f8f9fa;
+     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+     transition: left 0.3s ease;
+     overflow-y: auto;
+     z-index: 1050;
+ }
+
+ .search-sidebar:hover {
+     left: 0;
+     /* Slide into view on hover */
+ }
+
+ .toggle-icon i {
+     font-size: 24px;
+     transition: transform 0.3s ease;
+ }
+
+ /* Change arrow direction on hover */
+ .toggle-icon:hover i {
+     transform: rotate(180deg);
+     /* Rotate the arrow */
+ }
+
