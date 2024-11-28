@@ -1,7 +1,8 @@
 <?php
 session_start();
 //testing
-print_r($_SESSION);
+// print_r($_SESSION);
+echo $_SESSION['message']. "<br>";
 echo "Username: " . $_SESSION['username'] . "<br>";
 echo "Role: " . $_SESSION['role'] . "<br>";
 

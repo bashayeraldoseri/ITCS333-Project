@@ -94,7 +94,7 @@ echo "logged in:" . $_SESSION['loggedin'];
                   <!-- Profile Pictures here -->
                     <img class="card-img-top rounded-circle mx-auto d-block" src="../static/user.jpg" alt="pfp"
                       style="width: 100px; height: 100px; object-fit: cover;" />
-                   
+                  
 
                   <div class="card-body">
                     <h5 class="card-title d-flex justify-content-center">Name</h5>
