@@ -1,0 +1,22 @@
+<?php
+  if(isset($_POST['submit'])){
+$pdo = new PDO('mysql:dbname=your_database_name;host=localhost', 'your_username', 'your_password');
+ 
+// Handle signup form submission
+$email = $_POST['email'];
+$password = $_POST['password'];
+ 
+// Validate input (basic example)
+if (empty($email) || empty($password)) {
+$error_message = 'Please fill in all fields.';
+    } else {
+// Prepare and execute the SQL query
+$stmt = $pdo->prepare('INSERT INTO users (email, password) VALUES (?, ?)');
+$stmt->execute([$email, hash('md5',$password)]);
+ 
+// Successful signup
+header('Location: login.php');
+        }
+    }
+
+ ?>

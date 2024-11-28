@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2024 at 03:55 PM
+-- Generation Time: Nov 28, 2024 at 09:32 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,18 +31,17 @@ CREATE TABLE `bookings` (
   `Booking_ID` int(11) NOT NULL,
   `user_ID` int(11) NOT NULL,
   `Room_ID` int(11) NOT NULL,
-  `Title` varchar(255) NOT NULL,
-  `Start_Time` datetime NOT NULL,
-  `End_Time` datetime NOT NULL
+  `Start_Time` date NOT NULL,
+  `End_Time` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bookings`
 --
 
-INSERT INTO `bookings` (`Booking_ID`, `user_ID`, `Room_ID`, `Title`, `Start_Time`, `End_Time`) VALUES
-(1, 2, 28, 'Team Meeting', '2023-11-10 09:00:00', '2023-11-12 17:00:00'),
-(2, 2, 30, 'Project Discussion', '2024-12-01 14:00:00', '2024-12-05 16:00:00');
+INSERT INTO `bookings` (`Booking_ID`, `user_ID`, `Room_ID`, `Start_Time`, `End_Time`) VALUES
+(1, 2, 28, '2023-11-10', '2023-11-12'),
+(2, 2, 30, '2024-12-01', '2024-12-05');
 
 -- --------------------------------------------------------
 
@@ -629,7 +628,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`Role`, `email`, `password`, `name`, `ID`, `ProfilePic`) VALUES
 ('Admin', 'admin@uob.edu.bh', 'admin_password', 'Admin Name', 1, 0),
 ('Instructor', 'instructor@uob.edu.bh', 'instructor_password', 'Instructor Name', 2, 0),
-('Student', 'student@stu.uob.edu.bh', 'student_password', 'Student Name', 3, 0);
+('Student', 'student@stu.uob.edu.bh', 'student_password', 'Student Name', 3, 0),
+('', 'rshoodkk@gmail.com', '$2y$10$9xrPzlbMBQJWfyF2qtszeuPlHt6bUGGbcrow1z.pq9kLj5Hth6DTe', 'rashid', 5, 0);
 
 --
 -- Indexes for dumped tables
@@ -686,7 +686,7 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
