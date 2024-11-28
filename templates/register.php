@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($stmt->execute()) {
           // Registration successful
           $_SESSION['message'] = "Registration successful!";
-          header("Location: index.php");
+          header("Location: ../index.php");
           exit;
       } else {
           $errors[] = "Something went wrong. Please try again later.";

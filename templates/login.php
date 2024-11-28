@@ -40,36 +40,34 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
 function validate_user($username, $password)
 {
-    require_once '../database/db.php';
-    $sql = "SELECT * FROM users WHERE name = :name";
+  require_once '../database/db.php';
+  $sql = "SELECT * FROM users WHERE name = :name";
 
-    if ($stmt = $pdo->prepare($sql)) {
-        $stmt->bindParam(":name", $username, PDO::PARAM_STR);
+  if ($stmt = $pdo->prepare($sql)) {
+    $stmt->bindParam(":name", $username, PDO::PARAM_STR);
 
-        if ($stmt->execute()) {
-            if ($stmt->rowCount() == 1) {
+    if ($stmt->execute()) {
+        if ($stmt->rowCount() == 1) {
+          $row = $stmt->fetch(PDO::FETCH_ASSOC);
+          $stored_password = $row['password'];
 
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                
-                $stored_password = $row['password'];
-
-                // if (password_verify($password, $stored_password)) {}
-
-                // For testing Only
-                if ($password === $stored_password) {
-                    return $row; // Return user data
-                }
-            } else {
-                echo "No matching user found.";
-            }
+          // Use password_verify to check the password
+          if (password_verify($password, $stored_password)) {
+            return $row; // Return user data
+          } else {
+            echo "Invalid password.";
+          }
         } else {
-            echo "Query execution failed.";
+          echo "No matching user found.";
         }
     } else {
-        echo "Failed to prepare SQL statement.";
+      echo "Query execution failed.";
     }
+  } else {
+    echo "Failed to prepare SQL statement.";
+  }
 
-    return false;
+  return false;
 }
 
 ?>
