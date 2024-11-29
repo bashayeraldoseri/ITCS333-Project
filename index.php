@@ -47,7 +47,7 @@ echo "Role: " . $_SESSION['role'] . "<br>";
                   <a class="nav-link" href="dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="dashboard.php">Admin Panel</a>
+                  <a class="nav-link" href="adminDash.php">Admin Panel</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="templates/login.html">Login</a>
