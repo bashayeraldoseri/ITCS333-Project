@@ -2,10 +2,11 @@
 session_start();
 //testing
 // print_r($_SESSION);
-echo $_SESSION['message']. "<br>";
-echo "Username: " . $_SESSION['username'] . "<br>";
-echo "Role: " . $_SESSION['role'] . "<br>";
+$loggedin = false;
 
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
+  $loggedin = true;
+}
 
 ?>
 
@@ -37,6 +38,8 @@ echo "Role: " . $_SESSION['role'] . "<br>";
             <div class="collapse navbar-collapse" id="navbarNav">
               <div class="me-auto"></div>
               <ul class="nav nav-tabs">
+
+                <?php if ($loggedin): ?>
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
@@ -47,6 +50,17 @@ echo "Role: " . $_SESSION['role'] . "<br>";
                   <a class="nav-link" href="dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="templates/logout.php">logout</a>
+                </li>
+
+                <?php else: ?>
+                  <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link" href="templates/login.html">Login</a>
                 </li>
                 <li class="nav-item">
@@ -55,6 +69,10 @@ echo "Role: " . $_SESSION['role'] . "<br>";
                 <li class="nav-item">
                   <a class="nav-link" href="#">About Us</a>
                 </li>
+
+                <?php endif; ?>
+
+
               </ul>
             </div>
           </div>

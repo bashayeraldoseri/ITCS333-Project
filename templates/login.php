@@ -26,12 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
       $_SESSION['username'] = $user['name'];
       $_SESSION['user_id'] = $user['ID']; // Save user ID
       $_SESSION['role'] = $user['Role']; // Save user role
+      $_SESSION['user_email'] = $user['email'];
+
+    
+      $_SESSION['Phone'] = $user['Phone'];
+      $_SESSION['DoB'] = $user['DoB'];
+      $_SESSION['Department'] = $user['Department'];
+      $_SESSION['ProfilePic'] = $user['ProfilePic'];
 
       header("Location: ../index.php");
       exit;
 
     } else {
-      echo var_dump($user);
+      // echo var_dump($user);
       echo "Invalid username or password";
       $errors[] = "Invalid username or password.";
     }

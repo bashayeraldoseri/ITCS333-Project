@@ -27,13 +27,14 @@ function getUserByEmail($pdo, $email) {
 }
 
 function getUserRoleById($pdo, $id) {
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE ID= :id");
+    $stmt = $pdo->prepare("SELECT Role FROM users WHERE ID= :id");
     $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $role = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $role ? $role : false;
 }
+
 
 
 function getRoomById($pdo, $id) {
