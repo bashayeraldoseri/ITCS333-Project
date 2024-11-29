@@ -50,7 +50,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                   <a class="nav-link" href="dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="adminDash.php">Admin Panel</a>
+                  <a class="nav-link" href="adminDash.php">Admin</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="templates/login.html">Login</a>
