@@ -1,12 +1,44 @@
 <?php
 session_start();
 //testing
-print_r($_SESSION);
-echo "Username: " . $_SESSION['username'] . "<br>";
-echo "Role: " . $_SESSION['role'] . "<br>";
-echo $_SESSION['test'] ?? "Session data missing.";
-echo "logged in:" . $_SESSION['loggedin'];
+// print_r($_SESSION);
 
+include("../database/db.php");
+
+$username = $_SESSION['username'];
+$id = $_SESSION['user_id'];
+$email = $_SESSION['user_email'];
+$Dob = '0000-00-00';
+$phone = $_SESSION['Phone'];
+$department = $_SESSION['Department'];
+
+$stmt = $pdo->prepare("SELECT ProfilePic FROM users WHERE ID = :ID");
+$stmt->bindParam(':ID', $id);
+$stmt->execute();
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$profilePicture = $user['ProfilePic'] ?? '../static/user.jpg'; //default
+
+
+// print_r($profilePicture);
+
+switch ($department) {
+  case 'CS':
+    $department = "Computer Science";
+    break;
+  case "CE":
+    $department = "Computer Engineering";
+    break;
+  case "IS":
+    $department = "Information Systems";
+    break;
+  default:
+    $department = "Not set";
+}
+
+if ($_SESSION['DoB'] != null) {
+  $Dob = $_SESSION['DoB'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +50,7 @@ echo "logged in:" . $_SESSION['loggedin'];
   <title>Profile</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/profile.css">
@@ -47,16 +79,13 @@ echo "logged in:" . $_SESSION['loggedin'];
                   <a class="nav-link active" href="#">Profile</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="login.html">Login</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="register.html">Register</a>
+                  <a class="nav-link" href="../dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="logout.php">logout</a>
                 </li>
               </ul>
             </div>
@@ -82,56 +111,58 @@ echo "logged in:" . $_SESSION['loggedin'];
           </a>
         </div>
       </div>
-      <div class="col-sm-10 right-box">
+      <div class="col-sm-9 right-box">
         <div class="tab-content" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel"
             aria-labelledby="v-pills-profile-tab">
 
-            <div class="row d-flex justify-content-center align-items-center m-2">
+            <div class="row d-flex justify-content-center align-items-center m-2 g-3">
               <div class="col-sm-4">
                 <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center"
                   id="profile-card">
                   <!-- Profile Pictures here -->
-                    <img class="card-img-top rounded-circle mx-auto d-block" src="../static/user.jpg" alt="pfp"
-                      style="width: 100px; height: 100px; object-fit: cover;" />
-                  
+                  <img class="card-img-top rounded-circle mx-auto d-block" src="<?php echo $profilePicture?>" alt="pfp"
+                    style="width: 100px; height: 100px; object-fit: cover;" />
+
 
                   <div class="card-body">
-                    <h5 class="card-title d-flex justify-content-center">Name</h5>
+                    <h5 class="card-title d-flex justify-content-center"><?php echo $username; ?></h5>
                     <p class="card-text d-flex justify-content-center">Role: Student</p>
                   </div>
                 </div>
 
 
               </div>
-              <div class="col-sm-7 ">
+              <div class="col-sm-8 ">
                 <form action="">
                   <fieldset disabled>
                     <div class="row d-flex justify-content-center align-items-center m-3">
                       <div class="col-lg-10">
-                        <div class="card p-3 d-flex justify-content-center align-items-center">
+                        <div class="card p-1 d-flex justify-content-center align-items-center">
                           <div class="mb-3">
                             <h5>Department</h5>
-                            <p>Computer Science</p>
+                            <p><?php echo $department; ?></p>
                           </div>
                           <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-lg-7">
                               <h5>Email</h5>
-                              <p>user@example.com</p>
+                              <p><?php echo $email ?></p>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-5">
                               <h5>Phone</h5>
-                              <p>+123456789</p>
+                              <p><?php echo $phone ?></p>
                             </div>
                           </div>
                           <div class="mb-3">
                             <h5>Date of Birth</h5>
-                            <input type="date" id="dob" class="form-control" value="1995-01-01" />
+                            <input type="date" id="dob" class="form-control" value="<?php echo $Dob; ?>" />
                           </div>
                         </div>
                       </div>
                     </div>
                   </fieldset>
+
+
                 </form>
 
               </div>
@@ -146,10 +177,10 @@ echo "logged in:" . $_SESSION['loggedin'];
               <div class="col-sm-5">
                 <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center">
                   <!-- Profile Pictures here -->
-                  <img class="card-img-top rounded-circle mx-auto d-block" src="../static/user.jpg" alt="pfp"
+                  <img class="card-img-top rounded-circle mx-auto d-block" src="<?php echo $profilePicture?>" alt="pfp"
                     style="width: 100px; height: 100px; object-fit: cover;" />
                   <div class="card-body">
-                    <h5 class="card-title d-flex justify-content-center">Name</h5>
+                    <h5 class="card-title d-flex justify-content-center"><?php echo $username; ?></h5>
                     <p class="card-text d-flex justify-content-center">Role: Student</p>
                     <p class="card-text"><small>Last time booked: 3 months ago</small></p>
                   </div>
@@ -163,7 +194,8 @@ echo "logged in:" . $_SESSION['loggedin'];
           <!-- ----------------------------------SETTINGS--------------------------------------- -->
           <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
             <div class="container">
-              <form>
+              <!-- Main form -->
+              <form action="settings.php" method="post" enctype="multipart/form-data">
                 <div class="row g-3">
                   <!-- Account Settings -->
                   <div class="col-md-4">
@@ -172,21 +204,18 @@ echo "logged in:" . $_SESSION['loggedin'];
                         Account Settings
                       </div>
                       <div class="card-body">
-                        
                         <div class="mb-3">
-                          <label for="email" class="form-label">Change Linked Email</label>
-                          <input type="email" class="form-control" id="email" placeholder="Enter new email"
-                            value="user@example.com" />
+                          <label for="username" class="form-label">Change username</label>
+                          <input type="text" class="form-control" name="username" id="username"
+                            placeholder="Enter new username" value="<?php echo $username; ?>" />
                         </div>
-
-                        
                         <div class="mb-3">
-                        <label class="form-label">Edit Profile Picture</label>
-                        <img class="card-img-top rounded-circle mx-auto d-block mb-3" src="../static/user.jpg" alt="pfp"
-                        style="width: 100px; height: 100px; object-fit: cover;" />
-                        <form action="<?php echo $SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data" class="mt-3">
-                          <input type="file" name="fileToUpload" id="fileToUpload">
-                        </form>
+                          <label class="form-label">Edit Profile Picture</label>
+                          <img id="imagePreview" class="card-img-top rounded-circle mx-auto d-block mb-3"
+                            src="<?php echo $profilePicture; ?>" alt="pfp"
+                            style="width: 100px; height: 100px; object-fit: cover;" />
+                          <input type="file" name="fileToUpload" id="fileToUpload" onchange="previewImage(event)">
+
                         </div>
                       </div>
                     </div>
@@ -199,26 +228,33 @@ echo "logged in:" . $_SESSION['loggedin'];
                         Personal Information
                       </div>
                       <div class="card-body">
-                        <div class="mb-3">
-                          <label for="Dob" class="form-label">Choose Date of Birth</label>
-                          <input type="date" class="form-control" id="DoB" placeholder="Enter new DoB"
-                            value="2004-02-21" />
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="field" id="CS" value="CS" 
+                          <?php if ($department === 'Computer Science') echo 'checked'; ?>>
+                          <label class="form-check-label" for="CS">Computer Science</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="field" id="CE" value="CE"
+                          <?php if ($department === 'Computer Engineering') echo 'checked'; ?>>
+                          <label class="form-check-label" for="CE">Computer Engineering</label>
+                        </div>
+                        <div class="form-check mb-3">
+                          <input class="form-check-input" type="radio" name="field" id="IS" value="IS"
+                          <?php if ($department === 'Information Systems') echo 'checked'; ?>>
+                          <label class="form-check-label" for="IS">Information Systems</label>
                         </div>
 
                         <div class="mb-3">
-                          <label for="Phone" class="form-label">Change Phone number</label>
-                          <input type="phone" class="form-control" id="phone" placeholder="Enter new Phone number"
-                            value="+379138918" />
+                          <label for="DoB" class="form-label">Choose Date of Birth</label>
+                          <input type="date" class="form-control" name="DoB" id="DoB" placeholder="Enter new DoB"
+                            value="<?php echo $Dob ?>" />
                         </div>
-
                         <div class="mb-3">
-                          <label for="username" class="form-label">Change username</label>
-                          <input type="text" class="form-control" id="username" placeholder="Enter new username"
-                            value="current_user" />
+                          <label for="phone" class="form-label">Change Phone number</label>
+                          <input type="text" class="form-control" name="phone" id="phone"
+                            placeholder="Enter new Phone number" value="<?php echo $phone; ?>" />
                         </div>
-
                       </div>
-
                     </div>
                   </div>
 
@@ -229,46 +265,47 @@ echo "logged in:" . $_SESSION['loggedin'];
                         Privacy Settings
                       </div>
                       <div class="mt-3">
+                        <label for="email" class="form-label">Change Linked Email</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter new email"
+                          value="<?php echo $email; ?>" />
+                      </div>
+                      <div class="mt-3">
                         <label for="password" class="form-label">Change Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="New password" />
+                        <input type="password" class="form-control" name="password" id="password"
+                          placeholder="New password" />
                       </div>
                       <div class="mt-3 mb-3">
                         <label for="rp-password" class="form-label">Repeat Password</label>
-                        <input type="Password" class="form-control" id="rp-password"
+                        <input type="password" class="form-control" name="rp-password" id="rp-password"
                           placeholder="Repeated password" />
-                      </div>
-                      <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="trackActivity" checked />
-                        <label class="form-check-label" for="trackActivity">
-                          Allow tracking of my activity
-                        </label>
                       </div>
                     </div>
                   </div>
                 </div>
-            </div>
 
-            <!-- Save Changes Button -->
-            <div class="d-flex justify-content-center mt-4">
-              <button type="submit" class="btn btn-success">Save Changes</button>
+                <!-- Submit Button -->
+                <div class="mt-4">
+                  <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+              </form>
+
             </div>
-            </form>
           </div>
-        </div>
 
-        <!-- ------------------------------------------------------------------------- -->
-        <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-help-tab">
-          النجدة
+          <!-- ------------------------------------------------------------------------- -->
+          <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-help-tab">
+            النجدة
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+    <script src="pfpView.js"></script>
+
 </body>
 
 </html>
-
