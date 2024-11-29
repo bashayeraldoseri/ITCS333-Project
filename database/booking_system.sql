@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2024 at 09:32 AM
+-- Generation Time: Nov 29, 2024 at 02:19 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -618,18 +618,27 @@ CREATE TABLE `users` (
   `password` text NOT NULL,
   `name` text NOT NULL,
   `ID` int(11) NOT NULL,
-  `ProfilePic` int(11) NOT NULL
+  `ProfilePic` varchar(255) DEFAULT NULL,
+  `Phone` text NOT NULL DEFAULT '+973 00000000',
+  `DoB` date DEFAULT NULL,
+  `Department` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`Role`, `email`, `password`, `name`, `ID`, `ProfilePic`) VALUES
-('Admin', 'admin@uob.edu.bh', 'admin_password', 'Admin Name', 1, 0),
-('Instructor', 'instructor@uob.edu.bh', 'instructor_password', 'Instructor Name', 2, 0),
-('Student', 'student@stu.uob.edu.bh', 'student_password', 'Student Name', 3, 0),
-('', 'rshoodkk@gmail.com', '$2y$10$9xrPzlbMBQJWfyF2qtszeuPlHt6bUGGbcrow1z.pq9kLj5Hth6DTe', 'rashid', 5, 0);
+INSERT INTO `users` (`Role`, `email`, `password`, `name`, `ID`, `ProfilePic`, `Phone`, `DoB`, `Department`) VALUES
+('Admin', 'admin@uob.edu.bh', 'admin_password', 'Admin Name', 1, '0', '+973 00000000', NULL, ''),
+('Instructor', 'instructor@uob.edu.bh', 'instructor_password', 'Instructor Name', 2, '0', '+973 00000000', NULL, ''),
+('Student', 'student@stu.uob.edu.bh', 'student_password', 'Student Name', 3, '0', '+973 00000000', NULL, ''),
+('', 'rshoodkk@gmail.com', '$2y$10$9xrPzlbMBQJWfyF2qtszeuPlHt6bUGGbcrow1z.pq9kLj5Hth6DTe', 'rashid', 5, '0', '+973 00000000', NULL, ''),
+('', 'xxx@gmail.com', '$2y$10$AIY1Pl3vXYhjafZOdW9QDuJ/OVcAxOD.LHxsxZhAN1mWiBZiGocIq', 'x4', 6, '0', '+973 00000000', NULL, ''),
+('', 'testtest@uob', '$2y$10$J8Q1w2vqx.4l3EHXruN1geVCGaPLZ6CEHRHZZkor.CXzCR441y2fq', 'testtest', 7, '0', '+973 00000000', NULL, ''),
+('', 'nay@uob', '$2y$10$aXvz2.iaUgwpajG7soJ4dOdgtz.OAkJPWYqqx/WwUBjUTKBwRS/d6', 'yay', 8, '0', '+973 00000000', NULL, ''),
+('', 'hey@uob', '$2y$10$dzSCqLsSnqmAiPz7ZoK5zOtDtEWKx9.1ARRyVB53cPGhjnd6YteUq', 'heyy', 9, '0', '+973 982313', '2004-02-29', ''),
+('', 'test1019321@uob', '$2y$10$tKB76miOIN5fnhU/jNxMIOG6Fkek0CBhXFsyXUGQ1VwZRkQfLvUMS', 'Test1011', 10, '../static/uploads/6749b402e705a0.41528320.jpg', '+973 123', '2024-11-05', 'IS'),
+('', 'AA@uob', '$2y$10$zTbwL1bvWriFcP.X1tY9l.lMEXbSw4nrjNB/zf2PpSTtw69GFKOIC', 'Ameena', 11, '../static/uploads/6749bd569ccab8.37118584.jpg', '+973 09876', '2024-11-12', 'CS');
 
 --
 -- Indexes for dumped tables
@@ -686,7 +695,7 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
