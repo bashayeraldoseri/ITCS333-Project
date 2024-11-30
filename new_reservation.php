@@ -1,66 +1,56 @@
 <!-- process-new_reservation.php -->
 
 <?php
-// Database connection
-$host = 'localhost';
-$user = 'root'; 
-$password = ''; 
-$dbname = 'booking_system';
+ session_start();
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+$room_id=0;
+if(isset($_GET["room_id"])) {
+    $room_id=$_GET["room_id"];
 }
 
-// Fetch the room details
-$roomId = isset($_GET['Room_ID']) ? intval($_GET['Room_ID']) : 1;
+if(isset($_POST['submit'])){
+    //code for insert
 
-function getRoomDetails($roomId, $pdo) {
-    $stmt = $pdo->prepare("SELECT * FROM rooms WHERE Room_ID = :Room_ID");
-    $stmt->bindParam(':Room_ID', $roomId, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
+    $host = 'localhost';
+    $user = 'root'; // default username for XAMPP/MAMP
+    $password = ''; // your password for the database
+    $dbname = 'booking_system';
+    $port = 3306; // Default MySQL port is 3306, use 8080 if it's a non-standard port for your database server
 
-$room = getRoomDetails($roomId, $pdo);
+    try {
+        // Create PDO connection
+        $dsn = "mysql:host=$host;dbname=$dbname;port=$port";
+        $pdo = new PDO($dsn, $user, $password);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $room_id = $_POST['room_id'];
-    $title = $_POST['title'];
-    $Sdatetime = $_POST['Sdatetime'];
-    $Edatetime = $_POST['Edatetime'];
-    $capacity = $_POST['capacity'];
+        // Set PDO error mode to exception for better error handling
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Handle form submission
+        $Title = $_POST['Title'];
+        $Start_Time = $_POST['start_date'];
+        $End_Time = $_POST['end_date'];
+        $id = $_SESSION['user_id'];
 
-    // Check capacity
-    $query = "SELECT capacity FROM rooms WHERE Room_ID = ?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$room_id]);
-    $roomData = $stmt->fetch();
 
-    if ($roomData && $capacity <= $roomData['capacity']) {
-        // Insert booking
-        $sql = "INSERT INTO bookings (Room_ID, Title, Start_Time, End_Time, Capacity)
-                VALUES (:room_id, :title, :Sdatetime, :Edatetime, :capacity)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':room_id', $room_id, PDO::PARAM_INT);
-        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-        $stmt->bindParam(':Sdatetime', $Sdatetime, PDO::PARAM_STR);
-        $stmt->bindParam(':Edatetime', $Edatetime, PDO::PARAM_STR);
-        $stmt->bindParam(':capacity', $capacity, PDO::PARAM_INT);
+        // Validate input (basic example)
 
-        if ($stmt->execute()) {
-            echo "Reservation successful!";
-            header('Location: index.php');
-            exit;
-        } else {
-            echo "Error occurred during reservation.";
-        }
-    } else {
-        echo "Capacity exceeds room's capacity of " . $roomData['capacity'];
+        // Prepare and execute the SQL query
+        $stmt = $pdo->prepare("INSERT INTO bookings (user_ID,Title, Start_Time, End_Time) VALUES 
+        (?, ?, ?, ?)");
+        $stmt->execute([$id ,$Title, $Start_Time, $End_Time]);
+        
+        // Successful insertion
+        header('Location: index.php'); // Redirect to items list page
+            
+        
+    } catch (PDOException $e) {
+        // Handle connection failure
+        die("Connection failed: " . $e->getMessage());
     }
+
+ 
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -71,41 +61,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <script>
+  $( function() {
+    //your code is here
+    
+    $( "#datepicker1" ).datepicker({dateFormat: "yy-mm-dd"});
+    $( "#datepicker2" ).datepicker({dateFormat: "yy-mm-dd"});
+
+
+  } );
+  </script>
+
+
 </head>
 <body>
 <div class="jumbotron text-center">
-    <h1>Reserve Room: <?php echo htmlspecialchars($room['number']); ?></h1>
+    <h1>Reserve Room: <?php echo $room_id; ?></h1>
     <p>Kindly fill this form required to ensure your reservation!</p> 
     </div>
 
     <div class="container">
     <form action="new_reservation.php" method="POST">
-        <input type="hidden" name="room_id" value="<?php echo $room['Room_ID']; ?>">
+        <input type="hidden" name="Room_ID" value="<?php echo $room_id; ?>">
 
-        <div>
+
+        <div class="form-group">
             <label for="title">Event Title:</label>
-            <input type="text" name="title" id="title" required>
+            <input type="text" class="form-control" name="Title" id="Title" >
         </div>
 
-        <div>
-            <label for="Sdatetime">Start Date / Time:</label>
-            <input type="datetime-local" name="Sdatetime" id="Sdatetime" required>
+        <div class="form-group">
+        <p>Start Date: <input type="text" name="start_date" id="datepicker1"></p>
         </div>
 
-        <div>
-            <label for="Edatetime">End Date / Time:</label>
-            <input type="datetime-local" name="Edatetime" id="Edatetime" required>
+        
+
+        <div class="form-group">
+        <p>End Date: <input type="text" name="end_date" id="datepicker2"></p>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="capacity">Capacity:</label>
-            <input type="number" name="capacity" id="capacity" required>
+            <input type="number" class="form-control" name="capacity" id="capacity" >
         </div>
 
-        <button type="submit">Submit Reservation</button>
+        <button type="submit" name='submit' class="btn btn-primary">Submit Reservation</button>
+
+
+        
+
+
+        
+        <p style="color: red;">
+         <?php if (isset($error_message)) echo $error_message; ?>
+        </p>
         
     </form>
+    <p><a href="index.php">Back to Room Browsing</a></p>
+
     </div>
 
 
