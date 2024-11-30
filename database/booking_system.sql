@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2024 at 02:19 PM
+-- Generation Time: Nov 30, 2024 at 12:19 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,8 +33,8 @@ CREATE TABLE `bookings` (
   `Booking_ID` int(11) NOT NULL,
   `user_ID` int(11) NOT NULL,
   `Room_ID` int(11) NOT NULL,
-  `Start_Time` date NOT NULL,
-  `End_Time` date NOT NULL
+  `Start_Time` datetime NOT NULL,
+  `End_Time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -42,8 +42,8 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`Booking_ID`, `user_ID`, `Room_ID`, `Start_Time`, `End_Time`) VALUES
-(1, 2, 28, '2023-11-10', '2023-11-12'),
-(2, 2, 30, '2024-12-01', '2024-12-05');
+(1, 2, 28, '2023-11-10 00:00:00', '2023-11-12 00:00:00'),
+(2, 2, 30, '2024-12-01 00:00:00', '2024-12-05 00:00:00');
 
 -- --------------------------------------------------------
 
