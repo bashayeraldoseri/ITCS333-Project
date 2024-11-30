@@ -40,27 +40,41 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
               <ul class="nav nav-tabs">
 
                 <?php if ($loggedin): ?>
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="templates/profile.php">Profile</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="dashboard.php">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="adminDash.php">Admin</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="templates/login.html">Login</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="templates/register.html">Register</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">About Us</a>
-                </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="templates/profile.php">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="dashboard.php">Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="adminDash.php">Admin</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="templates/logout.php">logout</a>
+                  </li>
+
+                <?php else: ?>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="templates/login.html">Login</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="templates/register.html">Register</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="admin/adminDash.php">Admin</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                  </li>
 
                 <?php endif; ?>
 
