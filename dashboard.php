@@ -7,7 +7,7 @@
     <link href="css/style.css" rel="stylesheet">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/styles.css" />
     <style>
         body {
@@ -18,6 +18,7 @@
             margin-left: 10vw;
             margin-top: 5vh;
         }
+
         .Statistics {
             padding-top: 7vh;
             padding-bottom: 7vh;
@@ -48,12 +49,12 @@
         .ChartsContainer {
             /* border: 0.25vw, solid, black ;*/
         }
-        
+
         form {
             margin-left: 10vw;
             margin-right: 10vw;
             padding: 2vh;
-            text-align:left;
+            text-align: left;
             background-color: white;
         }
     </style>
@@ -89,39 +90,39 @@
     ?>
 
     <header>
-    <div class="container-fluid p-2">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">UOB Booking System</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <div class="me-auto"></div>
-              <ul class="nav nav-tabs">
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="index.php">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" href="/templates/profile.php">Profile</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="templates/logout.php">logout</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
-   
-    
+        <div class="container-fluid p-2">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">UOB Booking System</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <div class="me-auto"></div>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="index.php">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/templates/profile.php">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="templates/logout.php">logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+
         <h1> Reports Dashboard </h1>
         <div class="Statistics">
             <div id="total">
@@ -145,10 +146,10 @@
     </header>
 
     <main>
-        
-    <form>
+
+        <form method = "POST" action = "popularity.php">
             <label for="sdate">Choose a starting date: </label>
-            <input type="date" id="date" name="sdate"> <br> 
+            <input type="date" id="date" name="sdate"> <br>
 
             <label for="edate">Choose an ending date: </label>
             <input type="date" id="date" name="edate"> <br> <br>
@@ -162,27 +163,28 @@
 
             <!-- Range Input -->
             <label for="range">Select the number of records to consider:</label> <br>
-            <input type="range" id="range" name="range" min="0" max=<?php echo $total ?> value=<?php echo $total ?> oninput="this.nextElementSibling.value = this.value">
+            <input type="range" id="range" name="range" min="0" max=<?php echo $total ?> value=<?php echo $total ?>
+                oninput="this.nextElementSibling.value = this.value">
             <output><?php echo $total ?></output> <br> <br> <br>
 
             <!-- Submit Button -->
             <button type="submit">Apply Filters</button>
         </form>
 
-        <div class = "ChartsContainer">
-            <div id = "Popularity">
-                <!-- number of bookings for each room -->
+        <div class="ChartsContainer">
+            <div class="Popularity">
+                <?php include("popularity.php") ?>
             </div>
 
-            <div id = "Usage">
+            <div id="Usage">
                 <!-- Show the status of each room at the current time (Occupied or not) -->
             </div>
 
-            <div id = "cancelation rate">
+            <div id="cancelation rate">
                 <!-- Show the cancelation rate of each room -->
             </div>
 
-            <div id = "booking trends">
+            <div id="booking trends">
                 <!-- Show booking numbers in a period of time for each room -->
             </div>
         </div>
