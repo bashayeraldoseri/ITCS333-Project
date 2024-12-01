@@ -105,16 +105,16 @@
                                 <a class="nav-link" aria-current="page" href="index.php">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/templates/profile.php">Profile</a>
+                                <a class="nav-link" href="profile/profile.php">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Dashboard</a>
+                                <a class="nav-link active" href="#">Dashboard</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">About Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="templates/logout.php">logout</a>
+                                <a class="nav-link" href="Registration/logout.php">logout</a>
                             </li>
                         </ul>
                     </div>

@@ -44,19 +44,19 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="templates/profile.php">Profile</a>
+                    <a class="nav-link" href="profile/profile.php">Profile</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="dashboard.php">Dashboard</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="adminDash.php">Admin</a>
+                    <a class="nav-link" href="admin/adminDash.php">Admin</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">About Us</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="templates/logout.php">logout</a>
+                    <a class="nav-link" href="Registration/logout.php">logout</a>
                   </li>
 
                 <?php else: ?>
@@ -64,10 +64,10 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="task1/login.html">Login</a>
+                    <a class="nav-link" href="Registration/login.html">Login</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="task1/register.html">Register</a>
+                    <a class="nav-link" href="Registration/register.html">Register</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="admin/adminDash.php">Admin</a>
@@ -180,9 +180,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                           <?php echo $class_description; ?>
                         </p>
                         <hr>
-
-
-                        <a href="#" class="book-link">
+                        <a href="new_reservation.php" class="book-link">
                           <p class="book-link">Book</p>
                         </a>
                       </div>

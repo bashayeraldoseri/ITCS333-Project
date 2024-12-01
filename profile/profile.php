@@ -85,7 +85,7 @@ if ($_SESSION['DoB'] != null) {
                   <a class="nav-link" href="#">About Us</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="logout.php">logout</a>
+                  <a class="nav-link" href="Registration/logout.php">logout</a>
                 </li>
               </ul>
             </div>
