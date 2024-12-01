@@ -10,7 +10,6 @@
     }
 
     if(isset($_POST['submit'])){
-        //code for insert
 
         $host = 'localhost';
         $user = 'root'; // default username for XAMPP/MAMP
@@ -51,11 +50,11 @@
                     $error_message_capacity_less_than = "The minimum number that the university allows to request a room reservation is 5 ! ";
                 }
 
-                if ($roomData && $capacity > $roomData['capacity']){
+                else if ($roomData && $capacity > $roomData['capacity']){
                     $error_message_capacity_exceeds = "Capacity exceeds the room's capacity of ! " . $roomData['capacity'];
                 }
 
-                if ($roomData && $capacity <= $roomData['capacity']) {
+                else  {
 
                     //another condition about time and date
                     // Insert booking
@@ -177,7 +176,7 @@
 
             <div class="form-group">
                 <label for="capacity">Capacity:</label>
-                <input type="number" oninput="maxLengthCheck(this)" class="form-control" name="capacity"  id="capacity"  min="5" max = "120" maxlength = "3" >
+                <input type="number" oninput="maxLengthCheck(this)" class="form-control" name="capacity"  id="capacity"  min="1" max = "999" maxlength = "3" > <!-- assume that the max capacity can hold in the biggest university room is 999 --> 
                 <p>*The minimum number that the university allows to request a room reservation is 5</p>
             </div>
 
