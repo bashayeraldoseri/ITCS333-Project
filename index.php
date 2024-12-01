@@ -91,57 +91,59 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
       <div class="row g-50">
         <!-- Sidebar Search Menu -->
         <div id="searchSidebar" class="search-sidebar">
-          <!-- <div class="sidebar-header">
-            <button class="btn-close" id="closeSidebar">&times;</button>
-          </div> -->
+
           <div class="sidebar-body p-5 ">
-            <input class="form-control me-2 mb-4" type="search" placeholder="Search" aria-label="Search" />
+            <form id="filterForm">
+              <input class="form-control me-2 mb-4" type="search" placeholder="Search" aria-label="Search" />
 
-            <label>Choose a department:</label>
-            <div class="form-check form-check-inline mb-4">
-              <input class="form-check-input" type="checkbox" id="ISCheckBox" value="IS" />
-              <label class="form-check-label" for="ISCheckBox">IS</label>
-            </div>
-            <div class="form-check form-check-inline mb-4">
-              <input class="form-check-input" type="checkbox" id="CSCheckBox" value="CS" />
-              <label class="form-check-label" for="CSCheckBox">CS</label>
-            </div>
-            <div class="form-check form-check-inline mb-4">
-              <input class="form-check-input" type="checkbox" id="CECheckBox" value="CE" />
-              <label class="form-check-label" for="CECheckBox">CE</label>
-            </div>
+              <label>Choose a department:</label>
+              <div class="form-check form-check-inline mb-4">
+                <input class="form-check-input" type="checkbox" id="ISCheckBox" value="IS" />
+                <label class="form-check-label" for="ISCheckBox">IS</label>
+              </div>
+              <div class="form-check form-check-inline mb-4">
+                <input class="form-check-input" type="checkbox" id="CSCheckBox" value="CS" />
+                <label class="form-check-label" for="CSCheckBox">CS</label>
+              </div>
+              <div class="form-check form-check-inline mb-4">
+                <input class="form-check-input" type="checkbox" id="CECheckBox" value="CE" />
+                <label class="form-check-label" for="CECheckBox">CE</label>
+              </div>
 
-            <label>Choose a floor:</label>
-            <div class="form-check mb-2">
-              <input class="form-check-input " type="checkbox" name="SecondFloorRadio" id="SecondFloorRadio"
-                value="Second" checked />
-              <label class="form-check-label" for="SecondFloorRadio">Second Floor</label>
-            </div>
-            <div class="form-check mb-2">
-              <input class="form-check-input" type="checkbox" name="FirstFloorRadio" id="FirstFloorRadio"
-                value="First" />
-              <label class="form-check-label" for="FirstFloorRadio">First Floor</label>
-            </div>
-            <div class="form-check  mb-4">
-              <input class="form-check-input" type="checkbox" name="GroundFloorRadio" id="GroundFloorRadio"
-                value="Ground" />
-              <label class="form-check-label" for="GroundFloorRadio">Ground Floor</label>
-            </div>
+              <label>Choose a floor:</label>
+              <div class="form-check mb-2">
+                <input class="form-check-input " type="checkbox"  id="SecondFloorRadio"
+                  value="2"  />
+                <label class="form-check-label" for="SecondFloorRadio">Second Floor</label>
+              </div>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox"  id="FirstFloorRadio"
+                  value="1" />
+                <label class="form-check-label" for="FirstFloorRadio">First Floor</label>
+              </div>
+              <div class="form-check  mb-4">
+                <input class="form-check-input" type="checkbox"  id="GroundFloorRadio"
+                  value="0" />
+                <label class="form-check-label" for="GroundFloorRadio">Ground Floor</label>
+              </div>
 
-            <label for="capacity">Capacity:</label>
-            <select id="capacity" class="form-control mb-4">
-              <option selected value="10">10</option>
-              <option value="15">15</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-              <option value="40">40</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
-            </select>
+              <label for="capacity">Capacity:</label>
+              <select id="capacity" class="form-control mb-4">
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+                <option selected value="100">100</option>
+              </select>
 
-            <label for="bookingTime">Search by Available Time:</label>
-            <input type="datetime-local" id="bookingTime" class="form-control mb-3" />
+              <label for="bookingTime">Search by Available Time:</label>
+              <input type="datetime-local" id="bookingTime" class="form-control mb-3" />
+              </form>
+
           </div>
+
 
           <div id="openSidebar" class="toggle-icon">
             <i class="bi bi-search"></i>
@@ -151,7 +153,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
 
 
         <div class="col-lg-9 container">
-          <div class="scrollable-container">
+          <div class="scrollable-container" id="cardsSection">
             <?php
             // Include the existing database connection
             include('database/db.php');
