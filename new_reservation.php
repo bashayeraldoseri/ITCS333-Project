@@ -127,11 +127,11 @@
             <div class="form-group">
             <label for="start_time">Start Time of the event:</label>
             <select name="start_time" class="form-control" id="start_time">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+            <option value="1">1am</option>
+            <option value="2">2am</option>
+            <option value="3">3am</option>
+            <option value="4">4am</option>
+            <option value="5">5am</option>
             </select>
             <p>*The time allowed to reserve based on university times <br>*University times start from 8am to 18pm <br> *Not allowed to reserve at 19pm or after
             </p>
