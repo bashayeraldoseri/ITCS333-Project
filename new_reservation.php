@@ -28,9 +28,13 @@
             
             // Handle form submission
             $id = $_SESSION['user_id'];
-            $Title = $_POST['Title'];
-            $Start_Time = $_POST['start_date'];
-            $End_Time = $_POST['end_date'];
+            $Status = $_POST['status'];
+            $Title = $_POST['Title']; 
+            $Start_Date = $_POST['start_date'];
+            $End_Date = $_POST['end_date'];
+            $Start_Time = $_POST['start_time'];
+            $Duration = $_POST['duration'];
+            $End_Time = $_POST['start_time'] + $_POST['duration']; //not sure 
 
 
 
@@ -49,9 +53,9 @@
 
 
             // Prepare and execute the SQL query
-            $stmt = $pdo->prepare("INSERT INTO bookings (user_ID, Title, Start_Time, End_Time) VALUES 
-            (?, ?, ?, ?)");
-            $stmt->execute([$id ,$Title, $Start_Time, $End_Time]);
+            $stmt = $pdo->prepare("INSERT INTO bookings (user_ID, Status, Title, Start_Date, End_Date, Duration, End_Time) VALUES 
+            (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$id, $Status, $Title, $Start_Date, $End_Date, $Start_Time, $Duration, $End_Time]);
             
             // Successful insertion
             header('Location: index.php'); // Redirect to items list page
@@ -85,6 +89,8 @@
         //your code is here
         
         $( "#datepicker1" ).datepicker({dateFormat: "yy-mm-dd"});
+        $( "#datepicker2" ).datepicker({dateFormat: "yy-mm-dd"});
+
 
 
     } );
@@ -108,14 +114,19 @@
             </div>
 
             <div class="form-group">
-            <label for="start_date">Start Date:</label>
+            <label for="start_date">Start Date of the event:</label>
             <input type="text" class="form-control" name="start_date" id="datepicker1">
+            </div>
+
+            <div class="form-group">
+            <label for="end_date">End Date of the event:</label>
+            <input type="text" class="form-control" name="end_date" id="datepicker2">
             </div>
 
 
             <div class="form-group">
-            <label for="time">Start Time of the event:</label>
-            <select name="time" class="form-control" id="time">
+            <label for="start_time">Start Time of the event:</label>
+            <select name="start_time" class="form-control" id="start_time">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
