@@ -40,6 +40,15 @@
 
 
             // Validate input 
+
+            // Check end_time
+            if($End_Time > 19){
+                $error_message_end_time = "You can't reserve the room after 19 pm, out of university times ! ";
+
+            }
+            else{
+
+           
             // Check capacity
                 $query = "SELECT capacity FROM rooms WHERE Room_ID = ?";
                 $stmt = $pdo->prepare($query);
@@ -68,7 +77,7 @@
                     header('Location: index.php'); // Redirect to items list page
                         }
 
-
+             }
             
         } catch (PDOException $e) {
             // Handle connection failure
@@ -188,6 +197,8 @@
             <?php if (isset($error_message)) echo $error_message; ?>
             <?php if (isset($error_message_capacity_less_than)) echo $error_message_capacity_less_than; ?>
             <?php if (isset($error_message_capacity_exceeds)) echo $error_message_capacity_exceeds; ?> 
+            <?php if (isset($error_message_end_time)) echo $error_message_end_time; ?> 
+
             
         </form>
         <p><a href="index.php">Back to Room Browsing</a></p>
