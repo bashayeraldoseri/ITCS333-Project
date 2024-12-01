@@ -64,10 +64,10 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="templates/login.html">Login</a>
+                    <a class="nav-link" href="task1/login.html">Login</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="templates/register.html">Register</a>
+                    <a class="nav-link" href="task1/register.html">Register</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="admin/adminDash.php">Admin</a>
