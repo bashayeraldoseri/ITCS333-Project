@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     // If no errors, insert new user
     if (empty($errors)) {
-      $sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
+      $sql = "INSERT INTO users (name, email, password, Role) VALUES (?, ?, ?, ?)";
       if ($stmt = $pdo->prepare($sql)) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $stmt->bindParam(1, $username, PDO::PARAM_STR);
