@@ -19,7 +19,7 @@ body{
 }
 
 .container {
-  background-color: var(--whitish);
+  background-color: var(--blue);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -72,17 +72,28 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-right: 20px;
+  padding-right: 20px; 
+  background-color: var(--blue);
 }
 
 #login-image {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+  width: 100px;
+} 
+
+
+img { 
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 100%
+} 
 
 .login-container {
   flex: 1;
   padding-left: 20px;
-
+  background-color: var(--blue);
 }
