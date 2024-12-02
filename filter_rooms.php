@@ -75,7 +75,7 @@ if ($stmt->rowCount() > 0) {
         $class_subtitle = "S40- " . $row['number'];
         $class_description = $row['Description'];
         echo "
-            <div class='col-lg-3 row g-3'>
+            <div class='col-lg-3 col-md-4 col-sm-6 mb-3'>
               <a href='room_details.php?Room_ID={$row['Room_ID']}' class='nav-link card-link'>
                 <div class='card' style='width: 18rem'>
                   <div class='card-body m-3'>

@@ -1,4 +1,3 @@
-
 const toggleIcon = document.querySelector('.toggle-icon');
 const searchSidebar = document.getElementById('searchSidebar');
 const closeicon = document.getElementById('closeSidebar');
@@ -52,7 +51,3 @@ searchSidebar.addEventListener('mouseleave', ()=> {
           })
           .catch(error => console.error('Error:', error));
   });
-  
-
-  
-

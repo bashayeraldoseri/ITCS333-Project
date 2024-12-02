@@ -53,7 +53,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                     <a class="nav-link" href="admin/adminDash.php">Admin</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
+                    <a class="nav-link" href="AboutUs.html">About Us</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="Registration/logout.php">logout</a>
@@ -73,7 +73,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                     <a class="nav-link" href="admin/adminDash.php">Admin</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
+                    <a class="nav-link" href="AboutUs.html">About Us</a>
                   </li>
 
                 <?php endif; ?>

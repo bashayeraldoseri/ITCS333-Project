@@ -38,8 +38,8 @@ $equipment = $stmt2->fetch(PDO::FETCH_ASSOC);
 // Determine background color based on department
 $departmentColors = [
     'CS' => '#ffd60a',
-    'CE' => '#0077b6',
-    'IS' => '#e63946',
+    'CE' => '#8ecae6',
+    'IS' => '#ff5a5f',
     // Add more departments as needed
 ];
 
@@ -109,7 +109,7 @@ $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department
         a:hover {
             background-color: #007bff;
             color: #ffffff;
-        }
+        } 
     </style>
 </head>
 
@@ -123,17 +123,23 @@ $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department
         case "2": $roomFloor = "Second Floor"; break;
         default : $roomFloor = "none";
 
+    } 
+
+    $RoomAvailability ;
+    switch($room['Availability']) {
+        case '0' : $RoomAvailability = "Room not available" ; break;
+        case '1' : $RoomAvailability = "Room available" ; break;
     }
 
     ?>
     <div class="container">
-        <h1><?php echo htmlspecialchars($room['Room_ID']); ?></h1>
+        <h1><?php echo "Room "; echo htmlspecialchars($room['number']); ?></h1>
         <div class="details">
             <p><strong>Room ID:</strong> <?php echo htmlspecialchars($room['Room_ID']); ?></p>
             <p><strong>Room Number:</strong> <?php echo htmlspecialchars($room['number']); ?></p>
             <p><strong>Capacity:</strong> <?php echo htmlspecialchars($room['Capacity']); ?></p>
             <p><strong>Room Type:</strong> <?php echo htmlspecialchars($room['Type']); ?></p>
-            <p><strong>Room Availability:</strong> <?php echo htmlspecialchars($room['Availability']); ?></p>
+            <p><strong>Room Availability:</strong> <?php echo htmlspecialchars($RoomAvailability); ?></p>
             <p><strong>Room Description:</strong> <?php echo htmlspecialchars($room['Description']); ?></p>
             <p><strong>Department:</strong> <?php echo htmlspecialchars($room['department']); ?></p>
             <p><strong>Floor:</strong> <?php echo htmlspecialchars($roomFloor); ?></p>

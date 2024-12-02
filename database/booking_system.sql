@@ -127,7 +127,8 @@ CREATE TABLE `rooms` (
   `Description` text NOT NULL,
   `floor` int(11) NOT NULL,
   `department` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `rooms`
