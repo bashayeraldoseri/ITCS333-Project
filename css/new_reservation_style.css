@@ -10,7 +10,6 @@
 
         body {
             background-color: var(--whitish);
-            font-family: 'Arial', sans-serif;
             color: var(--balckish);
         }
 
@@ -19,13 +18,11 @@
             padding: 40px 20px;
             margin-bottom: 30px;
             border-radius: 10px; 
-            font-family: Arial, Helvetica, sans-serif;
-        }
+                }
 
       
 
         h1 {
-            font-family: 'Roboto', sans-serif;
             color: var(--blue); 
             font-size: 36px; 
             text-align: center; 
@@ -35,7 +32,6 @@
         
         
         h2  {
-            font-family: 'Roboto', sans-serif; 
             color: var(--balckish); 
             font-size: 18px; 
             line-height: 1.6;

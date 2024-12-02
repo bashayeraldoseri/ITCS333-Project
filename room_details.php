@@ -37,9 +37,9 @@ $equipment = $stmt2->fetch(PDO::FETCH_ASSOC);
 
 // Determine background color based on department
 $departmentColors = [
-    'CS' => '#ffd60a',
+    'CS' => '#fce678',
     'CE' => '#8ecae6',
-    'IS' => '#ff5a5f',
+    'IS' => '#cc6a6a',
     // Add more departments as needed
 ];
 
