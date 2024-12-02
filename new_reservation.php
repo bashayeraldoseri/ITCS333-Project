@@ -125,7 +125,7 @@
 
     </head>
     <body>
-    <div class="jumbotron text-center">
+    <div class="jumbotron-text-center">
         <h1>Reserve Room: <?php echo $room_id; ?></h1>
         <h2>Kindly fill this form required to ensure your reservation!</h2> 
         </div>

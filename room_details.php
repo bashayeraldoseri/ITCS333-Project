@@ -55,10 +55,19 @@ $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Details</title>
     <style>
-        <style>body {
+        :root {
+        --whitish: #EFF1F3;
+        --blue: #8ecae6;
+        --yellow: #FED766;
+        --balckish: #272727;
+        /*--gray: #696773; */
+        --red:#a4161a;  
+    
+}
+        body {
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            background-color: #EFF1F3;
         }
 
         .container {
@@ -68,12 +77,14 @@ $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department
             background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            
         }
 
         h1 {
             text-align: center;
             color: #333333;
             margin-bottom: 20px;
+            font-family: 'Roboto', sans-serif;
         }
 
         .details {
@@ -83,15 +94,18 @@ $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department
             padding: 20px;
             border-radius: 10px;
             font: 1em sans-serif;
+            font-family: 'Roboto', sans-serif;
         }
 
         .details p {
             margin: 10px 0;
-            line-height: 1.6;
+            line-height: 1.6; 
+            font-family: 'Roboto', sans-serif;
         }
 
         .details strong {
-            color: #333333;
+            color: #333333; 
+            font-family: 'Roboto', sans-serif;
         }
 
         a {
@@ -103,12 +117,14 @@ $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department
             padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
-            font: 1em sans-serif;
+            font: 1em sans-serif; 
+            font-family: 'Roboto', sans-serif;
         }
 
         a:hover {
             background-color: #007bff;
-            color: #ffffff;
+            color: #ffffff; 
+            font-family: 'Roboto', sans-serif;
         } 
     </style>
 </head>

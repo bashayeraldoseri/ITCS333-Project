@@ -4,9 +4,10 @@
         --blue: #8ecae6;
         --yellow: #FED766;
         --balckish: #272727;
-        --gray: #696773; 
+        /*--gray: #696773; */
         --red:#a4161a; 
-}
+} 
+
 body{
      background-color: var(--whitish);
 
