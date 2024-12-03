@@ -98,7 +98,7 @@
                     $stmt->execute([$id, $Status, $Title, $Start_Date, $Start_Time, $End_Date, $Duration, $End_Time]);
                     
                     // Successful insertion
-                    header('Location: index.php'); // Redirect to items list page
+                    header('Location: index.php'); // Redirect to index.php page
                 } else {
                     // Display all errors 
                     echo "<div class='error-container' style='border: 1px solid red; background-color: #f8d7da; padding: 20px;'>";
