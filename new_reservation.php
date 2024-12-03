@@ -14,7 +14,7 @@
                 $stmt->execute([$room_id]);
                 $room = $stmt->fetch();
 
-                // If room not found with the provided room_id
+                // If no room found with the provided room_id
                 if (!$room) {
                     echo "Error: Room ID not found !";
                     exit;
@@ -163,25 +163,27 @@
 
             <div class="form-group">
                 <label for="title">Event Title:</label>
-                <input type="text" class="form-control" name="Title" id="Title" maxlength="80" >
+                <input type="text" class="form-control" name="Title" id="Title" maxlength="80" required >
             </div>
 
             <div class="form-group">
             <label for="start_date">Start Date of the event:</label>
-            <input type="text" class="form-control" name="start_date" id="datepicker1">
-            <p>*The university system not allwed to reserve with old date <br> *University only allwed to reserve with today date or new date</p>
+            <input type="text" class="form-control" name="start_date" id="datepicker1" required>
+            <p><strong>*The university system not allwed to reserve with old date <br> *University only allwed to reserve with today date or new date</strong></p>
             </div>
 
             <div class="form-group">
             <label for="end_date">End Date of the event:</label>
-            <input type="text" class="form-control" name="end_date" id="datepicker2">
-            <p>*The university system not allwed to reserve with old date <br> *University only allwed to reserve with today date or new date</p>
+            <input type="text" class="form-control" name="end_date" id="datepicker2" required>
+            <p><strong>*The university system not allwed to reserve with old date <br> *University only allwed to reserve with today date or new date</strong></p>
             </div>
 
 
             <div class="form-group">
             <label for="start_time">Start Time of the event:</label>
-            <select name="start_time" class="form-control" id="start_time">
+            <select name="start_time" class="form-control" id="start_time" required>
+            <option value="" disabled selected>Select Time</option> <!-- Placeholder option -->
+
             <option value="8">8 am</option>
             <option value="9">9 am</option>
             <option value="10">10 am</option>
@@ -194,30 +196,32 @@
             <option value="17">17 pm</option>
             <option value="18">18 pm</option>
             </select>
-            <p>*The time allowed to reserve is based on university times <br>*University times start from 8 am to 18 pm <br> *Not allowed to reserve at 19 pm or after
-            </p>
+            <p><strong>*The time allowed to reserve is based on university times <br>*University times start from 8 am to 18 pm <br> *Not allowed to reserve at 19 pm or after
+            </strong></p>
             </div>
 
             
             <div class="form-group">
             <label for="duration">Duration of the event:</label>
-            <select name="duration" class="form-control" id="duration">
+            <select name="duration" class="form-control" id="duration" required>
+            <option value="" disabled selected>Select Duration</option> <!-- Placeholder option -->
+
             <option value="1">1 hour</option>
             <option value="2">2 hours</option>
             <option value="3">3 hours</option>
             <option value="4">4 hours</option>
             <option value="5">5 hours</option>
             </select>
-            <p>*Duration of the event that takes  <br> *The university allows 1 to 5 maximum hours duration for one event</p>
+            <p><strong>*Duration of the event that takes  <br> *The university allows 1 to 5 maximum hours duration for one event</strong></p>
             </div>
 
 
             <div class="form-group">
                 <label for="capacity">Capacity:</label>
-                <input type="number" oninput="maxLengthCheck(this)" class="form-control" name="capacity"  id="capacity"  min="5" max = "999" maxlength = "3" > 
+                <input type="number" oninput="maxLengthCheck(this)" class="form-control" name="capacity"  id="capacity"  min="5" max = "999" maxlength = "3" required> 
                 <!-- assume that the max capacity can hold in the biggest university room is 999 --> 
 
-                <p>*The minimum number that the university allows to request a room reservation is 5</p>
+                <p><strong>*The minimum number that the university allows to request a room reservation is 5</strong></p>
             </div>
 
             <button type="submit" name='submit' class="btn btn-primary">Submit Reservation</button>
