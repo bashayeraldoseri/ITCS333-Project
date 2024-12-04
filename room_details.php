@@ -37,16 +37,24 @@ $equipment = $stmt2->fetch(PDO::FETCH_ASSOC);
 
 // Determine background color based on department
 $departmentColors = [
-    'CS' => '#fce678',
-    'CE' => '#8ecae6',
-    'IS' => '#cc6a6a',
-    // Add more departments as needed
+    'CS' => '#F8DE7E',
+    'CE' => '#A3BFEF',
+    'IS' => '#D35B6B',
 ];
 
 $department = $room['department'];
 $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department] : '#f1f3f4';
-?>
 
+// Room availability and floor information
+$roomFloor = match ($room['floor']) {
+    '0' => 'Ground Floor',
+    '1' => 'First Floor',
+    '2' => 'Second Floor',
+    default => 'Not Specified',
+};
+
+$roomAvailability = $room['Availability'] == '1' ? 'Available' : 'Not Available';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,57 +63,46 @@ $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Details</title>
     <style>
-        :root {
-        --whitish: #EFF1F3;
-        --blue: #8ecae6;
-        --yellow: #FED766;
-        --balckish: #272727;
-        /*--gray: #696773; */
-        --red:#a4161a;  
-    
-}
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #EFF1F3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .container {
             max-width: 800px;
-            margin: 20px auto;
+            width: 90%;
             padding: 20px;
-            background-color: #ffffff;
+            background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
             text-align: center;
-            color: #333333;
+            color: #007bff;
             margin-bottom: 20px;
-            font-family: 'Roboto', sans-serif;
         }
 
         .details {
-            background-color:
-                <?php echo htmlspecialchars($bgColor); ?>
-            ;
             padding: 20px;
-            border-radius: 10px;
-            font: 1em sans-serif;
-            font-family: 'Roboto', sans-serif;
+            border-radius: 8px;
+            background-color: <?php echo htmlspecialchars($bgColor); ?>;
+            color: #272727;
         }
 
         .details p {
             margin: 10px 0;
-            line-height: 1.6; 
-            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
         }
 
         .details strong {
-            color: #333333; 
-            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
         }
 
         a {
@@ -117,51 +114,30 @@ $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department
             padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
-            font: 1em sans-serif; 
-            font-family: 'Roboto', sans-serif;
         }
 
         a:hover {
             background-color: #007bff;
-            color: #ffffff; 
-            font-family: 'Roboto', sans-serif;
-        } 
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
-
-    <?php
-    $roomFloor;
-    switch ($room['floor']) {
-        case '0': $roomFloor = "Ground Floor" ; break;
-        case "1": $roomFloor = "First Floor"; break;
-        case "2": $roomFloor = "Second Floor"; break;
-        default : $roomFloor = "none";
-
-    } 
-
-    $RoomAvailability ;
-    switch($room['Availability']) {
-        case '0' : $RoomAvailability = "Room not available" ; break;
-        case '1' : $RoomAvailability = "Room available" ; break;
-    }
-
-    ?>
     <div class="container">
-        <h1><?php echo "Room "; echo htmlspecialchars($room['number']); ?></h1>
+        <h1>Room <?php echo htmlspecialchars($room['number']); ?></h1>
         <div class="details">
             <p><strong>Room ID:</strong> <?php echo htmlspecialchars($room['Room_ID']); ?></p>
             <p><strong>Room Number:</strong> <?php echo htmlspecialchars($room['number']); ?></p>
             <p><strong>Capacity:</strong> <?php echo htmlspecialchars($room['Capacity']); ?></p>
             <p><strong>Room Type:</strong> <?php echo htmlspecialchars($room['Type']); ?></p>
-            <p><strong>Room Availability:</strong> <?php echo htmlspecialchars($RoomAvailability); ?></p>
-            <p><strong>Room Description:</strong> <?php echo htmlspecialchars($room['Description']); ?></p>
+            <p><strong>Availability:</strong> <?php echo htmlspecialchars($roomAvailability); ?></p>
+            <p><strong>Description:</strong> <?php echo htmlspecialchars($room['Description']); ?></p>
             <p><strong>Department:</strong> <?php echo htmlspecialchars($room['department']); ?></p>
             <p><strong>Floor:</strong> <?php echo htmlspecialchars($roomFloor); ?></p>
-            <p><strong>Room Equipment:</strong> <?php echo htmlspecialchars($equipment['equipment_list']); ?></p>
+            <p><strong>Equipment:</strong> <?php echo htmlspecialchars($equipment['equipment_list'] ?: 'None'); ?></p>
         </div>
-        <p><a href="index.php">Back to Room Browsing</a></p>
+        <a href="index.php">Back to Room Browsing</a>
     </div>
 </body>
 

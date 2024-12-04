@@ -3,15 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2024 at 12:19 PM
+-- Generation Time: Dec 04, 2024 at 07:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-CREATE DATABASE booking_system;
-USE booking_system;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -33,17 +31,22 @@ CREATE TABLE `bookings` (
   `Booking_ID` int(11) NOT NULL,
   `user_ID` int(11) NOT NULL,
   `Room_ID` int(11) NOT NULL,
-  `Start_Time` datetime NOT NULL,
-  `End_Time` datetime NOT NULL
+  `Start_Time` int(11) NOT NULL,
+  `End_Time` int(11) NOT NULL,
+  `Status` varchar(255) NOT NULL,
+  `Title` varchar(255) NOT NULL,
+  `Start_Date` date DEFAULT NULL,
+  `End_Date` date DEFAULT NULL,
+  `Duration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bookings`
 --
 
-INSERT INTO `bookings` (`Booking_ID`, `user_ID`, `Room_ID`, `Start_Time`, `End_Time`) VALUES
-(1, 2, 28, '2023-11-10 00:00:00', '2023-11-12 00:00:00'),
-(2, 2, 30, '2024-12-01 00:00:00', '2024-12-05 00:00:00');
+INSERT INTO `bookings` (`Booking_ID`, `user_ID`, `Room_ID`, `Start_Time`, `End_Time`, `Status`, `Title`, `Start_Date`, `End_Date`, `Duration`) VALUES
+(1, 2, 28, 2147483647, 2147483647, '', '', NULL, NULL, 0),
+(2, 2, 30, 2147483647, 2147483647, '', '', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -127,8 +130,7 @@ CREATE TABLE `rooms` (
   `Description` text NOT NULL,
   `floor` int(11) NOT NULL,
   `department` text NOT NULL
-) 
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `rooms`
@@ -651,7 +653,9 @@ INSERT INTO `users` (`Role`, `email`, `password`, `name`, `ID`, `ProfilePic`, `P
 -- Indexes for table `bookings`
 --
 ALTER TABLE `bookings`
-  ADD PRIMARY KEY (`Booking_ID`);
+  ADD PRIMARY KEY (`Booking_ID`),
+  ADD KEY `Room_ID` (`Room_ID`),
+  ADD KEY `user_ID` (`user_ID`);
 
 --
 -- Indexes for table `equipment`
@@ -699,6 +703,17 @@ ALTER TABLE `rooms`
 --
 ALTER TABLE `users`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`Room_ID`) REFERENCES `rooms` (`Room_ID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`user_ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
