@@ -3,7 +3,7 @@
         --whitish: #EFF1F3;
         --blue: #8ecae6;
         --yellow: #FED766;
-        --balckish: #272727;
+        /*--balckish: #272727;*/
         /*--gray: #696773; */
         --red:#a4161a; 
 } 
@@ -25,7 +25,7 @@ body{
     border-radius: 5px;
     font-size: 1.25rem;
     text-decoration: none; 
-    color:var(--balckish)
+   /* color:var(--balckish)*/
   }
   
   .book-link:hover {
@@ -55,7 +55,7 @@ body{
     display: flex;
     justify-content: center;  /* Centers the scrollable container */
     padding: 20px;            /* Margin around the entire scrollable area */
-    background-color: var(--gray);
+    /* background-color: var(--gray);*/
 }
 
  .scrollable-container {
