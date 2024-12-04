@@ -163,18 +163,18 @@
 
             <div class="form-group">
                 <label for="title">Event Title:</label>
-                <input type="text" class="form-control" name="Title" id="Title" maxlength="80" required >
+                <input type="text" class="form-control" name="Title" id="Title" placeholder="Enter Title" maxlength="100" required >
             </div>
 
             <div class="form-group">
-            <label for="start_date">Start Date of the event:</label>
-            <input type="text" class="form-control" name="start_date" id="datepicker1" required>
+            <label for="start_date">Event Start Date:</label>
+            <input type="text" class="form-control" name="start_date" id="datepicker1" placeholder="Enter Start Date" required>
             <p><strong>*The university system not allwed to reserve with old date <br> *University only allwed to reserve with today date or new date</strong></p>
             </div>
 
             <div class="form-group">
-            <label for="end_date">End Date of the event:</label>
-            <input type="text" class="form-control" name="end_date" id="datepicker2" required>
+            <label for="end_date">Event End Date:</label>
+            <input type="text" class="form-control" name="end_date" id="datepicker2" placeholder="Enter End Date" required>
             <p><strong>*The university system not allwed to reserve with old date <br> *University only allwed to reserve with today date or new date</strong></p>
             </div>
 
@@ -202,7 +202,7 @@
 
             
             <div class="form-group">
-            <label for="duration">Duration of the event:</label>
+            <label for="duration">Event Duration:</label>
             <select name="duration" class="form-control" id="duration" required>
             <option value="" disabled selected>Select Duration</option> <!-- Placeholder option -->
 
@@ -217,8 +217,8 @@
 
 
             <div class="form-group">
-                <label for="capacity">Capacity:</label>
-                <input type="number" oninput="maxLengthCheck(this)" class="form-control" name="capacity"  id="capacity"  min="5" max = "999" maxlength = "3" required> 
+                <label for="capacity">Event Capacity:</label>
+                <input type="number" oninput="maxLengthCheck(this)" class="form-control" name="capacity"  id="capacity"  min="5" max = "999" maxlength = "3" placeholder="Enter Capacity" required> 
                 <!-- assume that the max capacity can hold in the biggest university room is 999 --> 
 
                 <p><strong>*The minimum number that the university allows to request a room reservation is 5</strong></p>
