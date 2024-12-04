@@ -4,11 +4,11 @@
 include('database/db.php');
 session_start();
 
-// Ensure the user is logged in or handle accordingly
- if (!isset($_SESSION['user_id'])) {
-     header('Location: login.php');
-     exit();
- }
+        // Ensure the user is logged in or handle accordingly
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: login.php');
+            exit();
+        }
 
         $room_id=1;
         if (isset($_GET['room_id'])) {
@@ -49,29 +49,24 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cancel Reservation</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
 </head>
 <body>
 
 <div class="container">
     <div class="jumbotron text-center">
         <h1>Cancel Room Reservation ID: <?php echo $room_id; ?></h1>
-        <p>Kindly for complete the cancellation give the permission</p>
-    </div>
+        <p>Kindly for complete the cancellation process you need permission</p>
 
-
-    <form action="update_to_cancel.php" method="POST">
+        <form action="update_to_cancel.php" method="POST">
         <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
 
         <input type="hidden" name="status"  value="Inactive" > 
         
         <button type="submit" name="update" class="btn btn-primary">Permission</button>
     </form>
-
     <p><a href="???????.php">Back to Bookings</a></p>
+    </div>
 </div>
 
 </body>
