@@ -1,6 +1,6 @@
 <?php
 // database connection
-$pdo = new PDO("mysql:host=localhost;dbname=booking_system", "root", "");
+include('database/db.php');
 
 // fetch rooms from the database
 $stmt = $pdo->query("SELECT * FROM rooms");
@@ -21,26 +21,33 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
+                <th>Room ID</th>
+                <th>Room Number</th>
                 <th>Capacity</th>
-                <th>Equipment</th>
-                <th>Location</th>
+                <th>Type</th>
+                <th>Availability</th>
+                <th>Description</th>
+                <th>Availability</th>
+                <th>Floor</th>
+                <th>Department</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($rooms as $room): ?>
                 <tr>
-                    <td><?php echo $room['id']; ?></td>
-                    <td><?php echo $room['name']; ?></td>
-                    <td><?php echo $room['capacity']; ?></td>
-                    <td><?php echo $room['equipment']; ?></td>
-                    <td><?php echo $room['location']; ?></td>
+                    <td><?php echo $room['Room_ID']; ?></td>
+                    <td><?php echo $room['number']; ?></td>
+                    <td><?php echo $room['Capacity']; ?></td>
+                    <td><?php echo $room['Type']; ?></td>
+                    <td><?php echo $room['Availability']; ?></td>
+                    <td><?php echo $room['Description']; ?></td>
+                    <td><?php echo $room['floor']; ?></td>
+                    <td><?php echo $room['department']; ?></td>
                     <td>
                         <!-- edit and delete actions -->
-                        <a href="editRoom.php?id=<?php echo $room['id']; ?>" class="btn btn-warning">Edit</a>
-                        <a href="deleteRoom.php?id=<?php echo $room['id']; ?>" class="btn btn-danger">Delete</a>
+                        <a href="editRoom.php?Room_ID=<?php echo $room['Room_ID']; ?>" class="btn btn-warning">Edit</a>
+                        <a href="deleteRoom.php?Room_ID=<?php echo $room['Room_ID']; ?>" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
