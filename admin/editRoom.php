@@ -1,25 +1,29 @@
 <?php
 // database connection
-$pdo = new PDO("mysql:host=localhost;dbname=booking_system", "root", "");
+include('database/db.php');
 
 // get the room ID from the URL
-$id = $_GET['id'];
+$Room_ID = $_GET['Room_ID'];
 
 // fetch the room data
-$stmt = $pdo->prepare("SELECT * FROM rooms WHERE id = ?");
-$stmt->execute([$id]);
+$stmt = $pdo->prepare("SELECT * FROM rooms WHERE Room_ID = ?");
+$stmt->execute([$Room_ID]);
 $room = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // update room data if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $capacity = $_POST['capacity'];
-    $equipment = $_POST['equipment'];
-    $location = $_POST['location'];
+    $number = $_POST['number'];
+    $Capacity = $_POST['Capacity'];
+    $Room_ID = $_POST['Room_ID'];
+    $Type = $_POST['Type'];
+    $Availability = $_POST['Availability'];
+    $Description = $_POST['Description'];
+    $floor = $_POST['floor'];
+    $department = $_POST['department'];
 
     // update room in the database
-    $stmt = $pdo->prepare("UPDATE rooms SET name = ?, capacity = ?, equipment = ?, location = ? WHERE id = ?");
-    $stmt->execute([$name, $capacity, $equipment, $location, $id]);
+    $stmt = $pdo->prepare("UPDATE rooms SET number = ?, Capacity = ?, Type = ?, Availability = ?, Description = ?, floor = ? department = ? WHERE $Room_ID = ?");
+     $stmt->execute([$number, $Capacity, $Type, $Availability, $Description, $floor, $department, $Room_ID]);
 
     // redirect to the view rooms page after update
     header("Location: viewRooms.php");
@@ -39,21 +43,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- form to edit room -->
     <form method="POST">
-        <div class="mb-3">
-            <label for="name" class="form-label">Room Name</label>
-            <input type="text" class="form-control" id="name" name="name" value="<?php echo $room['name']; ?>" required>
+    <div class="mb-3">
+            <label for="number" class="form-label">Room Number</label>
+            <input type="text" class="form-control" id="number" name="number" required>
         </div>
         <div class="mb-3">
-            <label for="capacity" class="form-label">Capacity</label>
-            <input type="number" class="form-control" id="capacity" name="capacity" value="<?php echo $room['capacity']; ?>" required>
+            <label for="Capacity" class="form-label">Capacity</label>
+            <input type="number" class="form-control" id="Capacity" name="Capacity" min="5" max="999" required>
         </div>
         <div class="mb-3">
-            <label for="equipment" class="form-label">Equipment</label>
-            <input type="text" class="form-control" id="equipment" name="equipment" value="<?php echo $room['equipment']; ?>">
+            <label for="Room_ID" class="form-label">Room ID</label>
+            <input type="number" class="form-control" id="Room_ID" name="Room_ID" required>
         </div>
         <div class="mb-3">
-            <label for="location" class="form-label">Location</label>
-            <input type="text" class="form-control" id="location" name="location" value="<?php echo $room['location']; ?>" required>
+            <label for="Type" class="form-label">Type</label>
+            <input type="text" class="form-control" id="Type" name="Type" required>
+        </div>
+        <div class="mb-3">
+            <label for="Availability" class="form-label">Availability</label>
+            <input type="text" class="form-control" id="Availability" name="Availability" required>
+        </div>
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="Description" name="Description" required>
+        </div>
+        <div class="mb-3">
+            <label for="floor" class="form-label">Floor</label>
+            <input type="number" class="form-control" id="floor" name="floor" required>
+        </div>
+        <div class="mb-3">
+            <label for="department" class="form-label">Department</label>
+            <input type="text" class="form-control" id="department" name="department" required>
         </div>
         <button type="submit" class="btn btn-success">Update Room</button>
     </form>
