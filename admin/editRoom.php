@@ -3,7 +3,7 @@
 include('database/db.php');
 
 // get the room ID from the URL
-$id = $_GET['id'];
+$Room_ID = $_GET['Room_ID'];
 
 // fetch the room data
 $stmt = $pdo->prepare("SELECT * FROM rooms WHERE Room_ID = ?");
