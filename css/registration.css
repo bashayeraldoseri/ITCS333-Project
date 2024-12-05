@@ -35,6 +35,7 @@ h1 {
   text-align: center;
   margin-bottom: 20px;
   color: var(--balckish);
+  font-weight: bold;
 }
 
 label {
@@ -64,7 +65,9 @@ button {
 
 button:hover {
   background-color: #0056b3;
-}
+} 
+
+
 
 /* Image Container Styles */
 .image-container {
@@ -72,28 +75,28 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-right: 20px; 
+  padding-right: 20px;
   background-color: var(--blue);
+  max-width: 1500px;
+  max-height: 1500px;
+  /* Added overflow handling for large images */
 }
 
-#login-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-} 
-
-
-img { 
+/* Image Styles */
+img {
+  width: 100%; /* Ensures the image fills the container */
+  max-width: 500px; /* Limits the maximum width */
+  height: auto; /* Maintains the aspect ratio */
   border-radius: 8px;
   border: 1px solid #ddd;
-  border-radius: 4px;
   padding: 5px;
-  width: 100%
-} 
+  object-fit: cover; /* Ensures the image fits neatly */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow for a polished look */
+}
 
+/* Login Container Styles */
 .login-container {
   flex: 1;
-  padding-left: 20px;
+  padding-left: 200px; /* Fixed issue with missing unit */
   background-color: var(--blue);
 }

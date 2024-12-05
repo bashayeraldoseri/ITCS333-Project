@@ -170,11 +170,26 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                 // Card content
                 $class_name = $row['department'] . " Class";
                 $class_subtitle = "S40- " . $row['number'];
-                $class_description = $row['Description'];
+                $class_description = $row['Description']; 
+
+                $card_color = "";
+                switch ($row['department']) {
+                    case "CE":
+                        $card_color = "background-color: #A3BFEF; color: #000000;"; 
+                        break;
+                    case "CS":
+                        $card_color = "background-color:#F8DE7E ; color: #000000;"; 
+                        break;
+                    case "IS":
+                        $card_color = "background-color: #D35B6B;  color: #000000"; 
+                        break;
+                    default:
+                        $card_color = "background-color: #fefefe; color: #000000;"; // Default gray 
+                    }
                 ?>
                 <div class="col-lg-3 row g-3">
                   <a href="room_details.php?Room_ID=<?php echo $row['Room_ID']; ?>" class="nav-link card-link">
-                    <div class="card" style="width: 18rem">
+                    <div class="card" style=" <?php echo $card_color ?> ;">
                       <div class="card-body m-3">
                         <h5 class="card-title"><?php echo $class_name; ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?php echo $class_subtitle; ?></h6>
