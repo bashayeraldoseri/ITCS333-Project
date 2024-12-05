@@ -44,16 +44,27 @@ if ($_SESSION['DoB'] != null) {
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="../css/styles.css" />
+<head> 
+  <meta charset="UTF-8" /> 
   <link rel="stylesheet" href="../css/profile.css">
+  <title>Profile</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> 
+<style>
+ .user-info-card {
+   width: 100%; /* Adjust the percentage as needed */ 
+  } 
+
+ .card {
+   padding: 1rem; margin: 1rem; text-align: center; 
+  }  
+
+ .mb-3 {
+   margin-bottom: 1rem; 
+  }  
+ 
+ </style>
 </head>
 
 <body>
@@ -82,7 +93,7 @@ if ($_SESSION['DoB'] != null) {
                   <a class="nav-link" href="../dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">About Us</a>
+                  <a class="nav-link" href="../AboutUs.html">About Us</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="Registration/logout.php">logout</a>
@@ -138,7 +149,7 @@ if ($_SESSION['DoB'] != null) {
                   <fieldset disabled>
                     <div class="row d-flex justify-content-center align-items-center m-3">
                       <div class="col-lg-10">
-                        <div class="card p-1 d-flex justify-content-center align-items-center">
+                        <div class="card p-1 d-flex justify-content-center align-items-center m-3 user-info-card">
                           <div class="mb-3">
                             <h5>Department</h5>
                             <p><?php echo $department; ?></p>
@@ -292,9 +303,33 @@ if ($_SESSION['DoB'] != null) {
             </div>
           </div>
 
-          <!-- ------------------------------------------------------------------------- -->
+          <!-- ------------------------------------------------------------------------- --> 
+
+
+
           <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-help-tab">
-            النجدة
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center">
+                  <div class="card-body"> 
+                   
+                  Contact Us at our Emails :
+            <ul>
+              <li>Help.123123@info.com</li>
+              <li>Help.9910@info.com</li>
+            </ul> 
+            Or directly at our call center :
+            <ul>
+              <li>+937 1234 5678 </li>
+              <li>+937 8765 4321 </li>
+            </ul> 
+
+                     </div>
+                    </div>
+                  </div>
+                </div>
+              </div>   
+            </div>
           </div>
         </div>
       </div>
