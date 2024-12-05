@@ -1,5 +1,12 @@
 <?php
 session_start();
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$dbname = 'booking_system';
+$port = 3306;
+$dsn = "mysql:host=$host;dbname=$dbname;port=$port";
+$pdo = new PDO($dsn, $user, $password);
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
   echo'Already logged in';
@@ -24,10 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     if ($user) {
       $_SESSION['loggedin'] = true;
       $_SESSION['username'] = $user['name'];
-      $_SESSION['user_id'] = $user['ID']; // Save user ID
-      $_SESSION['role'] = $user['Role']; // Save user role
+      $_SESSION['user_id'] = $user['ID']; 
+      $_SESSION['role'] = $user['Role'];
       $_SESSION['user_email'] = $user['email'];
-
     
       $_SESSION['Phone'] = $user['Phone'];
       $_SESSION['DoB'] = $user['DoB'];
@@ -47,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
 function validate_user($username, $password)
 {
+  global $pdo;
   require_once '../database/db.php';
   $sql = "SELECT * FROM users WHERE name = :name";
 
