@@ -11,7 +11,7 @@ $pdo = new PDO($dsn, $user, $password);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $username = trim($_POST['username']);
   $password = $_POST['password'];
-  $confirm_password = $_POST['password'];
+  $confirm_password = $_POST['confirm_password'];
   $errors = [];
 
   if (empty($username)) {
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bindParam(4, $role, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
-          // Registration successful
+          // Registration FINALLY successful
           $_SESSION['message'] = "Registration successful!";
           header("Location: ../index.php");
           exit;
