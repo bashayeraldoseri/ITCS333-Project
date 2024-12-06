@@ -175,16 +175,16 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                 $card_color = "";
                 switch ($row['department']) {
                     case "CE":
-                        $card_color = "background-color: #A3BFEF; color: #000000;"; 
+                        $card_color = " border-color: #023e8a; color: #000000; border-width: medium;"; 
                         break;
                     case "CS":
-                        $card_color = "background-color:#F8DE7E ; color: #000000;"; 
+                        $card_color = " border-color:#F8DE7E ; color: #000000; border-width: medium; "; 
                         break;
                     case "IS":
-                        $card_color = "background-color: #D35B6B;  color: #000000"; 
+                        $card_color = " border-color: #c1121f;  color: #000000 ; border-width: medium;"; 
                         break;
                     default:
-                        $card_color = "background-color: #fefefe; color: #000000;"; // Default gray 
+                        $card_color = " border-color: #fefefe; color: #000000; border-width: medium;"; // Default gray 
                     }
                 ?>
                 <div class="col-lg-3 row g-3">
