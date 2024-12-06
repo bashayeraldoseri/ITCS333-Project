@@ -19,7 +19,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $profilePicture = $user['ProfilePic'] ?? '../static/user.jpg'; //default
 
-
 // print_r($profilePicture);
 
 switch ($department) {
@@ -45,32 +44,15 @@ if ($_SESSION['DoB'] != null) {
 <html lang="en">
 
 <head> 
-  <meta charset="UTF-8" /> 
-  <link rel="stylesheet" href="../css/profile.css">
-  <title>Profile</title> 
+  <meta charset="UTF-8" />  
+  <link href="../css/profile.css" rel="stylesheet">
+  <title>Profile</title>   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> 
-<style>
- .user-info-card {
-   width: 100%; /* Adjust the percentage as needed */ 
-  } 
 
- .card {
-   padding: 1rem; margin: 1rem; text-align: center; 
-  }  
-
- .mb-3 {
-   margin-bottom: 1rem; 
-  }  
- 
- </style>
 </head>
-
 <body>
-
-
-  <div class="container-fluid">
     <header>
       <div class="container-fluid p-2">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -122,7 +104,7 @@ if ($_SESSION['DoB'] != null) {
           </a>
         </div>
       </div>
-      <div class="col-sm-9 right-box">
+      <div class="col-sm-9 right-box h-100">
         <div class="tab-content" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel"
             aria-labelledby="v-pills-profile-tab">
@@ -136,7 +118,7 @@ if ($_SESSION['DoB'] != null) {
                     style="width: 100px; height: 100px; object-fit: cover;" />
 
 
-                  <div class="card-body">
+                  <div class="card-body h-100">
                     <h5 class="card-title d-flex justify-content-center"><?php echo $username; ?></h5>
                     <p class="card-text d-flex justify-content-center">Role: Student</p>
                   </div>
@@ -148,7 +130,7 @@ if ($_SESSION['DoB'] != null) {
                 <form action="">
                   <fieldset disabled>
                     <div class="row d-flex justify-content-center align-items-center m-3">
-                      <div class="col-lg-10">
+                      <div class="col-lg-10 ">
                         <div class="card p-1 d-flex justify-content-center align-items-center m-3 user-info-card">
                           <div class="mb-3">
                             <h5>Department</h5>
@@ -275,17 +257,17 @@ if ($_SESSION['DoB'] != null) {
                       <div class="card-header bg-dark text-white">
                         Privacy Settings
                       </div>
-                      <div class="mt-3">
+                      <div class="mt-3 mb-2">
                         <label for="email" class="form-label">Change Linked Email</label>
                         <input type="email" class="form-control" name="email" id="email" placeholder="Enter new email"
                           value="<?php echo $email; ?>" />
                       </div>
-                      <div class="mt-3">
+                      <div class="mt-3 mb-2">
                         <label for="password" class="form-label">Change Password</label>
                         <input type="password" class="form-control" name="password" id="password"
                           placeholder="New password" />
                       </div>
-                      <div class="mt-3 mb-3">
+                      <div class="mt-3 mb-2">
                         <label for="rp-password" class="form-label">Repeat Password</label>
                         <input type="password" class="form-control" name="rp-password" id="rp-password"
                           placeholder="Repeated password" />
@@ -299,7 +281,6 @@ if ($_SESSION['DoB'] != null) {
                   <button type="submit" class="btn btn-primary">Save Changes</button>
                 </div>
               </form>
-
             </div>
           </div>
 

@@ -24,12 +24,12 @@ if (!empty($data['searchQuery'])) {
             OR Type LIKE ?
         )";
 
-        $params[] = "%" . $part . "%"; // department
-        $params[] = "%" . $part . "%"; // Description
-        $params[] = "%" . $part . "%"; // number
-        $params[] = "%" . $part . "%"; // Capacity
-        $params[] = "%" . $part . "%"; // floor
-        $params[] = "%" . $part . "%"; // Type
+        $params[] = "%" . $part . "%";  // department
+        $params[] = "%" . $part . "%";  // Description
+        $params[] = "%" . $part . "%";  // number
+        $params[] = "%" . $part . "%";  // Capacity
+        $params[] = "%" . $part . "%";  // floor
+        $params[] = "%" . $part . "%";  // Type
     }
 
     $query .= " AND (" . implode(" AND ", $conditions) . ")";
@@ -61,10 +61,10 @@ if (!empty($data['capacity'])) {
 }
 
 // Booking Time
-// if (!empty($data['bookingTime'])) {
-//     $query .= " AND available_time <= ?";
-//     $params[] = $data['bookingTime'];
-// }
+//if (!empty($data['bookingTime'])) {
+    //$query .= " AND available_time <= ?";
+    //$params[] = $data['bookingTime'];
+//}
 
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
