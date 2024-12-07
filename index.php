@@ -129,13 +129,13 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
 
               <label for="capacity">Capacity:</label>
               <select id="capacity" class="form-control mb-4">
-                <option value="10">10</option>
+                <option selected value="10">10</option>
                 <option value="15">15</option>
                 <option value="20">20</option>
                 <option value="30">30</option>
                 <option value="40">40</option>
                 <option value="50">50</option>
-                <option selected value="100">100</option>
+                <option value="100">100</option>
               </select>
 
               <label for="bookingTime">Search by Available Time:</label>
@@ -220,7 +220,6 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
       </div>
     </main>
 
-    <footer></footer>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"

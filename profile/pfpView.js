@@ -1,6 +1,6 @@
 function previewImage(event) {
     const fileInput = event.target;
-    const preview = document.getElementById('imagePreview'); // Ensure this ID matches your <img> tag
+    const preview = document.getElementById('imagePreview');
 
     // Check if a file is selected
     if (fileInput.files && fileInput.files[0]) {
@@ -11,14 +11,44 @@ function previewImage(event) {
             preview.src = e.target.result; // Set the <img> tag's src to the file data
         };
 
-        // Read the selected file
         reader.readAsDataURL(fileInput.files[0]);
     }
 }
 
 
+const passwordField = document.getElementById('verpassword');
+const privacySettings = document.getElementById('privacySettings');
+const verifyPasswordBtn = document.getElementById('verifyPasswordBtn');
+
+verifyPasswordBtn.addEventListener('click', function() {
+    const enteredPassword = passwordField.value.trim();
+    console.log (passwordField);
 
 
-
-
-
+    if (enteredPassword !== '') {
+        // AJAX request to verify the password
+        fetch('verify_password.php', {
+            method: 'POST',
+            body: JSON.stringify({ password: enteredPassword }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // If password matches, show privacy settings
+                privacySettings.style.display = 'block';
+            } else {
+                console.log("Passwords don't match")
+                // If password doesn't match, hide privacy settings
+                privacySettings.style.display = 'none';
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            privacySettings.style.display = 'none';
+        });
+    } else {
+        privacySettings.style.display = 'none';
+    }
+});

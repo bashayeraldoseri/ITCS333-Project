@@ -11,7 +11,7 @@ $pdo = new PDO($dsn, $user, $password);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $username = trim($_POST['username']);
   $password = $_POST['password'];
-  $confirm_password = $_POST['confirm_password'];
+  $confirm_password = $_POST['confirm-password'];
   $errors = [];
 
   if (empty($username)) {
@@ -43,8 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!preg_match('/^[a-zA-Z0-9._%+-]+@(uob\.edu\.bh|stu\.uob\.edu\.bh)$/', $email)) {
       $errors[] = "Invalid email format. Only UoB emails are allowed.";
     } 
-    else if (preg_match('/^[a-zA-Z0-9._%+-]+@(stu\.uob\.edu\.bh)$/', $email)) {
+    if (preg_match('/^[a-zA-Z0-9._%+-]+@(stu\.uob\.edu\.bh)$/', $email)) {
       $role="Student";
+    }else {
+      $role="Instructor";
     }
     $sql = "SELECT ID FROM users WHERE email = ?";
     if ($stmt = $pdo->prepare($sql)) {

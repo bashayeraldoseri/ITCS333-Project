@@ -11,6 +11,7 @@ $email = $_SESSION['user_email'];
 $Dob = '0000-00-00';
 $phone = $_SESSION['Phone'];
 $department = $_SESSION['Department'];
+$role = $_SESSION['role'];
 
 $stmt = $pdo->prepare("SELECT ProfilePic FROM users WHERE ID = :ID");
 $stmt->bindParam(':ID', $id);
@@ -78,7 +79,7 @@ if ($_SESSION['DoB'] != null) {
                   <a class="nav-link" href="../AboutUs.html">About Us</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="Registration/logout.php">logout</a>
+                  <a class="nav-link" href="../Registration/logout.php">logout</a>
                 </li>
               </ul>
             </div>
@@ -95,8 +96,6 @@ if ($_SESSION['DoB'] != null) {
           </a>
           <a class="nav-link" id="v-pills-bookings-tab" data-bs-toggle="pill" href="#v-pills-bookings" role="tab"
             aria-controls="v-pills-bookings" aria-selected="false">Bookings</a>
-          </a>
-          <a class="nav-link" href = "../userDashboard.php">User Dashboard</a>
           </a>
           <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings" role="tab"
             aria-controls="v-pills-settings" aria-selected="false">Settings</a>
@@ -122,7 +121,7 @@ if ($_SESSION['DoB'] != null) {
 
                   <div class="card-body h-100">
                     <h5 class="card-title d-flex justify-content-center"><?php echo $username; ?></h5>
-                    <p class="card-text d-flex justify-content-center">Role: Student</p>
+                    <p class="card-text d-flex justify-content-center">Role: <?php echo $role?></p>
                   </div>
                 </div>
 
@@ -168,7 +167,7 @@ if ($_SESSION['DoB'] != null) {
 
           <!-- ---------------------------------Bookings---------------------------------------- -->
           <div class="tab-pane fade" id="v-pills-bookings" role="tabpanel" aria-labelledby="v-pills-bookings-tab">
-            <div class="row">
+            <div class="row d-flex justify-content-center align-items-center m-2 g-3">
               <div class="col-sm-5">
                 <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center">
                   <!-- Profile Pictures here -->
@@ -176,115 +175,211 @@ if ($_SESSION['DoB'] != null) {
                     style="width: 100px; height: 100px; object-fit: cover;" />
                   <div class="card-body">
                     <h5 class="card-title d-flex justify-content-center"><?php echo $username; ?></h5>
-                    <p class="card-text d-flex justify-content-center">Role: Student</p>
+                    <p class="card-text d-flex justify-content-center">Role: <?php echo $role?></p>
                     <p class="card-text"><small>Last time booked: 3 months ago</small></p>
                   </div>
                 </div>
 
 
               </div>
+              <div class="col-sm-7">
+              <?php
+
+    // Retrieve the username from session
+    if (isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+    } else {
+        // If the username is not set, redirect to login page
+        header('Location: login.php');
+        exit();
+    }
+
+    include('../database/db.php');
+
+    // Get the user ID from the database using the username
+    $sql = "SELECT ID, ProfilePic FROM users WHERE name = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$username]);
+    $user = $stmt->fetch();
+
+    if ($user === false) {
+        echo "User not found.";
+        exit;
+    }
+
+    $userID = $user['ID'];
+    
+    // Fetch the upcoming bookings
+    $sql = "SELECT Room_ID, Start_Time, End_Time FROM bookings WHERE user_ID = ? AND End_Time > NOW()";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$userID]);
+    $comingbookings = $stmt->fetchAll();
+
+    // Fetch the past bookings
+    $sql = "SELECT Room_ID, Start_Time, End_Time FROM bookings WHERE user_ID = ? AND End_Time < NOW()";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$userID]);
+    $pastbookings = $stmt->fetchAll();
+    ?>
+
+
+                <div class="dashnoard-container">
+                    <!-- Upcoming Bookings -->
+                    <div class="box" id="upcoming-bookings">
+                        <h2>Upcoming Bookings</h2>
+                        <ul class="scrollable-container">
+                            <?php
+                            foreach ($comingbookings as $booking) {
+                                echo "<li>Room {$booking['Room_ID']} - {$booking['Start_Time']} to {$booking['End_Time']}</li>";
+                            }
+                            ?>
+                        </ul>
+                    </div>
+
+                    <!-- Past Bookings -->
+                    <div class="box" id="past-bookings">
+                        <h2>Past Bookings</h2>
+                        <ul class="scrollable-container">
+                            <?php
+                            foreach ($pastbookings as $booking) {
+                                echo "<li>Room {$booking['Room_ID']} - {$booking['Start_Time']} to {$booking['End_Time']}</li>";
+                            }
+                            ?>
+                        </ul>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="charts">
+                        <div class="chart" id="most-used">
+                            <a href="../userRoomsUsage.php">View Room Usage Chart</a>
+                        </div>
+                        <div class="chart" id="most-timing">
+                            <a href="../userTimingUsage.php">View Timing Chart</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+              </div>
             </div>
           </div>
+
+          
 
           <!-- ----------------------------------SETTINGS--------------------------------------- -->
           <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-            <div class="container">
-              <!-- Main form -->
-              <form action="settings.php" method="post" enctype="multipart/form-data">
-                <div class="row g-3">
-                  <!-- Account Settings -->
-                  <div class="col-md-4">
-                    <div class="card h-100">
-                      <div class="card-header bg-dark text-white">
-                        Account Settings
-                      </div>
-                      <div class="card-body">
-                        <div class="mb-3">
-                          <label for="username" class="form-label">Change username</label>
-                          <input type="text" class="form-control" name="username" id="username"
-                            placeholder="Enter new username" value="<?php echo $username; ?>" />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Edit Profile Picture</label>
-                          <img id="imagePreview" class="card-img-top rounded-circle mx-auto d-block mb-3"
-                            src="<?php echo $profilePicture; ?>" alt="pfp"
-                            style="width: 100px; height: 100px; object-fit: cover;" />
-                          <input type="file" name="fileToUpload" id="fileToUpload" onchange="previewImage(event)">
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Preferences -->
-                  <div class="col-md-4">
-                    <div class="card h-100">
-                      <div class="card-header bg-dark text-white">
-                        Personal Information
-                      </div>
-                      <div class="card-body">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="field" id="CS" value="CS" 
-                          <?php if ($department === 'Computer Science') echo 'checked'; ?>>
-                          <label class="form-check-label" for="CS">Computer Science</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="field" id="CE" value="CE"
-                          <?php if ($department === 'Computer Engineering') echo 'checked'; ?>>
-                          <label class="form-check-label" for="CE">Computer Engineering</label>
-                        </div>
-                        <div class="form-check mb-3">
-                          <input class="form-check-input" type="radio" name="field" id="IS" value="IS"
-                          <?php if ($department === 'Information Systems') echo 'checked'; ?>>
-                          <label class="form-check-label" for="IS">Information Systems</label>
-                        </div>
-
-                        <div class="mb-3">
-                          <label for="DoB" class="form-label">Choose Date of Birth</label>
-                          <input type="date" class="form-control" name="DoB" id="DoB" placeholder="Enter new DoB"
-                            value="<?php echo $Dob ?>" />
-                        </div>
-                        <div class="mb-3">
-                          <label for="phone" class="form-label">Change Phone number</label>
-                          <input type="text" class="form-control" name="phone" id="phone"
-                            placeholder="Enter new Phone number" value="<?php echo $phone; ?>" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Privacy Settings -->
-                  <div class="col-md-4">
-                    <div class="card h-100">
-                      <div class="card-header bg-dark text-white">
-                        Privacy Settings
-                      </div>
-                      <div class="mt-3 mb-2">
-                        <label for="email" class="form-label">Change Linked Email</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter new email"
-                          value="<?php echo $email; ?>" />
-                      </div>
-                      <div class="mt-3 mb-2">
-                        <label for="password" class="form-label">Change Password</label>
-                        <input type="password" class="form-control" name="password" id="password"
-                          placeholder="New password" />
-                      </div>
-                      <div class="mt-3 mb-2">
-                        <label for="rp-password" class="form-label">Repeat Password</label>
-                        <input type="password" class="form-control" name="rp-password" id="rp-password"
-                          placeholder="Repeated password" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Submit Button -->
-                <div class="mt-4">
-                  <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-              </form>
+  <div class="container">
+    <form action="settings.php" method="post" enctype="multipart/form-data">
+      <div class="row g-3 d-flex justify-content-center align-items-center m-2 g-3">
+        <!-- Account Settings -->
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-header bg-dark text-white">
+              Account Settings
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label for="username" class="form-label">Change username</label>
+                <input type="text" class="form-control" name="username" id="username"
+                  placeholder="Enter new username" value="<?php echo $username; ?>" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Edit Profile Picture</label>
+                <img id="imagePreview" class="card-img-top rounded-circle mx-auto d-block mb-3"
+                  src="<?php echo $profilePicture; ?>" alt="pfp"
+                  style="width: 100px; height: 100px; object-fit: cover;" />
+                <input type="file" name="fileToUpload" id="fileToUpload" onchange="previewImage(event)">
+              </div>
             </div>
           </div>
+        </div>
+
+        <!-- Preferences -->
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-header bg-dark text-white">
+              Personal Information
+            </div>
+            <div class="card-body">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="field" id="CS" value="CS" 
+                <?php if ($department === 'Computer Science') echo 'checked'; ?>>
+                <label class="form-check-label" for="CS">Computer Science</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="field" id="CE" value="CE"
+                <?php if ($department === 'Computer Engineering') echo 'checked'; ?>>
+                <label class="form-check-label" for="CE">Computer Engineering</label>
+              </div>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="radio" name="field" id="IS" value="IS"
+                <?php if ($department === 'Information Systems') echo 'checked'; ?>>
+                <label class="form-check-label" for="IS">Information Systems</label>
+              </div>
+
+              <div class="mb-3">
+                <label for="DoB" class="form-label">Choose Date of Birth</label>
+                <input type="date" class="form-control" name="DoB" id="DoB" placeholder="Enter new DoB"
+                  value="<?php echo $Dob ?>" />
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Change Phone number</label>
+                <input type="text" class="form-control" name="phone" id="phone"
+                  placeholder="Enter new Phone number" value="<?php echo $phone; ?>" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Privacy Settings  -->
+        <div class="col-md-4" >
+
+        <div class="card h-100" id="VerificationPass">
+        <div class="card-header bg-dark text-white">
+              Privacy Settings
+            </div>
+            <div class="mt-3 mb-2">
+              <label for="verpassword" class="form-label">Verify Password</label>
+              <input type="password" class="form-control" name="verpassword" id="verpassword"
+                placeholder="Enter your password" />
+            </div>
+            <div class="mt-3 mb-2">
+            <button type="button" class="btn btn-primary" id="verifyPasswordBtn">Verify</button>
+        </div>
+
+
+        </div>
+          <div class="card h-100" id="privacySettings" style="display: none;">
+            <div class="card-header bg-dark text-white">
+              Privacy Settings
+            </div>
+            <div class="mt-3 mb-2">
+              <label for="email" class="form-label">Change Linked Email</label>
+              <input type="email" class="form-control" name="email" id="email" placeholder="Enter new email"
+                value="<?php echo $email; ?>" />
+            </div>
+            <div class="mt-3 mb-2">
+              <label for="password" class="form-label">Change Password</label>
+              <input type="password" class="form-control" name="password" id="password"
+                placeholder="New password" />
+            </div>
+            <div class="mt-3 mb-2">
+              <label for="rp-password" class="form-label">Repeat Password</label>
+              <input type="password" class="form-control" name="rp-password" id="rp-password"
+                placeholder="Repeated password" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="mt-4">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
 
           <!-- ------------------------------------------------------------------------- --> 
 

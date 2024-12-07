@@ -56,7 +56,7 @@ if (!empty($data['floors'])) {
 
 // Capacity
 if (!empty($data['capacity'])) {
-    $query .= " AND capacity <= ?";
+    $query .= " AND capacity >= ?";
     $params[] = $data['capacity'];
 }
 

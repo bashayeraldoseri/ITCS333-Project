@@ -46,12 +46,22 @@ $department = $room['department'];
 $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department] : '#f1f3f4';
 
 // Room availability and floor information
-$roomFloor = match ($room['floor']) {
-    '0' => 'Ground Floor',
-    '1' => 'First Floor',
-    '2' => 'Second Floor',
-    default => 'Not Specified',
-};
+// $roomFloor = match ($room['floor']) {
+//     '0' => 'Ground Floor',
+//     '1' => 'First Floor',
+//     '2' => 'Second Floor',
+//     default => 'Not Specified',
+// };
+
+$roomFloor;
+    switch ($room['floor']) {
+        case '0': $roomFloor = "Ground Floor" ; break;
+        case "1": $roomFloor = "First Floor"; break;
+        case "2": $roomFloor = "Second Floor"; break;
+        default : $roomFloor = "none";
+    }
+
+
 
 $roomAvailability = $room['Availability'] == '1' ? 'Available' : 'Not Available';
 ?>

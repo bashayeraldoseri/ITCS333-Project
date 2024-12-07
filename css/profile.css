@@ -1,135 +1,245 @@
 /* General Styles */
 body {
-    background-color: #f8f9fa; /* Light gray background for a clean look */
-    color: #333; /* Neutral text color */
-    font-family: Arial, sans-serif;
-  }
+  background-color: #f8f9fa; /* Light gray background for a clean look */
+  color: #333; /* Neutral text color */
+  font-family: Arial, sans-serif;
+}
 
-  /* Navbar */
-  .navbar {
-    background-color: #7ca5b8;/* Blue background */
-    color: white; 
+/* Navbar */
+.navbar {
+  background-color: #7ca5b8; /* Blue background */
+  color: white;
+}
 
-  }
-  
-  .navbar-brand {
-    color: white;
-    font-weight: bold;
-  }
-  
-  .nav-tabs .nav-link {
-    color: black;
-    border: none; 
-  }
-  
-  .nav-tabs .nav-link.active {
-    background-color: #7ca5b8;
-    color: white; 
+.navbar-brand {
+  color: white;
+  font-weight: bold;
+}
 
-  }
-  
-  /* Left Menu (Vertical Tabs) */
+.nav-tabs .nav-link {
+  color: black;
+  border: none;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #7ca5b8;
+  color: white;
+}
+
+/* Left Menu (Vertical Tabs) */
+.left-box {
+  background-color: #7ca5b8; /* Blue background */
+  color: white;
+  height: 100%;
+  padding: 20px 0;
+}
+
+.left-box .nav-link {
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.left-box .nav-link.active {
+  background-color: #7ca5b8;
+}
+
+/* Profile Card */
+#profile-card {
+  background-color: white;
+  box-shadow: 0 4px 8px #0000001a;
+  text-align: center;
+}
+
+#profile-card h5 {
+  color: #7ca5b8;
+}
+
+/* Forms and Input Fields */
+input[type="date"],
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  border: 1px solid #7ca5b8;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+button {
+  background-color: #7ca5b8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #7ca5b8;
+}
+
+/* Cards */
+/* Customizing card size and colors */
+#profile-card {
+  background-color: #f8f9fa; /* Light gray background */
+  padding: 20px;
+  width: 350px; /* Customize width */
+}
+
+.card-title {
+  color: #333333; /* Override default text color */
+  font-size: 1.5rem; /* Adjust font size */
+}
+
+.user-info-card {
+  width: 75%; /* Adjust the percentage as needed */
+}
+
+.card {
+  border: none;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.card-header {
+  background-color: #7ca5b8;
+  color: white;
+  font-weight: bold;
+}
+
+/* Footer and Help Section */
+#help-section {
+  background-color: #7ca5b8;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
   .left-box {
-    background-color: #7ca5b8; /* Blue background */
-    color: white;
-    height: 100%;
-    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: auto;
   }
-  
-  .left-box .nav-link {
-    color: white;
-    text-align: center;
-    border-radius: 10px;
-    margin: 10px;
+}
+
+
+
+/* Header Styles */
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.profile-pic {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #4caf50;
+}
+
+h2 {
+  font-weight: 700;
+  color: #333;
+}
+
+/* Dashboard Layout */
+.dashnoard-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.box {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  flex: 1 1 30%;
+  min-width: 250px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.box h2 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #4caf50;
+}
+
+.scrollable-container {
+  max-height: 150px;
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+}
+
+.scrollable-container li {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* Chart Styles */
+.charts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex: 1 1 60%;
+}
+
+.chart {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  flex: 1 1 45%;
+  min-width: 300px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.chart:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.chart a {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4caf50;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.chart a:hover {
+  color: #388e3c;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dashnoard-container {
+    flex-direction: column;
   }
-  
-  .left-box .nav-link.active {
-    background-color: #7ca5b8;
+
+  .box,
+  .charts {
+    flex: 1 1 100%;
   }
-  
-  /* Profile Card */
-  #profile-card {
-    background-color: white;
-    box-shadow: 0 4px 8px #0000001a;
-    text-align: center;
-  }
-  
-  #profile-card h5 {
-    color: #7ca5b8;
-  }
-  
-  /* Forms and Input Fields */
-  input[type="date"],
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  select {
-    border: 1px solid #7ca5b8;
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    margin: 5px 0;
-  }
-  
-  button {
-    background-color: #7ca5b8;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #7ca5b8;
-  }
-  
-  /* Cards */ 
-  /* Customizing card size and colors */
-  #profile-card {
-    background-color: #f8f9fa; /* Light gray background */
-    padding: 20px;
-    width: 350px; /* Customize width */
-  }
-  
-  .card-title {
-    color: #333333; /* Override default text color */
-    font-size: 1.5rem; /* Adjust font size */
-  }
-  
-  .user-info-card {
-    width: 75%; /* Adjust the percentage as needed */
-  }
-  
-  
-  .card {
-    border: none;
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    max-width: 100%;
-    max-height: 100% ;
-  }
-  
-  .card-header {
-    background-color: #7ca5b8;
-    color: white;
-    font-weight: bold;
-  }
-  
-  /* Footer and Help Section */
-  #help-section {
-    background-color: #7ca5b8;
-    color: white;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  /* Responsive Adjustments */
-  @media (max-width: 768px) {
-    .left-box {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        height: auto;
-    }
-  }
+}
