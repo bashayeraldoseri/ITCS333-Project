@@ -144,6 +144,7 @@
                             SELECT * 
                             FROM bookings 
                             WHERE Room_ID = ? 
+                            AND Status = 'Active' 
                             AND (
                                 (Start_Time < ? AND End_Time > ?) 
                                 OR 
