@@ -1,18 +1,10 @@
 <?php
 // database connection
-include('database/db.php');
+include('../database/db.php');
 
 // fetch rooms and schedules from bookings table
 $rooms = $pdo->query("SELECT * FROM rooms")->fetchAll(PDO::FETCH_ASSOC);
-$bookings = $pdo->query("
-    SELECT 
-        bookings.Booking_ID, 
-        rooms.name AS room_name, 
-        bookings.Start_Time, 
-        bookings.End_Time 
-    FROM bookings 
-    JOIN rooms ON bookings.Room_ID = rooms.Room_ID
-")->fetchAll(PDO::FETCH_ASSOC);
+$bookings = $pdo->query("SELECT * FROM bookings")->fetchAll(PDO::FETCH_ASSOC);
 
 
 // add a new schedule
@@ -90,15 +82,15 @@ if (isset($_GET['delete_schedule'])) {
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($schedules as $schedule): ?>
+        <?php foreach ($bookings as $booking): ?>
             <tr>
-                <td><?= $schedule['Booking_ID'] ?></td>
-                <td><?= $schedule['room_name'] ?></td>
-                <td><?= $schedule['user_ID'] ?></td>
-                <td><?= $schedule['Start_Time'] ?></td>
-                <td><?= $schedule['End_Time'] ?></td>
+                <td><?= $booking['Booking_ID'] ?></td>
+                <td><?= $booking['Room_ID'] ?></td>
+                <td><?= $booking['user_ID'] ?></td>
+                <td><?= $booking['Start_Time'] ?></td>
+                <td><?= $booking['End_Time'] ?></td>
                 <td>
-                    <a href="?delete_schedule=<?= $schedule['Booking_ID'] ?>" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="?delete_schedule=<?= $booking['Booking_ID'] ?>" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>

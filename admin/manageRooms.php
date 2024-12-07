@@ -1,6 +1,6 @@
 <?php
 // database connection
-include('database/db.php');
+include('../database/db.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $number = $_POST['number'];
