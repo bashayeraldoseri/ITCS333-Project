@@ -1,20 +1,18 @@
 <?php
-// database connection
+// database connection 
 include('../database/db.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $number = $_POST['number'];
     $Capacity = $_POST['Capacity'];
-    $Room_ID = $_POST['Room_ID'];
     $Type = $_POST['Type'];
-    $Availability = $_POST['Availability'];
     $Description = $_POST['Description'];
     $floor = $_POST['floor'];
     $department = $_POST['department'];
 
     // insert room into the database
-    $stmt = $pdo->prepare("INSERT INTO rooms (number, Capacity, Room_ID, Type, Availability, Description, floor, department) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$number, $Capacity, $Room_ID, $Type, $Availability, $Description, $floor, $department]);
+    $stmt = $pdo->prepare("INSERT INTO rooms (number, Capacity, Type, Description, floor, department) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$number, $Capacity, $Type, $Description, $floor, $department]);
     
     echo "<p>Room added successfully!</p>";
 }
@@ -41,16 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="number" class="form-control" id="Capacity" name="Capacity" min="5" max="999" required>
         </div>
         <div class="mb-3">
-            <label for="Room_ID" class="form-label">Room ID</label>
-            <input type="number" class="form-control" id="Room_ID" name="Room_ID" required>
-        </div>
-        <div class="mb-3">
             <label for="Type" class="form-label">Type</label>
             <input type="text" class="form-control" id="Type" name="Type" required>
-        </div>
-        <div class="mb-3">
-            <label for="Availability" class="form-label">Availability</label>
-            <input type="text" class="form-control" id="Availability" name="Availability" required>
         </div>
         <div class="mb-3">
             <label for="Description" class="form-label">Description</label>
