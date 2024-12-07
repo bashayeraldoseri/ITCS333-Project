@@ -2,7 +2,6 @@
 // database connection
 include('database/db.php');
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $number = $_POST['number'];
     $Capacity = $_POST['Capacity'];
@@ -15,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // insert room into the database
     $stmt = $pdo->prepare("INSERT INTO rooms (number, Capacity, Room_ID, Type, Availability, Description, floor, department) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    //(`number`, `Capacity`, `Room_ID`, `Type`, `Availability`, `Description`, `floor`, `department`)
     $stmt->execute([$number, $Capacity, $Room_ID, $Type, $Availability, $Description, $floor, $department]);
     
     echo "<p>Room added successfully!</p>";

@@ -30,7 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_schedule'])) {
             ':End_Time' => $end_time,
         ]);
     header("Location: manageSchedules.php");
-    exit();
 }
 //for delete schedule
 if (isset($_GET['delete_schedule'])) {
