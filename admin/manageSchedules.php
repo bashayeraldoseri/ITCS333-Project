@@ -22,7 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_schedule'])) {
             ':End_Time' => $end_time,
         ]);
     header("Location: manageSchedules.php");
-    exit();
+}
+//for delete schedule
+if (isset($_GET['delete_schedule'])) {
+    $schedule_id = $_GET['delete_schedule'];
+    $sql = "DELETE FROM bookings WHERE Booking_ID = :Booking_ID";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':Booking_ID' => $schedule_id]);
+    header("Location: manageSchedules.php");
 }
 ?>
 <!DOCTYPE html>
