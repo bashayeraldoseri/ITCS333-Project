@@ -4,70 +4,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet">
-    <title>Document</title>
+    <title>Reports Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* General Styles */
+        html,
         body {
-            background-color: #edebeb;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            height: 100%;
+            padding: 0;
+            /* Removed padding to prevent margin before the header */
         }
 
+        /* Header Styles */
+        header {
+            position: fixed;
+            /* Fix the header to the top */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            /* Ensure the header is above other elements */
+            background-color: #fff;
+            /* Optional: To ensure header has a white background */
+        }
+
+        .container-fluid {
+            padding: 0;
+        }
+
+        .navbar {
+            padding: 0.5rem 1rem;
+            /* Adjust padding for better appearance */
+        }
+
+        /* Adjust main content for the fixed header */
+        main {
+            padding-top: 80px;
+            /* Add space so content doesn't hide behind header */
+            padding-right: 5vw;
+            padding-left: 5vw;
+        }
+
+        /* Header text and navbar */
         h1 {
-            margin-left: 10vw;
-            margin-top: 5vh;
+            margin-top: 20px;
+            color: #333;
+            font-weight: 600;
+            text-align: center;
         }
 
+        /* Statistics Section */
         .Statistics {
-            padding-top: 7vh;
-            padding-bottom: 7vh;
-            padding-right: 7vw;
-            padding-left: 7vw;
-
             display: flex;
-            /* Enables flexbox */
             justify-content: space-around;
-            /* Distributes space evenly between items */
-            align-items: center;
-            /* Aligns items vertically in the center */
             gap: 30px;
-            /* Optional: Adds space between the items */
+            padding: 40px 0;
+            margin-top: 20px;
         }
 
         .Statistics>div {
-            text-align: center;
-            padding-top: 2vh;
-            padding-bottom: 1vh;
-            padding-right: 2vw;
-            padding-left: 2vw;
             background-color: white;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            flex: 1;
         }
 
+        .Statistics>div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .Statistics h2 {
+            color: #4caf50;
+            font-size: 24px;
+        }
+
+        .Statistics h4 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        /* Link Section for charts */
         .ChartsContainer {
-            /* border: 0.25vw, solid, black ;*/
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            padding-top: 50px;
         }
 
-        form {
-            margin-left: 10vw;
-            margin-right: 10vw;
-            padding: 2vh;
-            text-align: left;
+        .ChartsContainer div {
             background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .ChartsContainer div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .ChartsContainer a {
+            text-decoration: none;
+            color: #388e3c;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .ChartsContainer a:hover {
+            color: #4caf50;
+        }
+
+        /* Responsive Layout for small screens */
+        @media (max-width: 768px) {
+            .Statistics {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .ChartsContainer {
+                flex-direction: column;
+            }
+
+            .ChartsContainer div {
+                width: 100%;
+                margin-bottom: 20px;
+            }
         }
     </style>
 
-    <script>
-        // JavaScript to update the output value dynamically as the user interacts with the slider
-        const rangeInput = document.getElementById('range');
-        const rangeOutput = document.getElementById('range-output');
-
-        rangeInput.addEventListener('input', function () {
-            rangeOutput.textContent = 'Value: ' + rangeInput.value;
-        });
-    </script>
 </head>
 
 <body>
@@ -78,12 +158,12 @@
     $stmt->execute();
     $total = $stmt->fetchColumn();
 
-    $query = "SELECT COUNT(*) FROM bookings WHERE  Start_Time > NOW()";
+    $query = "SELECT COUNT(*) FROM bookings WHERE Start_Time > NOW()";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
     $totalUp = $stmt->fetchColumn();
 
-    $query = "SELECT COUNT(*) FROM bookings WHERE  Start_Time < NOW()";
+    $query = "SELECT COUNT(*) FROM bookings WHERE Start_Time < NOW()";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
     $totalPast = $stmt->fetchColumn();
@@ -121,8 +201,9 @@
                 </div>
             </nav>
         </div>
+    </header>
 
-
+    <main>
         <h1> Reports Dashboard </h1>
         <div class="Statistics">
             <div id="total">
@@ -137,55 +218,27 @@
                 <h4><?php echo $totalUp; ?></h4>
             </div>
 
-            <div id="totalpast">
+            <div id="totalPast">
                 <h2>No. Past Bookings</h2>
                 <hr>
                 <h4><?php echo $totalPast; ?></h4>
             </div>
         </div>
-    </header>
-
-    <main>
-
-        <form method = "POST" action = "popularity.php">
-            <label for="sdate">Choose a starting date: </label>
-            <input type="date" id="date" name="sdate"> <br>
-
-            <label for="edate">Choose an ending date: </label>
-            <input type="date" id="date" name="edate"> <br> <br>
-
-            <!-- checkbox input-->
-            <input type="checkbox" id="checkbox">
-            <label for="checkbox">Upcoming</label>
-
-            <input type="checkbox" id="checkbox">
-            <label for="checkbox">Past</label> <br> <br>
-
-            <!-- Range Input -->
-            <label for="range">Select the number of records to consider:</label> <br>
-            <input type="range" id="range" name="range" min="0" max=<?php echo $total ?> value=<?php echo $total ?>
-                oninput="this.nextElementSibling.value = this.value">
-            <output><?php echo $total ?></output> <br> <br> <br>
-
-            <!-- Submit Button -->
-            <button type="submit">Apply Filters</button>
-        </form>
-
         <div class="ChartsContainer">
-            <div class="Popularity">
-                <?php include("popularity.php") ?>
+            <div id="Popularity">
+                <a href="popularity.php">View Popularity Chart</a>
+            </div>
+
+            <div id="Status">
+                <a href="status.php">View Room Status Chart</a>
             </div>
 
             <div id="Usage">
-                <!-- Show the status of each room at the current time (Occupied or not) -->
+                <a href="usage.php">View Room Usage Chart</a>
             </div>
 
-            <div id="cancelation rate">
-                <!-- Show the cancelation rate of each room -->
-            </div>
-
-            <div id="booking trends">
-                <!-- Show booking numbers in a period of time for each room -->
+            <div id="booking-trends">
+                <a href="bookingtrends.php">View Booking Trends Chart</a>
             </div>
         </div>
     </main>

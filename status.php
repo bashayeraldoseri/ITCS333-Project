@@ -1,55 +1,36 @@
 <?php
 include("database/db.php");
-$sql = "SELECT Room_ID, COUNT(*) AS num_bookings FROM bookings GROUP BY Room_ID ORDER BY Room_ID";
+
+// Fetch unoccupied rooms
+$sql = "SELECT * FROM rooms WHERE Availability = 1;";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
-$bookings = $stmt->fetchAll();
+$unoccupiedRooms = $stmt->fetchAll();
 
-$dataPoints = array();
-
-// Loop through the fetched bookings and add each to the dataPoints array
-foreach ($bookings as $booking) {
-    // Use a parameterized query to fetch the room number for each Room_ID
-    $sql = "SELECT number FROM rooms WHERE Room_ID = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$booking['Room_ID']]);  // Pass the Room_ID dynamically
-    $roomNum = $stmt->fetchColumn();  // Fetch the room number
-
-    // Add the booking count and room number to the dataPoints array
-    $dataPoints[] = array("y" => $booking['num_bookings'], "label" => "Room " . $roomNum);
-}
-
-
-$sql = "
-SELECT Room_ID
-FROM rooms
-WHERE Room_ID NOT IN (
-    SELECT Room_ID
-    FROM bookings
-    GROUP BY Room_ID
-)
-";
-
+// Fetch occupied rooms
+$sql = "SELECT * FROM rooms WHERE Availability = 0;";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
-$noBookingsRooms = $stmt->fetchAll();
+$occupiedRooms = $stmt->fetchAll();
 
-foreach ($noBookingsRooms as $booking) {
-    $sql = "SELECT number FROM rooms WHERE Room_ID = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$booking['Room_ID']]);  // Pass the Room_ID dynamically
-    $roomNum = $stmt->fetchColumn();  // Fetch the room number
-    // Add each room's booking count to the dataPoints array
-    $dataPoints[] = array("y" => 0, "label" => "Room " . $roomNum);
+// Prepare data for occupied rooms
+$Occupied = array();
+foreach ($occupiedRooms as $room) {
+    $Occupied[] = array("y" => 1, "label" => "Room " . $room['number']); // 'y' is 1 indicating occupied
 }
 
+// Prepare data for unoccupied rooms
+$Unoccupied = array();
+foreach ($unoccupiedRooms as $room) {
+    $Unoccupied[] = array("y" => 1, "label" => "Room " . $room['number']); // 'y' is 0 indicating available
+}
 
 ?>
 <!DOCTYPE HTML>
 <html>
 
 <head>
-<style>
+    <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f7f6;
@@ -112,7 +93,7 @@ foreach ($noBookingsRooms as $booking) {
         }
     </style>
     <header>
-        Room Usage Statistics
+        Room Status Statistics
     </header>
 
     <main>
@@ -130,28 +111,46 @@ foreach ($noBookingsRooms as $booking) {
 
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
-                theme: "light2",
+                exportEnabled: true,
+                theme: "light1", // "light1", "light2", "dark1", "dark2"
                 title: {
-                    text: "Number of bookings for each room"
+                    text: "Current Room Occupancy Status"
                 },
                 axisX: {
                     title: "Rooms"
                 },
                 axisY: {
-                    title: "Number of bookings",
                     includeZero: true,
                     minimum: 0,
+                    maximum: 1,
+                    interval: 1,
                 },
-                data: [{
-                    type: "column",
-                    yValueFormatString: "#,##0.## ",
-                    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-                }]
+                toolTip: {
+                    shared: false
+                },
+                data: [
+                    {
+                        type: "stackedBar",
+                        name: "Occupied",
+                        color: "red",
+                        dataPoints: <?php echo json_encode($Occupied, JSON_NUMERIC_CHECK); ?>
+                    },
+                    {
+                        type: "stackedBar",
+                        name: "Unoccupied",
+                        color: "blue",
+                        dataPoints: <?php echo json_encode($Unoccupied, JSON_NUMERIC_CHECK); ?>
+                    }
+                ]
             });
             chart.render();
-
         }
     </script>
 </head>
+
+<body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+</body>
 
 </html>

@@ -96,6 +96,8 @@ if ($_SESSION['DoB'] != null) {
           <a class="nav-link" id="v-pills-bookings-tab" data-bs-toggle="pill" href="#v-pills-bookings" role="tab"
             aria-controls="v-pills-bookings" aria-selected="false">Bookings</a>
           </a>
+          <a class="nav-link" href = "../userDashboard.php">User Dashboard</a>
+          </a>
           <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings" role="tab"
             aria-controls="v-pills-settings" aria-selected="false">Settings</a>
           </a>

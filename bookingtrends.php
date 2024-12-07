@@ -1,55 +1,33 @@
 <?php
 include("database/db.php");
-$sql = "SELECT Room_ID, COUNT(*) AS num_bookings FROM bookings GROUP BY Room_ID ORDER BY Room_ID";
+
+$sql = "SELECT DATE(Start_Time) AS date, Room_ID, COUNT(*) AS num_bookings 
+FROM bookings 
+GROUP BY date, Room_ID 
+ORDER BY date, Room_ID;";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $bookings = $stmt->fetchAll();
 
 $dataPoints = array();
 
-// Loop through the fetched bookings and add each to the dataPoints array
 foreach ($bookings as $booking) {
-    // Use a parameterized query to fetch the room number for each Room_ID
-    $sql = "SELECT number FROM rooms WHERE Room_ID = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$booking['Room_ID']]);  // Pass the Room_ID dynamically
-    $roomNum = $stmt->fetchColumn();  // Fetch the room number
-
-    // Add the booking count and room number to the dataPoints array
-    $dataPoints[] = array("y" => $booking['num_bookings'], "label" => "Room " . $roomNum);
+    $dataPoints[] = array(
+        "y" => $booking['num_bookings'], // Number of bookings
+        "label" => $booking['date']      // Date of booking
+    );
 }
-
-
-$sql = "
-SELECT Room_ID
-FROM rooms
-WHERE Room_ID NOT IN (
-    SELECT Room_ID
-    FROM bookings
-    GROUP BY Room_ID
-)
-";
-
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$noBookingsRooms = $stmt->fetchAll();
-
-foreach ($noBookingsRooms as $booking) {
-    $sql = "SELECT number FROM rooms WHERE Room_ID = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$booking['Room_ID']]);  // Pass the Room_ID dynamically
-    $roomNum = $stmt->fetchColumn();  // Fetch the room number
-    // Add each room's booking count to the dataPoints array
-    $dataPoints[] = array("y" => 0, "label" => "Room " . $roomNum);
-}
-
-
 ?>
+
 <!DOCTYPE HTML>
 <html>
 
 <head>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Booking Trends</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f7f6;
@@ -111,8 +89,12 @@ foreach ($noBookingsRooms as $booking) {
             }
         }
     </style>
+</head>
+
+<body>
+
     <header>
-        Room Usage Statistics
+        Room Booking Trends
     </header>
 
     <main>
@@ -122,36 +104,44 @@ foreach ($noBookingsRooms as $booking) {
     </main>
 
     <footer>
-        <p>&copy; 2024 UOB Booking System. All rights reserved.</p>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
     </footer>
+
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
     <script>
         window.onload = function () {
-
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
-                theme: "light2",
                 title: {
-                    text: "Number of bookings for each room"
+                    text: "Room Booking Trends Over Time",
+                    fontSize: 20,
+                    fontFamily: 'Arial',
+                    fontWeight: 'bold'
                 },
                 axisX: {
-                    title: "Rooms"
+                    title: "Dates of Booking",
+                    titleFontSize: 16
                 },
                 axisY: {
-                    title: "Number of bookings",
-                    includeZero: true,
-                    minimum: 0,
+                    title: "Number of Bookings",
+                    titleFontSize: 16,
+                    interval: 1,
+                    gridThickness: 1,
+                    lineThickness: 2,
+                    includeZero: true
                 },
                 data: [{
-                    type: "column",
-                    yValueFormatString: "#,##0.## ",
+                    type: "area",
+                    markerSize: 5,
+                    xValueFormatString: "YYYY-MM-DD", // Format the x-axis dates
+                    yValueFormatString: "#,##0",     // Display y values as whole numbers
                     dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
                 }]
             });
             chart.render();
-
         }
     </script>
-</head>
+
+</body>
 
 </html>
