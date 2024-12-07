@@ -167,7 +167,6 @@
 
     $userID = $user['ID'];
     $profileImage = $user['ProfilePic']; // Get the profile image path from the database
-    print $profileImage;
     
     // Fetch the upcoming bookings
     $sql = "SELECT Room_ID, Start_Time, End_Time FROM bookings WHERE user_ID = ? AND End_Time > NOW()";
