@@ -31,22 +31,19 @@ CREATE TABLE `bookings` (
   `Booking_ID` int(11) NOT NULL,
   `user_ID` int(11) NOT NULL,
   `Room_ID` int(11) NOT NULL,
-  `Start_Time` int(11) NOT NULL,
-  `End_Time` int(11) NOT NULL,
-  `Status` varchar(255) NOT NULL,
+  `Status` varchar(255)  NOT NULL,
   `Title` varchar(255) NOT NULL,
-  `Start_Date` date DEFAULT NULL,
-  `End_Date` date DEFAULT NULL,
-  `Duration` int(11) NOT NULL
+  `Start_Time` datetime NOT NULL,
+  `End_Time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bookings`
 --
 
-INSERT INTO `bookings` (`Booking_ID`, `user_ID`, `Room_ID`, `Start_Time`, `End_Time`, `Status`, `Title`, `Start_Date`, `End_Date`, `Duration`) VALUES
-(1, 2, 28, 2147483647, 2147483647, '', '', NULL, NULL, 0),
-(2, 2, 30, 2147483647, 2147483647, '', '', NULL, NULL, 0);
+INSERT INTO `bookings` (`Booking_ID`,`user_ID`, `Room_ID`, `Status`, `Title`, `Start_Time`, `End_Time`) VALUES
+(1, 2,  28, 'Inactive', 'Team Meeting', '2023-11-10 08:00:00',  '2023-11-12 09:00:00'),
+(2, 2, 30, 'Active', 'Project Discussion', '2024-12-01 09:00:00',  '2024-12-05 10:00:00');
 
 -- --------------------------------------------------------
 
