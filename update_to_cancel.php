@@ -4,8 +4,11 @@
 include('database/db.php');
 session_start();
 
-        // Ensure the user is logged in or handle accordingly
-        if (!isset($_SESSION['user_id'])) {
+        // Retrieve the username from session
+        if (isset($_SESSION['username'])) {
+            $username = $_SESSION['username'];
+        } else {
+            // If the username is not set, redirect to login page
             header('Location: login.php');
             exit();
         }
@@ -26,18 +29,32 @@ session_start();
                     exit;
         }
 
+        // Fetch the room number
+        $query = "SELECT number FROM rooms WHERE Room_ID = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$room_id]);
+        $room = $stmt->fetch();
+        $room_number = $room['number'];
+
+        // Fetch the room's Description
+        $query = "SELECT Description FROM rooms WHERE Room_ID = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$room_id]);
+        $room = $stmt->fetch();
+        $room_Description = $room['Description'];
+
 
 
         if (isset($_POST['update'])) {
 
         // Update the status of the room to 'Inactive'
-        $update_query = "UPDATE rooms SET Status = ? WHERE Room_ID = ?";
+        $update_query = "UPDATE bookings SET Status = ? WHERE Room_ID = ?";
         $stmt = $pdo->prepare($update_query);
         $stmt->execute(['Inactive', $room_id]);
 
-        // Success message
-        header('Location: ?????.php'); // Redirect to ...... page
-    
+        // Redirect to the bookings after successful update
+        header('Location: userDashboard.php'); 
+            
            }
 
 ?>
@@ -55,17 +72,16 @@ session_start();
 
 <div class="container">
     <div class="jumbotron text-center">
-        <h1>Cancel Room Reservation ID: <?php echo $room_id; ?></h1>
-        <p>Kindly for complete the cancellation process you need permission</p>
+        <h1>Cancel Room Reservation <?php echo $room_number; ?></h1>
+        <h3><?php echo $room_Description; ?></h3>
+        <p>Kindly this cancellation need your permission</p>
 
         <form action="update_to_cancel.php" method="POST">
         <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
-
-        <input type="hidden" name="status"  value="Inactive" > 
         
         <button type="submit" name="update" class="btn btn-primary">Permission</button>
     </form>
-    <p><a href="???????.php">Back to Bookings</a></p>
+    <p><a href="userDashboard.php">Back to Bookings</a></p>
     </div>
 </div>
 
