@@ -7,12 +7,30 @@
 
     // Start the session 
     session_start();
-            
-        // Ensure the user is logged in before proceeding
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: login.php');
-            exit();
-        }
+
+        // Retrieve the username from session
+            if (isset($_SESSION['username'])) {
+                $username = $_SESSION['username'];
+            } else {
+                // If the username is not set, redirect to login page
+                header('Location: login.php');
+                exit();
+            }
+
+            // Get the user ID from the database using the username
+            $sql = "SELECT ID FROM users WHERE name = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$username]);
+            $user = $stmt->fetch();
+
+            if ($user === false) {
+                echo "User not found.";
+                exit;
+            }
+
+            $id = $user['ID'];
+
+     
            
             // Set the default room ID to 1
             $room_id=1;
@@ -72,7 +90,6 @@
      
             
             // Handle form submission
-            $id = $_SESSION['user_id'];  // User ID from the session
             $Status = $_POST['status'];
             $Title = $_POST['Title']; 
             $Start_time = $_POST['start_time'];
