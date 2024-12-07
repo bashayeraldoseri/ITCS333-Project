@@ -147,34 +147,41 @@
     if (isset($_SESSION['username'])) {
         $username = $_SESSION['username'];
     } else {
-        // If the username is not set, you might want to redirect to login page
+        // If the username is not set, redirect to login page
         header('Location: login.php');
         exit();
     }
-    
-
 
     include('database/db.php');
-    $sql = "SELECT ID FROM users WHERE name = ?";
+
+    // Get the user ID from the database using the username
+    $sql = "SELECT ID, ProfilePic FROM users WHERE name = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$username]);
-    $userID = $stmt->fetch();
+    $user = $stmt->fetch();
 
-    if ($userID === false) {
+    if ($user === false) {
         echo "User not found.";
         exit;
     }
 
-    $sql = "SELECT Room_ID, Start_Time, End_Time FROM bookings WHERE user_ID = ? AND END_Time > NOW()";
+    $userID = $user['ID'];
+    $profileImage = $user['ProfilePic']; // Get the profile image path from the database
+    print $profileImage;
+    
+    // Fetch the upcoming bookings
+    $sql = "SELECT Room_ID, Start_Time, End_Time FROM bookings WHERE user_ID = ? AND End_Time > NOW()";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$userID['ID']]);
+    $stmt->execute([$userID]);
     $comingbookings = $stmt->fetchAll();
 
-    $sql = "SELECT Room_ID, Start_Time, End_Time FROM bookings WHERE user_ID = ? AND END_Time < NOW()";
+    // Fetch the past bookings
+    $sql = "SELECT Room_ID, Start_Time, End_Time FROM bookings WHERE user_ID = ? AND End_Time < NOW()";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$userID['ID']]);
+    $stmt->execute([$userID]);
     $pastbookings = $stmt->fetchAll();
     ?>
+
 
     <header>
         <header>
@@ -215,9 +222,19 @@
         <main>
             <div class="container">
                 <div class="dashboard-header">
-                    <img src="https://via.placeholder.com/100" alt="User Picture" class="profile-pic">
+                    <?php
+                    // Check if the profile image exists in the database
+                    if (!empty($profileImage)) {
+                        // Display the user's profile image if it exists
+                        echo "<img src='$profileImage' alt='User Picture' class='profile-pic'>";
+                    } else {
+                        // Display the placeholder image if no profile image exists
+                        echo "<img src='https://via.placeholder.com/100' alt='User Picture' class='profile-pic'>";
+                    }
+                    ?>
                     <h2><?php echo $username; ?> Dashboard</h2>
                 </div>
+
 
                 <div class="dashnoard-container">
                     <!-- Upcoming Bookings -->
