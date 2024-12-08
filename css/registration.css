@@ -1,102 +1,89 @@
-/* General Styles */
-:root {
-  --whitish: #EFF1F3;
-  --blue: #8ecae6;
-  --yellow: #FED766;
-  --balckish: #272727;
-  --gray: #696773; 
-  --red:#a4161a; 
-} 
-
-body{
-    background-color: var(--whitish);
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+body {
+  background-color: #7ca5b8;
+  font-family: Arial, sans-serif;
 }
-
-.container {
-  background-color: var(--blue);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center; 
-
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: var(--balckish);
-  font-weight: bold;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  color: var(--blue);
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007BFF;
-  color: var(--whitish);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-} 
-
-
-
-/* Image Container Styles */
-.image-container {
-  flex: 1;
+.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-right: 20px;
-  background-color: var(--blue);
-  max-width: 1500px;
-  max-height: 1500px;
-  /* Added overflow handling for large images */
+  height: 100vh;
 }
-
-/* Image Styles */
-img {
-  width: 100%; /* Ensures the image fills the container */
-  max-width: 500px; /* Limits the maximum width */
-  height: auto; /* Maintains the aspect ratio */
-  border-radius: 8px;
+.card {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background: #fff;
   border: 1px solid #ddd;
-  padding: 5px;
-  object-fit: cover; /* Ensures the image fits neatly */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow for a polished look */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+.card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+.form-control {
+  border-radius: 4px;
+}
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+}
+.register-link {
+  text-align: center;
+  margin-top: 15px;
+}
+.register-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+.register-link a:hover {
+  text-decoration: underline;
+} 
 
-/* Login Container Styles */
-.login-container {
-  flex: 1;
-  padding-left: 200px; /* Fixed issue with missing unit */
-  background-color: var(--blue);
+body {
+  background-color: #7ca5b8;
+  font-family: Arial, sans-serif;
+}
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.card {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+.form-control {
+  border-radius: 4px;
+}
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+}
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+}
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+.login-link a:hover {
+  text-decoration: underline;
 }

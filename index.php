@@ -29,8 +29,9 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
     <header>
       <div class="container-fluid p-2">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
-          <div class="container-fluid">
+          <div class="container-fluid"> 
             <a class="navbar-brand" href="#">UOB Booking System</a>
+            <img scr="static\University_of_Bahrain_logo (1).png" alt="UOB">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>

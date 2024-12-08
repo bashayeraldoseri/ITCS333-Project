@@ -2,11 +2,11 @@
 session_start();
 $host = 'localhost';
 $user = 'root';
-$password = '';
+$dbpassword = '';
 $dbname = 'booking_system';
 $port = 3306;
 $dsn = "mysql:host=$host;dbname=$dbname;port=$port";
-$pdo = new PDO($dsn, $user, $password);
+$pdo = new PDO($dsn, $user, $dbpassword);
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
   echo'Already logged in';
@@ -17,6 +17,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
   $username = $_POST["username"];
   $password = $_POST["password"];
+
+  // exit(var_dump($_POST));
   $errors = [];
 
   if (empty($username)) {
@@ -27,7 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
   }
 
   if (empty($errors)) {
+    // exit(var_dump($password) . " TEST " . var_dump($username));
     $user = validate_user($username, $password);
+    // exit(var_dump($user));
+
     if ($user) {
       $_SESSION['loggedin'] = true;
       $_SESSION['username'] = $user['name'];
@@ -53,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
 function validate_user($username, $password)
 {
+  // exit("This is the password: ". $password);
   global $pdo;
   require_once '../database/db.php';
   $sql = "SELECT * FROM users WHERE name = :name";
@@ -64,9 +70,12 @@ function validate_user($username, $password)
         if ($stmt->rowCount() == 1) {
           $row = $stmt->fetch(PDO::FETCH_ASSOC);
           $stored_password = $row['password'];
+          // exit(var_dump($row));
 
           // Use password_verify to check the password
+          exit($password);
           if (password_verify($password, $stored_password)) {
+            exit($password);
             return $row; // Return user data
           } else {
             echo "Invalid password.";
@@ -78,6 +87,7 @@ function validate_user($username, $password)
       echo "Query execution failed.";
     }
   } else {
+    exit("FAild");
     echo "Failed to prepare SQL statement.";
   }
 

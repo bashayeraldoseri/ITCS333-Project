@@ -90,7 +90,7 @@ if ($_SESSION['DoB'] != null) {
 
     <div class="row">
       <div class="col-sm-2 left-box d-flex flex-column justify-content-center align-items-center ">
-        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab"
             aria-controls="v-pills-profile" aria-selected="true">Profile</a>
           </a>

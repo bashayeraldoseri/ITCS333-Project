@@ -2,15 +2,15 @@
 session_start();
 $host = 'localhost';
 $user = 'root';
-$password = '';
+$dbpassword = '';
 $dbname = 'booking_system';
 $port = 3306;
 $dsn = "mysql:host=$host;dbname=$dbname;port=$port";
-$pdo = new PDO($dsn, $user, $password);
+$pdo = new PDO($dsn, $user, $dbpassword);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $username = trim($_POST['username']);
-  $password = $_POST['password'];
+  $password = $_POST['dbpassword'];
   $confirm_password = $_POST['confirm-password'];
   $errors = [];
 
