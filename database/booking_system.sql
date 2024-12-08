@@ -33,7 +33,6 @@ CREATE TABLE `bookings` (
   `Booking_ID` int(11) NOT NULL,
   `user_ID` int(11) NOT NULL,
   `Room_ID` int(11) NOT NULL,
-  `Status` varchar(255)  NOT NULL,
   `Title` varchar(255) NOT NULL,
   `Start_Time` datetime NOT NULL,
   `End_Time` datetime NOT NULL
@@ -43,9 +42,9 @@ CREATE TABLE `bookings` (
 -- Dumping data for table `bookings`
 --
 
-INSERT INTO `bookings` (`Booking_ID`,`user_ID`, `Room_ID`, `Status`, `Title`, `Start_Time`, `End_Time`) VALUES
-(1, 2,  28, 'Inactive', 'Team Meeting', '2023-11-10 08:00:00',  '2023-11-12 09:00:00'),
-(2, 2, 30, 'Active', 'Project Discussion', '2024-12-01 09:00:00',  '2024-12-05 10:00:00');
+INSERT INTO `bookings` (`Booking_ID`,`user_ID`, `Room_ID`, `Title`, `Start_Time`, `End_Time`) VALUES
+(1, 2,  28, 'Team Meeting', '2023-11-10 08:00:00',  '2023-11-12 09:00:00'),
+(2, 2, 30, 'Project Discussion', '2024-12-01 09:00:00',  '2024-12-05 10:00:00');
 
 -- --------------------------------------------------------
 
