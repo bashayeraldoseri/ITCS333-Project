@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2024 at 07:07 PM
+-- Generation Time: Dec 08, 2024 at 07:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,7 +33,6 @@ CREATE TABLE `bookings` (
   `Booking_ID` int(11) NOT NULL,
   `user_ID` int(11) NOT NULL,
   `Room_ID` int(11) NOT NULL,
-  `Status` varchar(255)  NOT NULL,
   `Title` varchar(255) NOT NULL,
   `Start_Time` datetime NOT NULL,
   `End_Time` datetime NOT NULL
@@ -43,9 +42,10 @@ CREATE TABLE `bookings` (
 -- Dumping data for table `bookings`
 --
 
-INSERT INTO `bookings` (`Booking_ID`,`user_ID`, `Room_ID`, `Status`, `Title`, `Start_Time`, `End_Time`) VALUES
-(1, 2,  28, 'Inactive', 'Team Meeting', '2023-11-10 08:00:00',  '2023-11-12 09:00:00'),
-(2, 2, 30, 'Active', 'Project Discussion', '2024-12-01 09:00:00',  '2024-12-05 10:00:00');
+INSERT INTO `bookings` (`Booking_ID`, `user_ID`, `Room_ID`, `Title`, `Start_Time`, `End_Time`) VALUES
+(1, 2, 28, 'Team Meeting', '2023-11-10 08:00:00', '2023-11-12 09:00:00'),
+(2, 2, 30, 'Project Discussion', '2024-12-01 09:00:00', '2024-12-05 10:00:00'),
+(3, 12, 1, 'iujdeow', '2024-12-11 09:58:00', '2024-12-25 10:59:00');
 
 -- --------------------------------------------------------
 
@@ -642,7 +642,8 @@ INSERT INTO `users` (`Role`, `email`, `password`, `name`, `ID`, `ProfilePic`, `P
 ('', 'nay@uob', '$2y$10$aXvz2.iaUgwpajG7soJ4dOdgtz.OAkJPWYqqx/WwUBjUTKBwRS/d6', 'yay', 8, '0', '+973 00000000', NULL, ''),
 ('', 'hey@uob', '$2y$10$dzSCqLsSnqmAiPz7ZoK5zOtDtEWKx9.1ARRyVB53cPGhjnd6YteUq', 'heyy', 9, '0', '+973 982313', '2004-02-29', ''),
 ('', 'test1019321@uob', '$2y$10$tKB76miOIN5fnhU/jNxMIOG6Fkek0CBhXFsyXUGQ1VwZRkQfLvUMS', 'Test1011', 10, '../static/uploads/6749b402e705a0.41528320.jpg', '+973 123', '2024-11-05', 'IS'),
-('', 'AA@uob', '$2y$10$zTbwL1bvWriFcP.X1tY9l.lMEXbSw4nrjNB/zf2PpSTtw69GFKOIC', 'Ameena', 11, '../static/uploads/6749bd569ccab8.37118584.jpg', '+973 09876', '2024-11-12', 'CS');
+('', 'AA@uob', '$2y$10$zTbwL1bvWriFcP.X1tY9l.lMEXbSw4nrjNB/zf2PpSTtw69GFKOIC', 'Ameena', 11, '../static/uploads/6749bd569ccab8.37118584.jpg', '+973 09876', '2024-11-12', 'CS'),
+('Instructor', 'khadija@uob.edu.bh', '$2y$10$Sc0N.Po1ngBCbAJrWJMJ0u.6mLnBx.93JvIgL/JEWXutFwc4t1IRy', 'Khadija', 12, NULL, '+973 00000000', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -683,7 +684,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `Booking_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Booking_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `equipment`
@@ -701,7 +702,7 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

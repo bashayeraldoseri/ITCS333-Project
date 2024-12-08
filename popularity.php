@@ -1,6 +1,6 @@
 <?php
 include("database/db.php");
-$sql = "SELECT room_id, COUNT(*) AS num_bookings FROM bookings GROUP BY room_id ORDER BY num_bookings DESC LIMIT 3;";
+$sql = "SELECT room_id, COUNT(*) AS num_bookings FROM bookings GROUP BY room_id ORDER BY num_bookings DESC LIMIT 3 ;";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
