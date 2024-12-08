@@ -14,7 +14,6 @@ $room = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $number = $_POST['number'];
     $Capacity = $_POST['Capacity'];
-    $Room_ID = $_POST['Room_ID'];
     $Type = $_POST['Type'];
     $Availability = $_POST['Availability'];
     $Description = $_POST['Description'];
@@ -50,10 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="mb-3">
             <label for="Capacity" class="form-label">Capacity</label>
             <input type="number" class="form-control" id="Capacity" name="Capacity" min="5" max="999" required>
-        </div>
-        <div class="mb-3">
-            <label for="Room_ID" class="form-label">Room ID</label>
-            <input type="number" class="form-control" id="Room_ID" name="Room_ID" required>
         </div>
         <div class="mb-3">
             <label for="Type" class="form-label">Type</label>
