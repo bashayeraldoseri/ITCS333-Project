@@ -9,9 +9,22 @@ session_start();
             $username = $_SESSION['username'];
         } else {
             // If the username is not set, redirect to login page
-            header('Location: login.php');
+            header('Location: Registration/login.html');
             exit();
         }
+
+        // Get the user ID from the database using the username
+        $sql = "SELECT ID FROM users WHERE name = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$username]);
+        $user = $stmt->fetch();
+
+        if ($user === false) {
+            echo "User not found.";
+            exit;
+        }
+
+        $id = $user['ID'];
 
         $room_id=1;
         if (isset($_GET['room_id'])) {
@@ -48,9 +61,9 @@ session_start();
         if (isset($_POST['update'])) {
 
         // Update the status of the room to 'Inactive'
-        $update_query = "UPDATE bookings SET Status = ? WHERE Room_ID = ?";
+        $update_query = "UPDATE bookings SET Status = ? WHERE Room_ID = ? AND user_ID = ?";
         $stmt = $pdo->prepare($update_query);
-        $stmt->execute(['Inactive', $room_id]);
+        $stmt->execute(['Inactive', $room_id , $id]);
 
         // Redirect to the bookings after successful update
         header('Location: userDashboard.php'); 
@@ -76,11 +89,9 @@ session_start();
         <h3><?php echo $room_Description; ?></h3>
         <p>Kindly this cancellation need your permission</p>
 
-        <form action="update_to_cancel.php" method="POST">
-        <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
-        
+        <form action="update_to_cancel.php" method="POST">        
         <button type="submit" name="update" class="btn btn-primary">Permission</button>
-    </form>
+        </form>
     <p><a href="userDashboard.php">Back to Bookings</a></p>
     </div>
 </div>
