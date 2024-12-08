@@ -10,7 +10,7 @@ $pdo = new PDO($dsn, $user, $dbpassword);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $username = trim($_POST['username']);
-  $password = $_POST['dbpassword'];
+  $password = $_POST['password'];
   $confirm_password = $_POST['confirm-password'];
   $errors = [];
 

@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
   $username = $_POST["username"];
   $password = $_POST["password"];
 
-  // exit(var_dump($_POST));
   $errors = [];
 
   if (empty($username)) {
@@ -29,17 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
   }
 
   if (empty($errors)) {
-    // exit(var_dump($password) . " TEST " . var_dump($username));
     $user = validate_user($username, $password);
-    // exit(var_dump($user));
-
     if ($user) {
       $_SESSION['loggedin'] = true;
       $_SESSION['username'] = $user['name'];
       $_SESSION['user_id'] = $user['ID']; 
       $_SESSION['role'] = $user['Role'];
       $_SESSION['user_email'] = $user['email'];
-    
       $_SESSION['Phone'] = $user['Phone'];
       $_SESSION['DoB'] = $user['DoB'];
       $_SESSION['Department'] = $user['Department'];
@@ -49,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
       exit;
 
     } else {
-      // echo var_dump($user);
       echo "Invalid username or password";
       $errors[] = "Invalid username or password.";
     }
@@ -58,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
 function validate_user($username, $password)
 {
-  // exit("This is the password: ". $password);
   global $pdo;
   require_once '../database/db.php';
   $sql = "SELECT * FROM users WHERE name = :name";
@@ -68,15 +61,12 @@ function validate_user($username, $password)
 
     if ($stmt->execute()) {
         if ($stmt->rowCount() == 1) {
-          $row = $stmt->fetch(PDO::FETCH_ASSOC);
-          $stored_password = $row['password'];
-          // exit(var_dump($row));
+          $user = $stmt->fetch(PDO::FETCH_ASSOC);
+          $stored_password = $user['password'];
 
           // Use password_verify to check the password
-          exit($password);
-          if (password_verify($password, $stored_password)) {
-            exit($password);
-            return $row; // Return user data
+          if (password_verify($password,$stored_password)) {
+            return $user; // Return user data
           } else {
             echo "Invalid password.";
           }
@@ -87,11 +77,9 @@ function validate_user($username, $password)
       echo "Query execution failed.";
     }
   } else {
-    exit("FAild");
     echo "Failed to prepare SQL statement.";
   }
 
   return false;
 }
-
 ?>
