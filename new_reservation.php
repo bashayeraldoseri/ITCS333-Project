@@ -246,7 +246,6 @@
         <!-- Reservation form -->
         <div class="container">
         <form action="new_reservation.php" method="POST">
-            <input type="hidden" name="Room_ID" value="<?php echo $room_id; ?>">
             <input type="hidden" name="status" value="Active">
 
             <div>
