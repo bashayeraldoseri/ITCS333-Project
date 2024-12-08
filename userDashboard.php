@@ -242,7 +242,7 @@
                         <ul class="scrollable-container">
                             <?php
                             foreach ($comingbookings as $booking) {
-                                echo "<li>Room {$booking['Room_ID']} - {$booking['Start_Time']} to {$booking['End_Time']}</li>";
+                                echo "<li>Room {$booking['Room_ID']} - {$booking['Start_Time']} to {$booking['End_Time']}" . "\t <a href='delete_reservation.php?booking_id={$booking['Booking_ID']}'> Cancel </a>"."</li>";
                             }
                             ?>
                         </ul>
