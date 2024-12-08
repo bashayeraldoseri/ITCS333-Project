@@ -42,10 +42,16 @@ CREATE TABLE `bookings` (
 -- Dumping data for table `bookings`
 --
 
+<<<<<<< HEAD
 INSERT INTO `bookings` (`Booking_ID`, `user_ID`, `Room_ID`, `Title`, `Start_Time`, `End_Time`) VALUES
 (1, 2, 28, 'Team Meeting', '2023-11-10 08:00:00', '2023-11-12 09:00:00'),
 (2, 2, 30, 'Project Discussion', '2024-12-01 09:00:00', '2024-12-05 10:00:00'),
 (3, 12, 1, 'iujdeow', '2024-12-11 09:58:00', '2024-12-25 10:59:00');
+=======
+INSERT INTO `bookings` (`Booking_ID`,`user_ID`, `Room_ID`, `Title`, `Start_Time`, `End_Time`) VALUES
+(1, 2,  28, 'Team Meeting', '2023-11-10 08:00:00',  '2023-11-12 09:00:00'),
+(2, 2, 30, 'Project Discussion', '2024-12-01 09:00:00',  '2024-12-05 10:00:00');
+>>>>>>> 481e0ea1239647e4eac5df0c10d8e6ea4bfa4fcf
 
 -- --------------------------------------------------------
 

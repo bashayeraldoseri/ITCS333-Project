@@ -90,7 +90,6 @@
      
             
             // Handle form submission
-            $Status = $_POST['status'];
             $Title = $_POST['Title']; 
             $Start_time = $_POST['start_time'];
             $End_time = $_POST['end_time'];
@@ -181,8 +180,8 @@
                         echo "</div>";
                     } else {        
                             // If no errors, insert the reservation into the database
-                             $stmt = $pdo->prepare("INSERT INTO bookings ( user_ID, Room_ID, Status, Title, Start_Time, End_Time) VALUES (?,?,?,?,?,?)");
-                             $stmt->execute([$id, $room_id, $Status, $Title, $mysqlDateTime, $mysqlDateTime2]);
+                             $stmt = $pdo->prepare("INSERT INTO bookings ( user_ID, Room_ID, Title, Start_Time, End_Time) VALUES (?,?,?,?,?)");
+                             $stmt->execute([$id, $room_id, $Title, $mysqlDateTime, $mysqlDateTime2]);
                              // Redirect to the homepage after successful booking
                              header('Location: index.php'); 
 
@@ -246,7 +245,6 @@
         <!-- Reservation form -->
         <div class="container">
         <form action="new_reservation.php" method="POST">
-            <input type="hidden" name="status" value="Active">
 
             <div>
             <p>*The university system does not permit reservations for past dates.</p>

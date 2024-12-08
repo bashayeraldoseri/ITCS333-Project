@@ -26,18 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
   if (empty($errors)) {
-    require_once '../database/db.php'; 
-    
-    // Check if username is already taken
     $sql = "SELECT ID FROM users WHERE name = ?";
     if ($stmt = $pdo->prepare($sql)) {
       $stmt->bindParam(1, $username, PDO::PARAM_STR);
       $stmt->execute();
-
     if ($stmt->rowCount() > 0) {
       $errors[] = "Username is already taken.";
     }
-    }
+  }
     //Validate whether email is in uob format and check if email already exists
     $email = trim($_POST['email']);
     if (!preg_match('/^[a-zA-Z0-9._%+-]+@(uob\.edu\.bh|stu\.uob\.edu\.bh)$/', $email)) {
@@ -52,16 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt = $pdo->prepare($sql)) {
       $stmt->bindParam(1, $email, PDO::PARAM_STR);
       $stmt->execute();
-
       if ($stmt->rowCount() > 0) {
         $errors[] = "Email is already taken.";
       }
     }
-
     foreach($errors as $error){
       echo $error;
     }
-    
     // If no errors, insert new user
     if (empty($errors)) {
       $sql = "INSERT INTO users (name, email, password, Role) VALUES (?, ?, ?, ?)";
@@ -78,9 +71,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           header("Location: ../index.php");
           exit;
       } else {
-          $errors[] = "Something went wrong. Please try again later.";
+        echo "Something went wrong. Please try again later.";
         }
       }
+    }
+  } else {
+    foreach($errors as $error){
+      echo $error;
     }
   }
 }  
