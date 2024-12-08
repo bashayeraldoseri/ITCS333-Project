@@ -74,7 +74,7 @@ if (isset($_GET['delete_schedule'])) {
         <thead>
         <tr>
             <th>Schedule ID</th>
-            <th>Room Name</th>
+            <th>Room Number</th>
             <th>User ID</th>
             <th>Start Time</th>
             <th>End Time</th>
