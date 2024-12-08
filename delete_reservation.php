@@ -49,6 +49,27 @@ session_start();
         $booking = $stmt->fetch();
         $booking_title = $booking['Title'];
 
+        // Fetch the booking room id 
+        $query = "SELECT Room_ID FROM bookings WHERE Booking_ID = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$booking_id]);
+        $booking = $stmt->fetch();
+        $room_id = $booking['Room_ID'];
+
+        // Fetch the booking room number 
+        $query = "SELECT number FROM rooms WHERE Room_ID = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$room_id]);
+        $room = $stmt->fetch();
+        $room_number = $room['number'];
+
+       // Fetch the booking room Description 
+        $query = "SELECT Description FROM rooms WHERE Room_ID = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$room_id]);
+        $room = $stmt->fetch();
+        $room_Description = $room['Description'];
+
         // Fetch the booking Start_Time
         $query = "SELECT Start_Time FROM bookings WHERE Booking_ID = ?";
         $stmt = $pdo->prepare($query);
@@ -89,6 +110,8 @@ session_start();
             <div class="jumbotron text-center">
                 <h1>Cancel Reservation</h1>
                 <h3> Title: <?php echo $booking_title; ?><br>
+                     Room number: <?php echo $room_number; ?><br>
+                     Description: <?php echo $room_Description; ?><br>
                      Start Date/Time: <?php echo $booking_StartTime; ?><br>
                      End Date/Time: <?php echo $booking_EndTime; ?><br>
                 </h3>
