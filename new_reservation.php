@@ -118,27 +118,32 @@
 
                 // 1. Check if the start date is not in the past
                 if (strtotime($mysqlDateTime) < strtotime($currentDate)) {
-                    $error_messages[] = "Error: You cannot reserve a room for a past date. Please choose today or a future date !";
+                    $error_messages[] = "Error Start Date: You cannot reserve a room for a past date. Please choose today or a future date !";
                 }
 
-                // 2. Check if the start time is within university allowed times (8 AM to 8 PM)
+                // 2. Check if the end date is not in the past
+                if (strtotime($mysqlDateTime2) < strtotime($currentDate)) {
+                    $error_messages[] = "Error End Date: You cannot reserve a room for a past date. Please choose today or a future date !";
+                }
+
+                // 3. Check if the start time is within university allowed times (8 AM to 8 PM)
                 $startHour = date('H', strtotime($mysqlDateTime));
                 if ($startHour < 8 || $startHour >= 20) {
-                    $error_messages[] = "Error: The university only allows reservations between 8 AM and 8 PM !";
+                    $error_messages[] = "Error Start Time: The university only allows reservations between 8 AM and 8 PM !";
                 }
 
-                // 3. Check if the end time is within university allowed times (8 AM to 8 PM)
+                // 4. Check if the end time is within university allowed times (8 AM to 8 PM)
                 $endHour = date('H', strtotime($mysqlDateTime2));
                 if ($endHour < 8 || $endHour > 20) {
-                    $error_messages[] = "Error: The university only allows reservations to end before 9 PM !";
+                    $error_messages[] = "Error End Time: The university only allows reservations to end before 9 PM !";
                 }
 
-                // 4. Check if the end time is not before the start time or at the same time
+                // 5. Check if the end time is not before the start time or at the same time
                 if (strtotime($mysqlDateTime2) <= strtotime($mysqlDateTime)) {
-                    $error_messages[] = "Error: The end time must be after the start time. Please ensure the event has a valid duration !";
+                    $error_messages[] = "Error Start and End Time: The end time must be after the start time. Please ensure the event has a valid duration !";
                 }
 
-                // 5. Check for conflicts with existing reservations
+                // 6. Check for conflicts with existing reservations
 
                 $query = "
                             SELECT * 
@@ -158,7 +163,7 @@
                         $conflict = $stmt->fetch();
 
                         if ($conflict) {
-                            $error_messages[] = "Error: Error: The room is already reserved during the selected time ! Please choose a different time slot.";
+                            $error_messages[] = "Error Conflicts: Error: The room is already reserved during the selected time ! Please choose a different time slot.";
                         }
 
              
