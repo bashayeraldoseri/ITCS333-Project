@@ -46,8 +46,12 @@ $dataPoints = array();
 // Loop through each booking and calculate the percentage for each room
 foreach ($bookings as $booking) {
     $percentage = ($booking['booking_count'] / $totalBookings) * 100; // Calculate percentage
+    $sql = "SELECT number FROM rooms WHERE Room_ID = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$booking['Room_ID']]);  // Pass the Room_ID dynamically
+    $roomNum = $stmt->fetchColumn();
     $dataPoints[] = array(
-        "label" => "Room " . $booking['Room_ID'],  // Label for the room
+        "label" => "Room " . $roomNum, // Label for the room
         "y" => round($percentage, 2)  // Round percentage to two decimal places
     );
 }
