@@ -26,44 +26,51 @@ session_start();
 
         $id = $user['ID'];
 
-        $room_id = 1;
-        if (isset($_GET['room_id'])) {
-            $room_id = $_GET['room_id'];
+        $booking_id = 1;
+        if (isset($_GET['booking_id'])) {
+            $booking_id = $_GET['booking_id'];
         }
 
-        // Validate if Room_ID exists
-        $query = "SELECT * FROM rooms WHERE Room_ID = ?";
+        // Validate if booking_id exists
+        $query = "SELECT * FROM bookings WHERE Booking_ID = ?";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$room_id]);
-        $room = $stmt->fetch();
+        $stmt->execute([$booking_id]);
+        $booking = $stmt->fetch();
 
-        if (!$room) {
-            echo "Error: Room ID not found!";
+        if (!$booking) {
+            echo "Error: Booking ID not found!";
             exit;
         }
 
-        // Fetch the room number
-        $query = "SELECT number FROM rooms WHERE Room_ID = ?";
+        // Fetch the booking title 
+        $query = "SELECT Title FROM bookings WHERE Booking_ID = ?";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$room_id]);
-        $room = $stmt->fetch();
-        $room_number = $room['number'];
+        $stmt->execute([$booking_id]);
+        $booking = $stmt->fetch();
+        $booking_title = $booking['Title'];
 
-        // Fetch the room's Description
-        $query = "SELECT Description FROM rooms WHERE Room_ID = ?";
+        // Fetch the booking Start_Time
+        $query = "SELECT Start_Time FROM bookings WHERE Booking_ID = ?";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$room_id]);
-        $room = $stmt->fetch();
-        $room_Description = $room['Description'];
+        $stmt->execute([$booking_id]);
+        $booking = $stmt->fetch();
+        $booking_StartTime = $booking['Start_Time'];
+
+         // Fetch the booking End_Time
+         $query = "SELECT End_Time FROM bookings WHERE Booking_ID = ?";
+         $stmt = $pdo->prepare($query);
+         $stmt->execute([$booking_id]);
+         $booking = $stmt->fetch();
+         $booking_EndTime = $booking['End_Time'];
 
         if (isset($_POST['delete'])) {
             // Delete the booking from the database
-            $delete_query = "DELETE FROM bookings WHERE Room_ID = ? AND user_ID = ?";
+            $delete_query = "DELETE FROM bookings WHERE Booking_ID = ? AND user_ID = ?";
             $stmt = $pdo->prepare($delete_query);
-            $stmt->execute([$room_id, $id]);
+            $stmt->execute([$booking_id, $id]);
 
             // Redirect to the dashboard after successful deletion
-            header('Location: userDashboard.php');
+            header('Location: profile/profile.php');
             exit();
         }
         ?>
@@ -80,14 +87,17 @@ session_start();
 
         <div class="container">
             <div class="jumbotron text-center">
-                <h1>Cancel Room Reservation <?php echo $room_number; ?></h1>
-                <h3><?php echo $room_Description; ?></h3>
+                <h1>Cancel Reservation</h1>
+                <h3> Title: <?php echo $booking_title; ?><br>
+                     Start Date/Time: <?php echo $booking_StartTime; ?><br>
+                     End Date/Time: <?php echo $booking_EndTime; ?><br>
+                </h3>
                 <p>Kindly confirm your permission to cancel this reservation</p>
 
                 <form action="delete_reservation.php" method="POST">
                     <button type="submit" name="delete" class="btn btn-danger">Cancel Reservation</button>
                 </form>
-                <p><a href="userDashboard.php">Back to Bookings</a></p>
+                <p><a href="profile/profile.php">Back to Bookings</a></p>
             </div>
         </div>
 
