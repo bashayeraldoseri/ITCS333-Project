@@ -51,7 +51,7 @@ if (isset($_GET['delete_schedule'])) {
                 <select name="Room_ID" class="form-select" required>
                     <option value="">Select Room</option>
                     <?php foreach ($rooms as $room): ?>
-                        <option value="<?= $room['Room_ID'] ?>"><?= $room['name'] ?></option>
+                        <option value="<?= $room['Room_ID'] ?>"><?= $room['number'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
