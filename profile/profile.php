@@ -240,8 +240,12 @@ if ($_SESSION['DoB'] != null) {
                         <ul class="scrollable-container">
                             <?php
                             foreach ($comingbookings as $booking) {
-                                echo "<li>Room {$booking['Room_ID']} - From: {$booking['Start_Time']} To: {$booking['End_Time']} </li>";
-                                echo "<a href='../delete_reservation.php?booking_id={$booking['Booking_ID']}' style='background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;'> Cancel </a>";
+                              $sql = "SELECT number FROM rooms WHERE Room_ID = ?";
+                              $stmt = $pdo->prepare($sql);
+                              $stmt->execute([$booking['Room_ID']]);
+                              $roomNum = $stmt->fetchColumn();
+                              echo "<li>Room {$roomNum} - From: {$booking['Start_Time']} To: {$booking['End_Time']} </li>";
+                              echo "<a href='../delete_reservation.php?booking_id={$booking['Booking_ID']}' style='background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;'> Cancel </a>";
                             }
                             ?>
                         </ul>
@@ -253,7 +257,11 @@ if ($_SESSION['DoB'] != null) {
                         <ul class="scrollable-container">
                             <?php
                             foreach ($pastbookings as $booking) {
-                                echo "<li>Room {$booking['Room_ID']} - From: {$booking['Start_Time']} To: {$booking['End_Time']}</li>";
+                              $sql = "SELECT number FROM rooms WHERE Room_ID = ?";
+                              $stmt = $pdo->prepare($sql);
+                              $stmt->execute([$booking['Room_ID']]);
+                              $roomNum = $stmt->fetchColumn();
+                              echo "<li>Room {$roomNum} - From: {$booking['Start_Time']} To: {$booking['End_Time']} </li>";
                             }
                             ?>
                         </ul>
