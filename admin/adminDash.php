@@ -62,88 +62,138 @@ if (isset($_GET['delete_schedule'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 
-<body class="container mt-5">
-    <h1 class="text-center mb-4">Manage Rooms' Schedule</h1>
+<body>
+    <header>
+        <div class="container-fluid p-2">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <img src="../static\UOBLogo.png" alt="UOB" id="UOBLogo" style="height: 80px; 
+  width: auto;  
+  vertical-align: middle;" />
+                    <h2
+                        style="font-family: Comic Sans MS, Comic Sans, cursive; margin-left: 10px; display: inline-block;">
+                        UOB Booking System
+                    </h2>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <div class="me-auto"></div>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="../index.php">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="../profile/profile.php">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../Dashboard/dashboard.php">Dashboard</a>
+                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#">Admin</a>
+                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../AboutUs.php">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../Registration/logout.php">logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-    <!-- add schedule form -->
-    <form method="post" class="mb-4">
-        <h3>Manage Rooms</h3>
+    <main class="container my-4">
+        <!-- Room Management Section -->
         <section>
-            <div class="row">
-                <div class="col-md-3">
-                    <select name="Room_ID" class="form-select" required>
-                        <option value="">Select Room</option>
-                        <?php foreach ($rooms as $room): ?>
-                            <option value="<?= $room['Room_ID'] ?>"><?= $room['number'] ?></option>
-                        <?php endforeach; ?>
-                    </select>
+            <h3 class="mb-3">Manage Rooms</h3>
+            <form method="post">
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-6">
+                        <select name="Room_ID" class="form-select" required>
+                            <option value="">Select Room</option>
+                            <?php foreach ($rooms as $room): ?>
+                                <option value="<?= $room['Room_ID'] ?>"><?= $room['number'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" name="get_bookings" class="btn btn-primary w-100">View Bookings</button>
+                    </div>
+
+                    <div class="col-md-3">
+                    <button type="submit" name="delete_room" class="btn btn-danger">Delete Room</button>
+
+
+                    </div>
+
                 </div>
-                <div class="col-md-3">
-                    <button type="submit" name="get_bookings" value="update" class="btn btn-primary">Get
-                        Bookings</button>
+
+                <div class="row g-3 mt-3">
+                    <div class="col-md-4">
+                        <label for="Start_Time" class="form-label">Start Time</label>
+                        <input type="time" name="Start_Time" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="End_Time" class="form-label">End Time</label>
+                        <input type="time" name="End_Time" class="form-control">
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button type="submit" name="modify_availability" class="btn btn-primary me-2">Update
+                            Time</button>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <!-- Redirect to addRoom.php -->
-                    <button type="button" onclick="location.href='addRoom.php'" class="btn btn-success">Add
-                        Room</button>
-                </div>
-                <div class="col-md-3">
-                    <button type="submit" name="delete_room" value="delete" class="btn btn-danger">Delete Room</button>
-                </div>
+            </form>
+
+            <div class="mt-4">
+                <button type="button" onclick="location.href='addRoom.php'" class="btn btn-success">Add Room</button>
             </div>
         </section>
 
-        <h2>Manage Room's Availability</h2>
+        <hr class="my-5">
+
+        <!-- Booking Management Section -->
         <section>
-            <div class="col-md-3">
-                <label for="Start_Time"> Start Time</label>
-                <input type="time" name="Start_Time" class="form-control">
-            </div>
-            <div class="col-md-3">
-                <label for="End_Time"> End Time</label>
-                <input type="time" name="End_Time" class="form-control">
-            </div>
-
-            <div class="col-md-3">
-                <button type="submit" name="modify_availability" value="update" class="btn btn-primary">Modify
-                    Time</button>
-            </div>
+            <h3 class="mb-3">Manage Bookings</h3>
+            <table class="table table-bordered table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Schedule ID</th>
+                        <th>Room Number</th>
+                        <th>User ID</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($bookings as $booking): ?>
+                        <tr>
+                            <td><?= $booking['Booking_ID'] ?></td>
+                            <td>
+                                <?php
+                                $stmt = $pdo->prepare("SELECT number FROM rooms WHERE Room_ID = ?");
+                                $stmt->execute([$booking['Room_ID']]);
+                                echo $stmt->fetchColumn();
+                                ?>
+                            </td>
+                            <td><?= $booking['user_ID'] ?></td>
+                            <td><?= $booking['Start_Time'] ?></td>
+                            <td><?= $booking['End_Time'] ?></td>
+                            <td>
+                                <a href="?delete_schedule=<?= $booking['Booking_ID'] ?>"
+                                    class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </section>
-    </form>
+    </main>
 
-    <!-- display schedules -->
-    <h3>All Bookings</h3>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Schedule ID</th>
-                <th>Room Number</th>
-                <th>User ID</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($bookings as $booking): ?>
-                <tr>
-                    <td><?= $booking['Booking_ID'] ?></td>
-                    <td><?php $sql = "SELECT number FROM rooms WHERE Room_ID = ?";
-                    $stmt = $pdo->prepare($sql);
-                    $stmt->execute([$booking['Room_ID']]);  // Pass the Room_ID dynamically
-                    $roomNum = $stmt->fetchColumn();
-                    echo $roomNum; ?></td>
-                    <td><?= $booking['user_ID'] ?></td>
-                    <td><?= $booking['Start_Time'] ?></td>
-                    <td><?= $booking['End_Time'] ?></td>
-                    <td>
-                        <a href="?delete_schedule=<?= $booking['Booking_ID'] ?>" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    </div>
 </body>
 
 </html>
