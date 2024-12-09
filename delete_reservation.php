@@ -110,8 +110,7 @@ session_start();
             <div class="jumbotron text-center">
                 <h1>Cancel Reservation</h1>
                 <h3> Title: <?php echo $booking_title; ?><br>
-                     Room number: <?php echo $room_number; ?><br>
-                     Description: <?php echo $room_Description; ?><br>
+                     Room: <?php echo $room_number; ?> - <?php echo $room_Description; ?><br>
                      Start Date/Time: <?php echo $booking_StartTime; ?><br>
                      End Date/Time: <?php echo $booking_EndTime; ?><br>
                 </h3>
