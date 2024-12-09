@@ -84,11 +84,12 @@
         }
 
         .Statistics h2 {
-            color: #4caf50;
+            color: #a0b8cf;
             font-size: 24px;
         }
 
         .Statistics h4 {
+            color: #a0b8cf;
             font-size: 36px;
             font-weight: 700;
             margin-top: 10px;
@@ -120,7 +121,7 @@
 
         .ChartsContainer a {
             text-decoration: none;
-            color: #388e3c;
+            color: #a0b8cf;
             font-weight: 600;
             font-size: 16px;
             transition: color 0.3s;

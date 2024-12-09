@@ -40,7 +40,7 @@
         }
         
         .container {
-            background-color: var(--blue);
+            background-color: #a0b8cf;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -62,22 +62,25 @@
         }
 
         .btn-primary {
-            background-color: var(--blue);
+            background-color:var(--blue2);
             border: none;
             padding: 10px 20px;
             color: var(--whitish);
             border-radius: 5px;
-            font-size: 1rem;
+            font-size: 1rem; 
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px; 
+            background-color: var(--blue2);
+            border-color: #EFF1F3;
         }
 
-        .btn-primary:hover {
-            background-color: var(--blue);
-        }
-
-        .form-control:focus {
-            box-shadow: 0 0 5px rgba(92, 95, 158, 0.6);
-            border-color: var(--blue2);
-        }
+      
+          .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+          }
 
         .footer {
             text-align: center;

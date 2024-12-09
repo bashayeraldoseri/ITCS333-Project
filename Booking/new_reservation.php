@@ -303,13 +303,12 @@
 
             <!-- Submit Button -->
             <button type="submit" name='submit' class="btn btn-primary" onclick="return validateCapacity(document.getElementById('capacity'));">Submit Reservation</button>
-
-
+             <p><a href="dashboard.php" class="btn btn-primary">Return to Dashboard</a></p>
+           
             
             
         </form>
-        <p><a href="../index.php">Back to Room Browsing</a></p>
-        <form>
+        
 
         </div>
 
