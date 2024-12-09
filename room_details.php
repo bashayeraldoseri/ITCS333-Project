@@ -45,14 +45,6 @@ $departmentColors = [
 $department = $room['department'];
 $bgColor = isset($departmentColors[$department]) ? $departmentColors[$department] : '#f1f3f4';
 
-// Room availability and floor information
-// $roomFloor = match ($room['floor']) {
-//     '0' => 'Ground Floor',
-//     '1' => 'First Floor',
-//     '2' => 'Second Floor',
-//     default => 'Not Specified',
-// };
-
 $roomFloor;
     switch ($room['floor']) {
         case '0': $roomFloor = "Ground Floor" ; break;
@@ -63,7 +55,6 @@ $roomFloor;
 
 
 
-$roomAvailability = $room['Availability'] == '1' ? 'Available' : 'Not Available';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,6 +63,8 @@ $roomAvailability = $room['Availability'] == '1' ? 'Available' : 'Not Available'
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -95,7 +88,7 @@ $roomAvailability = $room['Availability'] == '1' ? 'Available' : 'Not Available'
 
         h1 {
             text-align: center;
-            color: #007bff;
+            color: #272727;
             margin-bottom: 20px;
         }
 
@@ -134,20 +127,45 @@ $roomAvailability = $room['Availability'] == '1' ? 'Available' : 'Not Available'
 </head>
 
 <body>
-    <div class="container">
-        <h1>Room <?php echo htmlspecialchars($room['number']); ?></h1>
-        <div class="details">
-            <p><strong>Room ID:</strong> <?php echo htmlspecialchars($room['Room_ID']); ?></p>
-            <p><strong>Room Number:</strong> <?php echo htmlspecialchars($room['number']); ?></p>
-            <p><strong>Capacity:</strong> <?php echo htmlspecialchars($room['Capacity']); ?></p>
-            <p><strong>Room Type:</strong> <?php echo htmlspecialchars($room['Type']); ?></p>
-            <p><strong>Availability:</strong> <?php echo htmlspecialchars($roomAvailability); ?></p>
-            <p><strong>Description:</strong> <?php echo htmlspecialchars($room['Description']); ?></p>
-            <p><strong>Department:</strong> <?php echo htmlspecialchars($room['department']); ?></p>
-            <p><strong>Floor:</strong> <?php echo htmlspecialchars($roomFloor); ?></p>
-            <p><strong>Equipment:</strong> <?php echo htmlspecialchars($equipment['equipment_list'] ?: 'None'); ?></p>
+    <div class="container mt-4 details">
+        <h1 class="text-center mb-4 details-text">Room Details: <?php echo htmlspecialchars($room['number']); ?></h1>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <!-- Details in a horizontal layout -->
+                <div class="row text-center">
+                    <div class="col-md-6">
+                        <p><strong>Room ID:</strong> <?php echo htmlspecialchars($room['Room_ID']); ?></p>
+                        <p><strong>Room Number:</strong> <?php echo htmlspecialchars($room['number']); ?></p>
+                        <p><strong>Capacity:</strong> <?php echo htmlspecialchars($room['Capacity']); ?></p>
+                        <p><strong>Room Type:</strong> <?php echo htmlspecialchars($room['Type']); ?></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Description:</strong> <?php echo htmlspecialchars($room['Description']); ?></p>
+                        <p><strong>Department:</strong> <?php echo htmlspecialchars($room['department']); ?></p>
+                        <p><strong>Floor:</strong> <?php echo htmlspecialchars($roomFloor); ?></p>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="row text-center">
+                    <div class="col-md-6">
+                        <h5 class="card-title">Availability</h5>
+                        <ul class="list-unstyled">
+                            <li><strong>From:</strong> <?php echo htmlspecialchars($room['Available_From']); ?></li>
+                            <li><strong>To:</strong> <?php echo htmlspecialchars($room['Available_To']); ?></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="card-title">Equipment</h5>
+                        <p><?php echo htmlspecialchars($equipment['equipment_list'] ?: 'None'); ?></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <a href="index.php">Back to Room Browsing</a>
+        <div class="text-center mt-4">
+            <a href="index.php" class="btn btn-primary">Back to Room Browsing</a>
+        </div>
     </div>
 </body>
 

@@ -39,7 +39,10 @@ foreach ($unoccupiedRooms as $room) {
 <!DOCTYPE HTML>
 <html>
 
-<head>
+<head> 
+<link rel="stylesheet" href="css/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -50,11 +53,12 @@ foreach ($unoccupiedRooms as $room) {
         }
 
         header {
-            background-color: #4CAF50;
+            background-color: #a0b8cf;
             color: white;
             text-align: center;
             padding: 20px;
-            font-size: 24px;
+            font-size: 24px; 
+            
         }
 
         main {
@@ -80,12 +84,22 @@ foreach ($unoccupiedRooms as $room) {
         footer {
             text-align: center;
             padding: 10px;
-            background-color: #4CAF50;
+            background-color: #a0b8cf;
             color: white;
             position: fixed;
             width: 100%;
             bottom: 0;
-        }
+        } 
+        
+        .btn-primary {
+      background-color: #a0b8cf;
+      border-color: #EFF1F3;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #004085;
+    }
 
         /* Responsive design */
         @media screen and (max-width: 768px) {
@@ -101,11 +115,13 @@ foreach ($unoccupiedRooms as $room) {
                 font-size: 14px;
             }
         }
-    </style>
+    </style> 
+</head> 
+<body>
+
     <header>
         Room Status Statistics
     </header>
-
     <main>
         <div class="chart-container">
             <div id="chartContainer"></div>
@@ -156,11 +172,13 @@ foreach ($unoccupiedRooms as $room) {
             chart.render();
         }
     </script>
-</head>
 
-<body>
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-</body>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>  
+
+    <div class="text-center mb-7">
+      <p><a href="dashboard.php" class="btn btn-primary">Return to Dashboard</a></p>
+    </div> 
+    </body>
 
 </html>
