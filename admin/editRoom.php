@@ -1,6 +1,6 @@
 <?php
 // database connection
-include('database/db.php');
+include('../database/db.php');
 
 // get the room ID from the URL
 $Room_ID = $_GET['Room_ID'];

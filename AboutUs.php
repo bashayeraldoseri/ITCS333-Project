@@ -103,9 +103,11 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                   <li class="nav-item">
                     <a class="nav-link" href="Dashboard/dashboard.php">Dashboard</a>
                   </li>
+                  <?php if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin"):?>
                   <li class="nav-item">
                     <a class="nav-link" href="admin/adminDash.php">Admin</a>
                   </li>
+                  <?php endif; ?>
                   <li class="nav-item">
                     <a class="nav-link active" href="#">About Us</a>
                   </li>

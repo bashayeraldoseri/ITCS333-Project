@@ -5,6 +5,13 @@ session_start();
 
 include "../database/db.php";
 
+if (isset($_SESSION['username'])) {
+  $username = $_SESSION['username'];
+} else {
+  header('Location: Registration/login.html');
+  exit();
+}
+
 $username = $_SESSION["username"];
 $id = $_SESSION["user_id"];
 $email = $_SESSION["user_email"];
@@ -80,6 +87,11 @@ if ($_SESSION["DoB"] != null) {
                 <li class="nav-item">
                   <a class="nav-link" href="../Dashboard/dashboard.php">Dashboard</a>
                 </li>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin"):?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../admin/adminDash.php">Admin</a>
+                  </li>
+                  <?php endif; ?>
                 <li class="nav-item">
                   <a class="nav-link" href="../AboutUs.php">About Us</a>
                 </li>

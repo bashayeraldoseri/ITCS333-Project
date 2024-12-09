@@ -173,7 +173,8 @@
         <div class="container-fluid p-2">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <img src="../static\UOBLogo.png" alt="UOB" id="UOBLogo" style="height: 80px; width: auto; vertical-align: middle;" />
+                    <img src="../static\UOBLogo.png" alt="UOB" id="UOBLogo"
+                        style="height: 80px; width: auto; vertical-align: middle;" />
                     <h2
                         style="font-family: Comic Sans MS, Comic Sans, cursive; margin-left: 10px; display: inline-block;">
                         UOB Booking System
@@ -194,6 +195,11 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="#">Dashboard</a>
                             </li>
+                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin"): ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../admin/adminDash.php">Admin</a>
+                                </li>
+                            <?php endif; ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="../AboutUs.php">About Us</a>
                             </li>

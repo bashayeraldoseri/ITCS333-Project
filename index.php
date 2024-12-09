@@ -1,7 +1,5 @@
 <?php
 session_start();
-//testing
-// print_r($_SESSION);
 $loggedin = false;
 
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
@@ -32,7 +30,6 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
           <div class="container-fluid">
           <img src="static\UOBLogo.png" alt="UOB" id="UOBLogo"/>
-            <!-- <a class="navbar-brand" href="#"> UOB Booking System</a> -->
              <h2>UOB Booking System</h2>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,9 +49,11 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                   <li class="nav-item">
                     <a class="nav-link" href="Dashboard/dashboard.php">Dashboard</a>
                   </li>
+                  <?php if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin"):?>
                   <li class="nav-item">
                     <a class="nav-link" href="admin/adminDash.php">Admin</a>
                   </li>
+                  <?php endif; ?>
                   <li class="nav-item">
                     <a class="nav-link" href="AboutUs.php">About Us</a>
                   </li>
@@ -71,9 +70,6 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="Registration/register.html">Register</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="admin/adminDash.php">Admin</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="AboutUs.php">About Us</a>
