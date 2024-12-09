@@ -46,37 +46,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($new_email != $email && !empty($new_email)) {
-        try {
-            $stmt = $pdo->prepare("UPDATE users SET email = :email WHERE ID = :ID");
-            $stmt->bindParam(":email", $new_email);
-            $stmt->bindParam("ID", $id);
-
-            if ($stmt->execute()) {
-                $_SESSION['user_email'] = $new_email;
-                $Success = true;
+    
+        if (!preg_match('/^[a-zA-Z0-9._%+-]+@(uob\.edu\.bh|stu\.uob\.edu\.bh)$/', $new_email)) {
+            $_SESSION['message'] = "Invalid email format. Please use a valid UOB email.";
+            $Success = false;
+        } else {
+            try {
+                $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+                $stmt->bindParam(":email", $new_email);
+                $stmt->execute();
+                $emailExists = $stmt->fetchColumn();
+    
+                if ($emailExists > 0) {
+                    $_SESSION['message'] = "This email is already taken. Please use a different one.";
+                    $Success = false;
+                } else {
+                    $stmt = $pdo->prepare("UPDATE users SET email = :email WHERE ID = :ID");
+                    $stmt->bindParam(":email", $new_email);
+                    $stmt->bindParam(":ID", $id);
+    
+                    if ($stmt->execute()) {
+                        $_SESSION['user_email'] = $new_email;
+                        $Success = true;
+                    }
+                }
+            } catch (PDOException $e) {
+                $_SESSION['message'] = 'Error updating email: ' . $e->getMessage();
             }
-        } catch (PDOException $e) {
-            echo 'Error Email' . $e->getMessage();
         }
+
     }
 
-    if (!empty($new_password) && $new_password == $rep_password) {
-        $hashed_pass = password_hash($new_password, PASSWORD_DEFAULT);
+    if (!empty($new_password) ) {
+        if ($new_password != $rep_password) {
+            $_SESSION['message'] = "Passwords do not match";
+            $Success = false; 
 
-        try {
-            $stmt = $pdo->prepare("UPDATE users SET password = :password WHERE ID = :ID");
+        }else {
+            $hashed_pass = password_hash($new_password, PASSWORD_DEFAULT);
 
-            $stmt->bindParam(":password", $hashed_pass);
-            $stmt->bindParam(":ID", $id);
-
-            $stmt->execute();
-        } catch (PDOException $e) {
-            echo "". $e->getMessage();
+            try {
+                $stmt = $pdo->prepare("UPDATE users SET password = :password WHERE ID = :ID");
+    
+                $stmt->bindParam(":password", $hashed_pass);
+                $stmt->bindParam(":ID", $id);
+    
+                $stmt->execute();
+            } catch (PDOException $e) {
+                echo "". $e->getMessage();
+    
+            }
 
         }
 
-    }else {
-        echo "Passwords don't match";
     }
 
     if ($new_DoB != null && $new_DoB != $Dob) {
@@ -158,12 +180,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    
 
     if ($Success) {
         header("Location: profile.php");
-
+        exit;
     }
+    
+    
 
 }
 

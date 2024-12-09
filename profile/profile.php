@@ -94,6 +94,13 @@ if ($_SESSION['DoB'] != null) {
     </header>
 
     <div class="row container-fluid d-flex justify-content-center align-items-center">
+      <?php
+          if (isset($_SESSION['message'])): ?>
+          <div class="alert alert-info">
+          <?php echo htmlspecialchars($_SESSION['message']); ?>
+          </div>
+          <?php unset($_SESSION['message']); ?>
+          <?php endif; ?>
       <div class="col-sm-2 left-box d-flex flex-column justify-content-center align-items-center mx-auto">
         <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab"
@@ -186,7 +193,6 @@ if ($_SESSION['DoB'] != null) {
                   <div class="card-body">
                     <h5 class="card-title d-flex justify-content-center"><?php echo $username; ?></h5>
                     <p class="card-text d-flex justify-content-center">Role: <?php echo $role?></p>
-                    <p class="card-text"><small>Last time booked: 3 months ago</small></p>
                   </div>
                 </div>
 
