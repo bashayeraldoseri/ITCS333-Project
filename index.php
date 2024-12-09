@@ -213,12 +213,12 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                           <?php echo $class_description; ?>
                         </p>
                         <hr>
-                        <a href="new_reservation.php?room_id=<?php echo $row['Room_ID']; ?>" class="book-link">
+                        <a href="Booking/new_reservation.php?room_id=<?php echo $row['Room_ID']; ?>" class="book-link">
                           <p class="book-link">Book</p>
                         </a>
                       </div>
                     </div>
-                  </a>
+                  </a>  
 
                 </div>
                 <?php
