@@ -212,7 +212,6 @@ if ($_SESSION['DoB'] != null) {
 
     include('../database/db.php');
 
-    // Get the user ID from the database using the username
     $sql = "SELECT ID, ProfilePic FROM users WHERE name = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$username]);
@@ -251,7 +250,7 @@ if ($_SESSION['DoB'] != null) {
                               $stmt->execute([$booking['Room_ID']]);
                               $roomNum = $stmt->fetchColumn();
                               echo "<li>Room {$roomNum} - From: {$booking['Start_Time']} To: {$booking['End_Time']} </li>";
-                              echo "<a href='../delete_reservation.php?booking_id={$booking['Booking_ID']}' style='background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;'> Cancel </a>";
+                              echo "<a href='../Booking/delete_reservation.php?booking_id={$booking['Booking_ID']}' style='background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;'> Cancel </a>";
                             }
                             ?>
                         </ul>
