@@ -120,7 +120,7 @@ foreach ($result as $timing) {
 <body>
 
     <header>
-        Instructor Booking Statistics
+        Timing Booking Statistics
     </header>
 
     <main>
@@ -130,7 +130,7 @@ foreach ($result as $timing) {
     </main>
 
     <footer>
-        <p>&copy; 2024 Your Company. All rights reserved.</p>
+        <p>&copy; 2024 UOB Booking System. All rights reserved.</p>
     </footer>
 
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
