@@ -2,13 +2,15 @@
 include("database/db.php");
 
 // Fetch unoccupied rooms
-$sql = "SELECT * FROM rooms WHERE Availability = 1;";
+$sql = "SELECT Room_ID FROM rooms WHERE Room_ID NOT IN (
+    SELECT Room_ID FROM bookings WHERE NOW() BETWEEN Start_Time AND End_Time
+)";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $unoccupiedRooms = $stmt->fetchAll();
 
 // Fetch occupied rooms
-$sql = "SELECT * FROM rooms WHERE Availability = 0;";
+$sql = "SELECT Room_ID FROM bookings WHERE NOW() BETWEEN Start_Time AND End_Time;";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $occupiedRooms = $stmt->fetchAll();
