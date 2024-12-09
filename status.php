@@ -18,13 +18,21 @@ $occupiedRooms = $stmt->fetchAll();
 // Prepare data for occupied rooms
 $Occupied = array();
 foreach ($occupiedRooms as $room) {
-    $Occupied[] = array("y" => 1, "label" => "Room " . $room['number']); // 'y' is 1 indicating occupied
+    $sql = "SELECT number FROM rooms WHERE Room_ID = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$room['Room_ID']]);
+    $roomNum = $stmt->fetchColumn();
+    $Occupied[] = array("y" => 1, "label" => "Room " . $roomNum); // 'y' is 1 indicating occupied
 }
 
 // Prepare data for unoccupied rooms
 $Unoccupied = array();
 foreach ($unoccupiedRooms as $room) {
-    $Unoccupied[] = array("y" => 1, "label" => "Room " . $room['number']); // 'y' is 0 indicating available
+    $sql = "SELECT number FROM rooms WHERE Room_ID = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$room['Room_ID']]);
+    $roomNum = $stmt->fetchColumn();
+    $Unoccupied[] = array("y" => 1, "label" => "Room " . $roomNum); // 'y' is 0 indicating available
 }
 
 ?>
