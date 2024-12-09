@@ -1,7 +1,7 @@
 <!-- delete_reservation.php -->
 
 <?php
-include('database/db.php');
+include('../database/db.php');
 session_start();
 
 // Retrieve the username from session
@@ -9,7 +9,7 @@ if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 } else {
     // If the username is not set, redirect to login page
-    header('Location: Registration/login.html');
+    header('Location: ../Registration/login.html');
     exit();
 }
 
@@ -87,7 +87,7 @@ if (isset($_POST['delete'])) {
     $stmt->execute([$booking_id]);
 
     // Redirect to the dashboard after successful deletion
-    header('Location: profile/profile.php');
+    header('Location: ../profile/profile.php');
     exit();
 }
 ?>
@@ -118,7 +118,7 @@ if (isset($_POST['delete'])) {
             <form action=<?php echo "delete_reservation.php?booking_id=" . $booking_id; ?> method="POST">
                 <button type="submit" name="delete" class="btn btn-danger">Cancel Reservation</button>
             </form>
-            <p><a href="profile/profile.php">Back to Bookings</a></p>
+            <p><a href="../profile/profile.php">Back to Bookings</a></p>
         </div>
     </div>
 

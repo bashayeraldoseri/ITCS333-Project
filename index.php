@@ -29,8 +29,8 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
       <div class="container-fluid p-2">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
           <div class="container-fluid">
-          <img src="static\UOBLogo.png" alt="UOB" id="UOBLogo"/>
-             <h2>UOB Booking System</h2>
+            <img src="static\UOBLogo.png" alt="UOB" id="UOBLogo" />
+            <h2>UOB Booking System</h2>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -49,10 +49,10 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                   <li class="nav-item">
                     <a class="nav-link" href="Dashboard/dashboard.php">Dashboard</a>
                   </li>
-                  <?php if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin"):?>
-                  <li class="nav-item">
-                    <a class="nav-link" href="admin/adminDash.php">Admin</a>
-                  </li>
+                  <?php if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin"): ?>
+                    <li class="nav-item">
+                      <a class="nav-link" href="admin/adminDash.php">Admin</a>
+                    </li>
                   <?php endif; ?>
                   <li class="nav-item">
                     <a class="nav-link" href="AboutUs.php">About Us</a>
@@ -66,7 +66,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="Registration/login.html">Login</a>
+                    <a class="nav-link" href="Registration/login.php">Login</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="Registration/register.html">Register</a>
@@ -87,12 +87,27 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
 
 
     <main>
-    <?php if (isset($_SESSION['register_message'])): ?>
-          <div class="alert alert-info">
+      <?php if (isset($_SESSION['register_message'])): ?>
+        <div class="alert alert-info">
           <?php echo htmlspecialchars($_SESSION['register_message']); ?>
-          </div>
-          <?php unset($_SESSION['register_message']); ?>
-    <?php endif; ?>
+        </div>
+        <?php unset($_SESSION['register_message']); ?>
+      <?php endif; ?>
+
+      <?php if (isset($_SESSION['successful_booking']) && $_SESSION['successful_booking'] === true): ?>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+              icon: 'success',
+              title: 'Booking Confirmed',
+              text: "Your booking has been approved."
+            });
+          });
+        </script>
+
+        <?php unset($_SESSION['successful_booking']);?>
+
+      <?php endif; ?>
 
 
       <?php if (isset($_SESSION['logout_message_shown']) && $_SESSION['logout_message_shown'] === true): ?>
@@ -106,7 +121,8 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
           });
         </script>
 
-        <?php unset($_SESSION['logout_message_shown']); session_destroy();?>
+        <?php unset($_SESSION['logout_message_shown']);
+        session_destroy(); ?>
 
       <?php endif; ?>
 
@@ -221,7 +237,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                         </a>
                       </div>
                     </div>
-                  </a>  
+                  </a>
 
                 </div>
                 <?php
