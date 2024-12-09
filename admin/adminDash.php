@@ -33,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['get_bookings'])) {
         $sql = "UPDATE rooms SET Available_From = ? WHERE Room_ID = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$start_time, $room_id]);
-        echo "Room with ID {$room_id} has been updated successfully.";
     }
 
     if (isset($_POST['End_Time'])) {
@@ -41,9 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['get_bookings'])) {
         $sql = "UPDATE rooms SET Available_To = ? WHERE Room_ID = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$end_time, $room_id]);
-        echo "Room with ID {$room_id} has been updated successfully.";
     }
-    //header("Location: adminDash.php");
 }
 
 //for delete schedule
