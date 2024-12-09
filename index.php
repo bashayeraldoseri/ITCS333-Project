@@ -66,7 +66,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="Registration/login.php">Login</a>
+                    <a class="nav-link" href="Registration/login.html">Login</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="Registration/register.html">Register</a>
