@@ -79,6 +79,20 @@
                 $room = $stmt->fetch();
                 $room_Description = $room['Description'];
 
+                // Fetch the room's Available_From
+                $query = "SELECT Available_From FROM rooms WHERE Room_ID = ?";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$room_id]);
+                $room = $stmt->fetch();
+                $room_Available_From = $room['Available_From'];
+
+                // Fetch the room's Available_To
+                $query = "SELECT Available_To FROM rooms WHERE Room_ID = ?";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$room_id]);
+                $room = $stmt->fetch();
+                $room_Available_To = $room['Available_To'];
+
 
 
 
@@ -129,14 +143,17 @@
 
                 // 3. Check if the start time is within university allowed times (8 AM to 8 PM)
                 $startHour = date('H', strtotime($mysqlDateTime));
-                if ($startHour < 8 || $startHour >= 20) {
-                    $error_messages[] = "Error Start Time: The university only allows reservations between 8 AM and 8 PM !";
+                $endHour = date('H', strtotime($mysqlDateTime2)); 
+                $Available_From = date('H', strtotime($room_Available_From));
+                $Available_To = date('H', strtotime($room_Available_To));
+
+                if ($startHour < $Available_From || $startHour >= $Available_To) {
+                    $error_messages[] = "Error Start Time: This room is not available at this time !";
                 }
 
                 // 4. Check if the end time is within university allowed times (8 AM to 8 PM)
-                $endHour = date('H', strtotime($mysqlDateTime2));
-                if ($endHour < 8 || $endHour > 20) {
-                    $error_messages[] = "Error End Time: The university only allows reservations to end before 9 PM !";
+                if ($endHour < Available_From || $endHour >= $Available_To) {
+                    $error_messages[] = "Error End Time: This room is not available at this time !";
                 }
 
                 // 5. Check if the end time is not before the start time or at the same time
@@ -256,9 +273,7 @@
 
             <div>
             <p>*The university system does not permit reservations for past dates.</p>
-            <p>*Reservations can only be made for today or future dates.</p>   
-            <p>*The university's operating hours are from 8:00 AM to 8:00 PM.</p>
-            <p>*Reservations cannot extend beyond 8:00 PM.</p>
+            <p>*This room is Available from <?php echo $room_Available_From; ?> to <?php echo $room_Available_To; ?></p>
             </div>
 
             <!-- Event Title -->
