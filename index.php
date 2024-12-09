@@ -91,6 +91,13 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
 
 
     <main>
+    <?php if (isset($_SESSION['register_message'])): ?>
+          <div class="alert alert-info">
+          <?php echo htmlspecialchars($_SESSION['register_message']); ?>
+          </div>
+          <?php unset($_SESSION['register_message']); ?>
+    <?php endif; ?>
+
 
       <?php if (isset($_SESSION['logout_message_shown']) && $_SESSION['logout_message_shown'] === true): ?>
         <script>

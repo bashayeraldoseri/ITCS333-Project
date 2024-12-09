@@ -61,10 +61,11 @@ if (!empty($data['capacity'])) {
 }
 
 // Booking Time
-//if (!empty($data['bookingTime'])) {
-    //$query .= " AND available_time <= ?";
-    //$params[] = $data['bookingTime'];
-//}
+if (!empty($data['bookingTime'])) {
+    $query .= " AND Available_From <= ? AND Available_To >= ?";
+    $params[] = $data['bookingTime'];
+    $params[] = $data['bookingTime'];
+}
 
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);

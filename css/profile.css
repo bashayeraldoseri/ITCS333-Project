@@ -1,15 +1,23 @@
-/* General Styles */
+:root {
+  --whitish: #EFF1F3;
+  --blue: #8ebfd5;
+  --balckish: #272727;
+  --gray: #696773;
+  --charcoal: #264653;
+
+} 
+
 body {
-  background-color: #f8f9fa; /* Light gray background for a clean look */
-  color: #333; /* Neutral text color */
+  background-color: #EFF1F3; 
+  color: #333; 
   font-family: Arial, sans-serif;
 }
 
-/* Navbar */
 .navbar {
-  background-color: #7ca5b8; /* Blue background */
-  /* color: white; */
+  background-color: #7ca5b8; 
 }
+
+
 
 .navbar-brand {
   color: white;
@@ -22,7 +30,7 @@ body {
 }
 
 .nav-tabs .nav-link.active {
-  background-color: #7ca5b8;
+  background-color: #a6cadb;
   color: white;
 }
 
@@ -30,13 +38,17 @@ body {
 .left-box {
   /* background-color: #7ca5b8;  */
   color: rgb(9, 0, 0);
-  height: 100%;
+  height: 150px;
   padding: 20px 0;
+
+  
+
 }
+
 
 .left-box .nav-link {
   color: rgb(0, 0, 0);
-  text-align: center;
+  /* text-align: center; */
   border-radius: 10px;
   margin: 10px;
 }

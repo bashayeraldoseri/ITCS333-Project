@@ -3,41 +3,41 @@ session_start();
 //testing
 // print_r($_SESSION);
 
-include("../database/db.php");
+include "../database/db.php";
 
-$username = $_SESSION['username'];
-$id = $_SESSION['user_id'];
-$email = $_SESSION['user_email'];
-$Dob = 'not set';
-$phone = $_SESSION['Phone'];
-$department = $_SESSION['Department'];
-$role = $_SESSION['role'];
+$username = $_SESSION["username"];
+$id = $_SESSION["user_id"];
+$email = $_SESSION["user_email"];
+$Dob = "not set";
+$phone = $_SESSION["Phone"];
+$department = $_SESSION["Department"];
+$role = $_SESSION["role"];
 
 $stmt = $pdo->prepare("SELECT ProfilePic FROM users WHERE ID = :ID");
-$stmt->bindParam(':ID', $id);
+$stmt->bindParam(":ID", $id);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$profilePicture = $user['ProfilePic'] ?? '../static/user.jpg'; //default
+$profilePicture = $user["ProfilePic"] ?? "../static/user.jpg"; //default
 
 // print_r($profilePicture);
 
 switch ($department) {
-  case 'CS':
-    $department = "Computer Science";
-    break;
-  case "CE":
-    $department = "Computer Engineering";
-    break;
-  case "IS":
-    $department = "Information Systems";
-    break;
-  default:
-    $department = "Not set";
+    case "CS":
+        $department = "Computer Science";
+        break;
+    case "CE":
+        $department = "Computer Engineering";
+        break;
+    case "IS":
+        $department = "Information Systems";
+        break;
+    default:
+        $department = "Not set";
 }
 
-if ($_SESSION['DoB'] != null) {
-  $Dob = $_SESSION['DoB'];
+if ($_SESSION["DoB"] != null) {
+    $Dob = $_SESSION["DoB"];
 }
 ?>
 
@@ -93,22 +93,19 @@ if ($_SESSION['DoB'] != null) {
       </div>
     </header>
 
-    <div class="row container-fluid d-flex justify-content-center align-items-center">
-      <?php
-          if (isset($_SESSION['message'])): ?>
+    <div class="row container-fluid d-flex justify-content-center">
+      <?php if (isset($_SESSION["message"])): ?>
           <div class="alert alert-info">
-          <?php echo htmlspecialchars($_SESSION['message']); ?>
+          <?php echo htmlspecialchars($_SESSION["message"]); ?>
           </div>
-          <?php unset($_SESSION['message']); ?>
+          <?php unset($_SESSION["message"]); ?>
           <?php endif; ?>
-      <div class="col-sm-2 left-box d-flex flex-column justify-content-center align-items-center mx-auto">
+      <div class="col-sm-2 left-box d-flex justify-content-center align-items-start">
         <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab"
             aria-controls="v-pills-profile" aria-selected="true">Profile</a>
-          </a>
           <a class="nav-link" id="v-pills-bookings-tab" data-bs-toggle="pill" href="#v-pills-bookings" role="tab"
             aria-controls="v-pills-bookings" aria-selected="false">Bookings</a>
-          </a>
           <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings" role="tab"
             aria-controls="v-pills-settings" aria-selected="false">Settings</a>
           </a>
@@ -117,34 +114,33 @@ if ($_SESSION['DoB'] != null) {
           </a>
         </div>
       </div>
-      <div class="col-lg-10 ">
+
+
+      <div class="col-lg-10">
+
         <div class="tab-content" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel"
             aria-labelledby="v-pills-profile-tab">
-
+            <!----------------------------------Profile--------------------------------------->
             <div class="row d-flex justify-content-center align-items-center m-2 g-3">
               <div class="col-sm-3">
                 <div class="card border rounded-4 d-flex justify-content-center align-items-center"
                   id="profile-card">
                   <!-- Profile Pictures here -->
-                  <img class="card-img-top rounded-circle mx-auto d-block" src="<?php echo $profilePicture?>" alt="pfp"
+                  <img class="card-img-top rounded-circle mx-auto d-block" src="<?php echo $profilePicture; ?>" alt="pfp"
                     style="width: 100px; height: 100px; object-fit: cover;" />
-
-
                   <div class="card-body h-100">
                     <h5 class="card-title d-flex justify-content-center"><?php echo $username; ?></h5>
-                    <p class="card-text d-flex justify-content-center">Role: <?php echo $role?></p>
+                    <p class="card-text d-flex justify-content-center">Role: <?php echo $role; ?></p>
                   </div>
                 </div>
-
-
               </div>
               <div class="col-sm-9">
                 <form action="">
                   <fieldset disabled>
-                    <div class="row d-flex justify-content-center align-items-center m-3">
+                    <div class="row d-flex justify-content-center align-items-center m-3 mx-auto">
                       <div class="col-lg-12">
-                        <div class="card p-1 d-flex align-items-center justify-content-center user-info-card mx-auto" >
+                        <div class="card p-1 d-flex align-items-center justify-content-center user-info-card " >
                           <div class="row mb-3 w-100">
                           <div class=" col-6 text-center mt-3">
                             <h5>Department</h5>
@@ -160,11 +156,11 @@ if ($_SESSION['DoB'] != null) {
                           <div class="row mb-3 w-100">
                             <div class="col-6 text-center">
                               <h5>Email</h5>
-                              <p><?php echo $email ?></p>
+                              <p><?php echo $email; ?></p>
                             </div>
                             <div class="col-6 text-center">
                               <h5>Phone</h5>
-                              <p><?php echo $phone ?></p>
+                              <p><?php echo $phone; ?></p>
                             </div>
                           </div>
                           
@@ -185,57 +181,57 @@ if ($_SESSION['DoB'] != null) {
           <!-- ---------------------------------Bookings---------------------------------------- -->
           <div class="tab-pane fade" id="v-pills-bookings" role="tabpanel" aria-labelledby="v-pills-bookings-tab">
             <div class="row d-flex justify-content-center align-items-center m-2 g-3">
-              <div class="col-sm-5">
-                <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center">
+            <div class="col-sm-3">
+                <div class="card border rounded-4 d-flex justify-content-center align-items-center"
+                  id="profile-card">
                   <!-- Profile Pictures here -->
-                  <img class="card-img-top rounded-circle mx-auto d-block" src="<?php echo $profilePicture?>" alt="pfp"
+                  <img class="card-img-top rounded-circle mx-auto d-block" src="<?php echo $profilePicture; ?>" alt="pfp"
                     style="width: 100px; height: 100px; object-fit: cover;" />
-                  <div class="card-body">
+                  <div class="card-body h-100">
                     <h5 class="card-title d-flex justify-content-center"><?php echo $username; ?></h5>
-                    <p class="card-text d-flex justify-content-center">Role: <?php echo $role?></p>
+                    <p class="card-text d-flex justify-content-center">Role: <?php echo $role; ?></p>
                   </div>
                 </div>
-
-
               </div>
-              <div class="col-sm-7">
+              <div class="col-sm-9">
               <?php
+              // Retrieve the username from session
+              if (isset($_SESSION["username"])) {
+                  $username = $_SESSION["username"];
+              } else {
+                  // If the username is not set, redirect to login page
+                  header("Location: login.php");
+                  exit();
+              }
 
-    // Retrieve the username from session
-    if (isset($_SESSION['username'])) {
-        $username = $_SESSION['username'];
-    } else {
-        // If the username is not set, redirect to login page
-        header('Location: login.php');
-        exit();
-    }
+              include "../database/db.php";
 
-    include('../database/db.php');
+              $sql = "SELECT ID, ProfilePic FROM users WHERE name = ?";
+              $stmt = $pdo->prepare($sql);
+              $stmt->execute([$username]);
+              $user = $stmt->fetch();
 
-    $sql = "SELECT ID, ProfilePic FROM users WHERE name = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$username]);
-    $user = $stmt->fetch();
+              if ($user === false) {
+                  echo "User not found.";
+                  exit();
+              }
 
-    if ($user === false) {
-        echo "User not found.";
-        exit;
-    }
+              $userID = $user["ID"];
 
-    $userID = $user['ID'];
-    
-    // Fetch the upcoming bookings
-    $sql = "SELECT Booking_ID, Room_ID, Start_Time, End_Time FROM bookings WHERE user_ID = ? AND End_Time > NOW()";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$userID]);
-    $comingbookings = $stmt->fetchAll();
+              // Fetch the upcoming bookings
+              $sql =
+                  "SELECT Booking_ID, Room_ID, Start_Time, End_Time FROM bookings WHERE user_ID = ? AND End_Time > NOW()";
+              $stmt = $pdo->prepare($sql);
+              $stmt->execute([$userID]);
+              $comingbookings = $stmt->fetchAll();
 
-    // Fetch the past bookings
-    $sql = "SELECT Room_ID, Start_Time, End_Time FROM bookings WHERE user_ID = ? AND End_Time < NOW()";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$userID]);
-    $pastbookings = $stmt->fetchAll();
-    ?>
+              // Fetch the past bookings
+              $sql =
+                  "SELECT Room_ID, Start_Time, End_Time FROM bookings WHERE user_ID = ? AND End_Time < NOW()";
+              $stmt = $pdo->prepare($sql);
+              $stmt->execute([$userID]);
+              $pastbookings = $stmt->fetchAll();
+              ?>
 
 
                 <div class="dashnoard-container">
@@ -243,16 +239,15 @@ if ($_SESSION['DoB'] != null) {
                     <div class="box" id="upcoming-bookings">
                         <h2>Upcoming Bookings</h2>
                         <ul class="scrollable-container">
-                            <?php
-                            foreach ($comingbookings as $booking) {
-                              $sql = "SELECT number FROM rooms WHERE Room_ID = ?";
-                              $stmt = $pdo->prepare($sql);
-                              $stmt->execute([$booking['Room_ID']]);
-                              $roomNum = $stmt->fetchColumn();
-                              echo "<li>Room {$roomNum} - From: {$booking['Start_Time']} To: {$booking['End_Time']} </li>";
-                              echo "<a href='../Booking/delete_reservation.php?booking_id={$booking['Booking_ID']}' style='background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;'> Cancel </a>";
-                            }
-                            ?>
+                            <?php foreach ($comingbookings as $booking) {
+                                $sql =
+                                    "SELECT number FROM rooms WHERE Room_ID = ?";
+                                $stmt = $pdo->prepare($sql);
+                                $stmt->execute([$booking["Room_ID"]]);
+                                $roomNum = $stmt->fetchColumn();
+                                echo "<li>Room {$roomNum} - From: {$booking["Start_Time"]} To: {$booking["End_Time"]} </li>";
+                                echo "<a href='../Booking/delete_reservation.php?booking_id={$booking["Booking_ID"]}' style='background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;'> Cancel </a>";
+                            } ?>
                         </ul>
                     </div>
 
@@ -260,15 +255,14 @@ if ($_SESSION['DoB'] != null) {
                     <div class="box" id="past-bookings">
                         <h2>Past Bookings</h2>
                         <ul class="scrollable-container">
-                            <?php
-                            foreach ($pastbookings as $booking) {
-                              $sql = "SELECT number FROM rooms WHERE Room_ID = ?";
-                              $stmt = $pdo->prepare($sql);
-                              $stmt->execute([$booking['Room_ID']]);
-                              $roomNum = $stmt->fetchColumn();
-                              echo "<li>Room {$roomNum} - From: {$booking['Start_Time']} To: {$booking['End_Time']} </li>";
-                            }
-                            ?>
+                            <?php foreach ($pastbookings as $booking) {
+                                $sql =
+                                    "SELECT number FROM rooms WHERE Room_ID = ?";
+                                $stmt = $pdo->prepare($sql);
+                                $stmt->execute([$booking["Room_ID"]]);
+                                $roomNum = $stmt->fetchColumn();
+                                echo "<li>Room {$roomNum} - From: {$booking["Start_Time"]} To: {$booking["End_Time"]} </li>";
+                            } ?>
                         </ul>
                     </div>
 
@@ -293,132 +287,157 @@ if ($_SESSION['DoB'] != null) {
 
           <!-- ----------------------------------SETTINGS--------------------------------------- -->
           <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-  <div class="container">
     <form action="settings.php" method="post" enctype="multipart/form-data">
-      <div class="row g-3 d-flex justify-content-center align-items-center m-2 g-3">
-        <!-- Account Settings -->
-        <div class="col-md-4">
-          <div class="card h-100">
-            <div class="card-header bg-dark text-white">
-              Account Settings
-            </div>
-            <div class="card-body">
-              <div class="mb-3">
-                <label for="username" class="form-label">Change username</label>
-                <input type="text" class="form-control" name="username" id="username"
-                  placeholder="Enter new username" value="<?php echo $username; ?>" />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Edit Profile Picture</label>
-                <img id="imagePreview" class="card-img-top rounded-circle mx-auto d-block mb-3"
-                  src="<?php echo $profilePicture; ?>" alt="pfp"
-                  style="width: 100px; height: 100px; object-fit: cover;" />
-                <input type="file" name="fileToUpload" id="fileToUpload" onchange="previewImage(event)">
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row d-flex justify-content-center align-items-center m-2 g-3">
 
-        <!-- Preferences -->
-        <div class="col-md-4">
-          <div class="card h-100">
-            <div class="card-header bg-dark text-white">
-              Personal Information
-            </div>
-            <div class="card-body">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="field" id="CS" value="CS" 
-                <?php if ($department === 'Computer Science') echo 'checked'; ?>>
-                <label class="form-check-label" for="CS">Computer Science</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="field" id="CE" value="CE"
-                <?php if ($department === 'Computer Engineering') echo 'checked'; ?>>
-                <label class="form-check-label" for="CE">Computer Engineering</label>
-              </div>
-              <div class="form-check mb-3">
-                <input class="form-check-input" type="radio" name="field" id="IS" value="IS"
-                <?php if ($department === 'Information Systems') echo 'checked'; ?>>
-                <label class="form-check-label" for="IS">Information Systems</label>
-              </div>
-
-              <div class="mb-3">
-                <label for="DoB" class="form-label">Choose Date of Birth</label>
-                <input type="date" class="form-control" name="DoB" id="DoB" placeholder="Enter new DoB"
-                  value="<?php echo $Dob ?>" />
-              </div>
-              <div class="mb-3">
-                <label for="phone" class="form-label">Change Phone number</label>
-                <input type="text" class="form-control" name="phone" id="phone"
-                  placeholder="Enter new Phone number" value="<?php echo $phone; ?>" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Privacy Settings  -->
-        <div class="col-md-4">
-                    <div class="card h-100">
-                      <div class="card-header bg-dark text-white">
-                        Privacy Settings
-                      </div>
-                      <div class="card-body">
-                      <div class="mt-1">
-                        <label for="email" class="form-label">Change Linked Email</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter new email"
-                          value="<?php echo $email; ?>" />
-                      </div>
-                      <div class="mt-3">
-                        <label for="password" class="form-label">Change Password</label>
-                        <input type="password" class="form-control" name="password" id="password"
-                          placeholder="New password" />
-                      </div>
-                      <div class="mt-3 mb-3">
-                        <label for="rp-password" class="form-label">Repeat Password</label>
-                        <input type="password" class="form-control" name="rp-password" id="rp-password"
-                          placeholder="Repeated password" />
-                      </div>
-
-                      </div>
-                    
+            <!-- Account Settings -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header bg-dark text-white">
+                        Account Settings
                     </div>
-                  </div>
-      </div>
+                    <div class="card-body">
+                        <!-- Change Username -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Change Username</label>
+                            <input type="text" class="form-control" name="username" id="username"
+                                placeholder="Enter new username" value="<?php echo $username; ?>" />
+                        </div>
+                        
+                        <!-- Edit Profile Picture -->
+                        <div class="mb-3">
+                            <label class="form-label">Edit Profile Picture</label>
+                            <img id="imagePreview" class="card-img-top rounded-circle mx-auto d-block mb-3"
+                                src="<?php echo $profilePicture; ?>" alt="Profile Picture"
+                                style="width: 100px; height: 100px; object-fit: cover;" />
+                            <input type="file" name="fileToUpload" id="fileToUpload" onchange="previewImage(event)">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      <!-- Submit Button -->
-      <div class="mt-4">
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-      </div>
+            <!-- Personal Information -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header bg-dark text-white">
+                        Personal Information
+                    </div>
+                    <div class="card-body">
+                        <!-- Department Selection -->
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="field" id="CS" value="CS"
+                                <?php if ($department === "Computer Science") echo "checked"; ?>>
+                            <label class="form-check-label" for="CS">Computer Science</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="field" id="CE" value="CE"
+                                <?php if ($department === "Computer Engineering") echo "checked"; ?>>
+                            <label class="form-check-label" for="CE">Computer Engineering</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="field" id="IS" value="IS"
+                                <?php if ($department === "Information Systems") echo "checked"; ?>>
+                            <label class="form-check-label" for="IS">Information Systems</label>
+                        </div>
+
+                        <!-- Date of Birth -->
+                        <div class="mb-3">
+                            <label for="DoB" class="form-label">Choose Date of Birth</label>
+                            <input type="date" class="form-control" name="DoB" id="DoB" 
+                                value="<?php echo $Dob; ?>" />
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Change Phone Number</label>
+                            <input type="text" class="form-control" name="phone" id="phone"
+                                placeholder="Enter new phone number" value="<?php echo $phone; ?>" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy Settings -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header bg-dark text-white">
+                        Privacy Settings
+                    </div>
+                    <div class="card-body">
+                        <!-- Change Email -->
+                        <div class="mt-1">
+                            <label for="email" class="form-label">Change Linked Email</label>
+                            <input type="email" class="form-control" name="email" id="email"
+                                placeholder="Enter new email" value="<?php echo $email; ?>" />
+                        </div>
+
+                        <!-- Change Password -->
+                        <div class="mt-3">
+                            <label for="password" class="form-label">Change Password</label>
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="New password" />
+                        </div>
+
+                        <!-- Repeat Password -->
+                        <div class="mt-3 mb-3">
+                            <label for="rp-password" class="form-label">Repeat Password</label>
+                            <input type="password" class="form-control" name="rp-password" id="rp-password"
+                                placeholder="Repeat password" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Submit Button -->
+         <div class="row">
+         <div class="mt-4 d-flex justify-content-center align-items-center">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+
+         </div>
+        
     </form>
-  </div>
 </div>
-
           <!-- ------------------------------------------------------------------------- --> 
 
 
 
           <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-help-tab">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center">
-                  <div class="card-body"> 
-                   
-                  Contact Us at our Emails :
-            <ul>
-              <li>Help.123123@info.com</li>
-              <li>Help.9910@info.com</li>
-            </ul> 
-            Or directly at our call center :
-            <ul>
-              <li>+937 1234 5678 </li>
-              <li>+937 8765 4321 </li>
-            </ul> 
-
-                     </div>
-                    </div>
-                  </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow rounded-4">
+                <div class="card-header bg-dark text-white rounded-top-4">
+                    <h4 class="text-center mb-0">Need Help? Contact Us</h4>
                 </div>
-              </div>   
+                <div class="card-body p-4">
+                    <div class="row">
+                        <!-- Contact Emails -->
+                        <div class="col-md-6 mb-4">
+                            <h5 class="text-primary">Email Support</h5>
+                            <p class="text-muted">Reach out to us via email for any inquiries or assistance:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-envelope-fill text-primary"></i> Help.123123@info.com</li>
+                                <li><i class="bi bi-envelope-fill text-primary"></i> Help.9910@info.com</li>
+                            </ul>
+                        </div>
+                        <!-- Call Center -->
+                        <div class="col-md-6">
+                            <h5 class="text-primary">Call Center</h5>
+                            <p class="text-muted">Speak directly with our support team at:</p>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-telephone-fill text-primary"></i> +973 1234 5678</li>
+                                <li><i class="bi bi-telephone-fill text-primary"></i> +973 8765 4321</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
             </div>
           </div>
         </div>
