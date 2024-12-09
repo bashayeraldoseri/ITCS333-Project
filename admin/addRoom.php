@@ -27,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,43 +40,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body class="container mt-5">
-    <h1 class="text-center mb-4">Manage Rooms</h1>
+    <h1 class="text-center mb-4">Add Rooms</h1>
 
     <!-- form to manage a new room -->
-    <form method="POST">
-        <div class="mb-3">
-            <label for="number" class="form-label">Room Number</label>
-            <input type="text" class="form-control" id="number" name="number" required>
+    <form method="POST" class="p-4 border rounded shadow-sm bg-light">
+        <div class="row g-3">
+            <!-- Room Number -->
+            <div class="col-md-6">
+                <label for="number" class="form-label">Room Number</label>
+                <input type="text" class="form-control" id="number" name="number" placeholder="Enter room number"
+                    required>
+            </div>
+
+            <!-- Capacity -->
+            <div class="col-md-6">
+                <label for="Capacity" class="form-label">Capacity</label>
+                <input type="number" class="form-control" id="Capacity" name="Capacity" min="5" max="100"
+                    placeholder="Enter room capacity" required>
+            </div>
+
+            <!-- Floor -->
+            <div class="col-md-6 mt-4">
+                <label for="floor" class="form-label">Floor</label>
+                <input type="number" class="form-control" id="floor" name="floor" min="0" max="2" 
+                    placeholder="Enter floor number" required>
+            </div>
+
+            <!-- Department -->
+            <div class="col-md-6 mt-4">
+                <label for="department" class="form-label">Department</label>
+                <select class="form-select" id="department" name="department" required>
+                    <option value="IS">IS</option>
+                    <option value="CS" selected>CS</option>
+                    <option value="CE">CE</option>
+                </select>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="Capacity" class="form-label">Capacity</label>
-            <input type="number" class="form-control" id="Capacity" name="Capacity" min="5" max="100" required>
-        </div>
-        <div class="mb-3">
-            <label for="Type" class="form-label">Type</label>
-            <select id="Type" class="form-select" name="Type" required>
-                <option value="room">Room</option>
-                <option value="lap">Lab</option>
-            </select>
-        </div>
-        <div class="mb-3">
+
+        <!-- Description -->
+        <div class="col-md-12 mt-4">
             <label for="Description" class="form-label">Description</label>
-            <input type="text" class="form-control" id="Description" name="Description" required>
+            <textarea class="form-control" id="Description" name="Description" rows="3"
+                placeholder="Provide a brief description of the room" required></textarea>
         </div>
-        <div class="mb-3">
-            <label for="floor" class="form-label">Floor</label>
-            <input type="number" class="form-control" id="floor" name="floor" min="0" max="2" required>
-        </div>
-        <div class="mb-3">
-            <label for="department" class="form-label">Department</label>
-            <select id="department" class="form-select" name="department" required>
-                <option value="IS">IS</option>
-                <option value="CS">CS</option>
-                <option value="CE">CE</option>
+
+        <!-- Type -->
+        <div class="col-md-6 mt-4 ">
+            <label for="Type" class="form-label">Type</label>
+            <select class="form-select" id="Type" name="Type" required>
+                <option value="room" selected>Room</option>
+                <option value="lab">Lab</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-success w-100">Add Room</button>
+
+        <!-- Submit Button -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-success px-4">Add Room</button>
+            <br>
+            <a href="adminDash.php">Go back to admin panel</a>
+
+        </div>
+
     </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
