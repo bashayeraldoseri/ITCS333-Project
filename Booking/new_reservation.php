@@ -144,7 +144,14 @@
                     $error_messages[] = "Error Start and End Time: The end time must be after the start time. Please ensure the event has a valid duration !";
                 }
 
-                // 6. Check for conflicts with existing reservations
+                // 6. Check that start and end times are not the same if the dates are the same
+                if (date('Y-m-d', strtotime($mysqlDateTime)) === date('Y-m-d', strtotime($mysqlDateTime2))) {
+                    if (strtotime($mysqlDateTime) === strtotime($mysqlDateTime2)) {
+                        $error_messages[] = "Error: Start time and end time cannot be the same if they are on the same day.";
+                    }
+                }
+
+                // 7. Check for conflicts with existing reservations
 
                 $query = "
                             SELECT * 
