@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2024 at 07:09 PM
+-- Generation Time: Dec 09, 2024 at 02:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,9 +43,10 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`Booking_ID`, `user_ID`, `Room_ID`, `Title`, `Start_Time`, `End_Time`) VALUES
-(1, 2, 28, 'Team Meeting', '2023-11-10 08:00:00', '2023-11-12 09:00:00'),
 (2, 2, 30, 'Project Discussion', '2024-12-01 09:00:00', '2024-12-05 10:00:00'),
-(3, 12, 1, 'iujdeow', '2024-12-11 09:58:00', '2024-12-25 10:59:00');
+(5, 12, 26, 'I don\'t know why', '2024-12-30 13:51:00', '2025-01-09 13:52:00'),
+(6, 12, 39, 'Just try', '2024-12-09 14:02:00', '2024-12-24 14:02:00'),
+(7, 12, 3, 'AAAA', '2024-12-24 14:52:00', '2024-12-31 14:52:00');
 
 -- --------------------------------------------------------
 
@@ -125,89 +126,90 @@ CREATE TABLE `rooms` (
   `Capacity` int(11) NOT NULL,
   `Room_ID` int(11) NOT NULL,
   `Type` text NOT NULL,
-  `Availability` tinyint(1) NOT NULL,
   `Description` text NOT NULL,
   `floor` int(11) NOT NULL,
-  `department` text NOT NULL
+  `department` text NOT NULL,
+  `Available_From` time NOT NULL DEFAULT '08:00:00',
+  `Available_To` time NOT NULL DEFAULT '20:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`number`, `Capacity`, `Room_ID`, `Type`, `Availability`, `Description`, `floor`, `department`) VALUES
-('028', 43, 1, 'room', 1, 'Room for IS department', 0, 'IS'),
-('029', 38, 2, 'room', 1, 'Room for IS department', 0, 'IS'),
-('023', 33, 3, 'room', 1, 'Room for IS department', 0, 'IS'),
-('030', 47, 4, 'room', 1, 'Room for IS department', 0, 'IS'),
-('021', 41, 5, 'room', 1, 'Room for IS department', 0, 'IS'),
-('032', 45, 6, 'room', 1, 'Room for IS department', 0, 'IS'),
-('039', 95, 7, 'lab', 1, 'Lab for IS department', 0, 'IS'),
-('040', 110, 8, 'lab', 1, 'Lab for IS department', 0, 'IS'),
-('056', 44, 9, 'room', 1, 'Room for CS department', 0, 'CS'),
-('057', 48, 10, 'room', 1, 'Room for CS department', 0, 'CS'),
-('051', 50, 11, 'room', 1, 'Room for CS department', 0, 'CS'),
-('058', 35, 12, 'room', 1, 'Room for CS department', 0, 'CS'),
-('049', 39, 13, 'room', 1, 'Room for CS department', 0, 'CS'),
-('060', 43, 14, 'room', 1, 'Room for CS department', 0, 'CS'),
-('067', 100, 15, 'lab', 1, 'Lab for CS department', 0, 'CS'),
-('068', 115, 16, 'lab', 1, 'Lab for CS department', 0, 'CS'),
-('084', 46, 17, 'room', 1, 'Room for CE department', 0, 'CE'),
-('085', 42, 18, 'room', 1, 'Room for CE department', 0, 'CE'),
-('079', 37, 19, 'room', 1, 'Room for CE department', 0, 'CE'),
-('086', 34, 20, 'room', 1, 'Room for CE department', 0, 'CE'),
-('077', 40, 21, 'room', 1, 'Room for CE department', 0, 'CE'),
-('088', 45, 22, 'room', 1, 'Room for CE department', 0, 'CE'),
-('095', 95, 23, 'lab', 1, 'Lab for CE department', 0, 'CE'),
-('096', 110, 24, 'lab', 1, 'Lab for CE department', 0, 'CE'),
-('1010', 45, 25, 'room', 1, 'Room for IS department', 1, 'IS'),
-('1011', 50, 26, 'room', 1, 'Room for IS department', 1, 'IS'),
-('1008', 41, 27, 'room', 1, 'Room for IS department', 1, 'IS'),
-('1012', 44, 28, 'room', 1, 'Room for IS department', 1, 'IS'),
-('1006', 42, 29, 'room', 1, 'Room for IS department', 1, 'IS'),
-('1014', 49, 30, 'room', 1, 'Room for IS department', 1, 'IS'),
-('1016', 85, 31, 'lab', 1, 'Lab for IS department', 1, 'IS'),
-('1017', 95, 32, 'lab', 1, 'Lab for IS department', 1, 'IS'),
-('1047', 47, 33, 'room', 1, 'Room for CS department', 1, 'CS'),
-('1048', 44, 34, 'room', 1, 'Room for CS department', 1, 'CS'),
-('1045', 50, 35, 'room', 1, 'Room for CS department', 1, 'CS'),
-('1050', 46, 36, 'room', 1, 'Room for CS department', 1, 'CS'),
-('1043', 39, 37, 'room', 1, 'Room for CS department', 1, 'CS'),
-('1052', 42, 38, 'room', 1, 'Room for CS department', 1, 'CS'),
-('1042', 100, 39, 'lab', 1, 'Lab for CS department', 1, 'CS'),
-('1044', 120, 40, 'lab', 1, 'Lab for CS department', 1, 'CS'),
-('1085', 50, 41, 'room', 1, 'Room for CE department', 1, 'CE'),
-('1086', 45, 42, 'room', 1, 'Room for CE department', 1, 'CE'),
-('1083', 38, 43, 'room', 1, 'Room for CE department', 1, 'CE'),
-('1087', 35, 44, 'room', 1, 'Room for CE department', 1, 'CE'),
-('1061', 43, 45, 'room', 1, 'Room for CE department', 1, 'CE'),
-('1089', 48, 46, 'room', 1, 'Room for CE department', 1, 'CE'),
-('1080', 95, 47, 'lab', 1, 'Lab for CE department', 1, 'CE'),
-('1082', 110, 48, 'lab', 1, 'Lab for CE department', 1, 'CE'),
-('2010', 48, 49, 'room', 1, 'Room for IS department', 2, 'IS'),
-('2011', 50, 50, 'room', 1, 'Room for IS department', 2, 'IS'),
-('2008', 42, 51, 'room', 1, 'Room for IS department', 2, 'IS'),
-('2012', 45, 52, 'room', 1, 'Room for IS department', 2, 'IS'),
-('2007', 40, 53, 'room', 1, 'Room for IS department', 2, 'IS'),
-('2013', 47, 54, 'room', 1, 'Room for IS department', 2, 'IS'),
-('2005', 110, 55, 'lab', 1, 'Lab for IS department', 2, 'IS'),
-('2015', 120, 56, 'lab', 1, 'Lab for IS department', 2, 'IS'),
-('2048', 48, 57, 'room', 1, 'Room for CS department', 2, 'CS'),
-('2049', 50, 58, 'room', 1, 'Room for CS department', 2, 'CS'),
-('2045', 45, 59, 'room', 1, 'Room for CS department', 2, 'CS'),
-('2050', 49, 60, 'room', 1, 'Room for CS department', 2, 'CS'),
-('2045', 44, 61, 'room', 1, 'Room for CS department', 2, 'CS'),
-('2051', 46, 62, 'room', 1, 'Room for CS department', 2, 'CS'),
-('2043', 100, 63, 'lab', 1, 'Lab for CS department', 2, 'CS'),
-('2053', 110, 64, 'lab', 1, 'Lab for CS department', 2, 'CS'),
-('2086', 50, 65, 'room', 1, 'Room for CE department', 2, 'CE'),
-('2087', 45, 66, 'room', 1, 'Room for CE department', 2, 'CE'),
-('2084', 40, 67, 'room', 1, 'Room for CE department', 2, 'CE'),
-('2088', 43, 68, 'room', 1, 'Room for CE department', 2, 'CE'),
-('2083', 42, 69, 'room', 1, 'Room for CE department', 2, 'CE'),
-('2089', 44, 70, 'room', 1, 'Room for CE department', 2, 'CE'),
-('2081', 95, 71, 'lab', 1, 'Lab for CE department', 2, 'CE'),
-('2091', 110, 72, 'lab', 1, 'Lab for CE department', 2, 'CE');
+INSERT INTO `rooms` (`number`, `Capacity`, `Room_ID`, `Type`, `Description`, `floor`, `department`, `Available_From`, `Available_To`) VALUES
+('028', 43, 1, 'room', 'Room for IS department', 0, 'IS', '08:00:00', '20:00:00'),
+('029', 38, 2, 'room', 'Room for IS department', 0, 'IS', '08:00:00', '20:00:00'),
+('023', 33, 3, 'room', 'Room for IS department', 0, 'IS', '08:00:00', '20:00:00'),
+('030', 47, 4, 'room', 'Room for IS department', 0, 'IS', '08:00:00', '20:00:00'),
+('021', 41, 5, 'room', 'Room for IS department', 0, 'IS', '08:00:00', '20:00:00'),
+('032', 45, 6, 'room', 'Room for IS department', 0, 'IS', '08:00:00', '20:00:00'),
+('039', 95, 7, 'lab', 'Lab for IS department', 0, 'IS', '08:00:00', '20:00:00'),
+('040', 110, 8, 'lab', 'Lab for IS department', 0, 'IS', '08:00:00', '20:00:00'),
+('056', 44, 9, 'room', 'Room for CS department', 0, 'CS', '08:00:00', '20:00:00'),
+('057', 48, 10, 'room', 'Room for CS department', 0, 'CS', '08:00:00', '20:00:00'),
+('051', 50, 11, 'room', 'Room for CS department', 0, 'CS', '08:00:00', '20:00:00'),
+('058', 35, 12, 'room', 'Room for CS department', 0, 'CS', '08:00:00', '20:00:00'),
+('049', 39, 13, 'room', 'Room for CS department', 0, 'CS', '08:00:00', '20:00:00'),
+('060', 43, 14, 'room', 'Room for CS department', 0, 'CS', '08:00:00', '20:00:00'),
+('067', 100, 15, 'lab', 'Lab for CS department', 0, 'CS', '08:00:00', '20:00:00'),
+('068', 115, 16, 'lab', 'Lab for CS department', 0, 'CS', '08:00:00', '20:00:00'),
+('084', 46, 17, 'room', 'Room for CE department', 0, 'CE', '08:00:00', '20:00:00'),
+('085', 42, 18, 'room', 'Room for CE department', 0, 'CE', '08:00:00', '20:00:00'),
+('079', 37, 19, 'room', 'Room for CE department', 0, 'CE', '08:00:00', '20:00:00'),
+('086', 34, 20, 'room', 'Room for CE department', 0, 'CE', '08:00:00', '20:00:00'),
+('077', 40, 21, 'room', 'Room for CE department', 0, 'CE', '08:00:00', '20:00:00'),
+('088', 45, 22, 'room', 'Room for CE department', 0, 'CE', '08:00:00', '20:00:00'),
+('095', 95, 23, 'lab', 'Lab for CE department', 0, 'CE', '08:00:00', '20:00:00'),
+('096', 110, 24, 'lab', 'Lab for CE department', 0, 'CE', '08:00:00', '20:00:00'),
+('1010', 45, 25, 'room', 'Room for IS department', 1, 'IS', '08:00:00', '20:00:00'),
+('1011', 50, 26, 'room', 'Room for IS department', 1, 'IS', '08:00:00', '20:00:00'),
+('1008', 41, 27, 'room', 'Room for IS department', 1, 'IS', '08:00:00', '20:00:00'),
+('1012', 44, 28, 'room', 'Room for IS department', 1, 'IS', '08:00:00', '20:00:00'),
+('1006', 42, 29, 'room', 'Room for IS department', 1, 'IS', '08:00:00', '20:00:00'),
+('1014', 49, 30, 'room', 'Room for IS department', 1, 'IS', '08:00:00', '20:00:00'),
+('1016', 85, 31, 'lab', 'Lab for IS department', 1, 'IS', '08:00:00', '20:00:00'),
+('1017', 95, 32, 'lab', 'Lab for IS department', 1, 'IS', '08:00:00', '20:00:00'),
+('1047', 47, 33, 'room', 'Room for CS department', 1, 'CS', '08:00:00', '20:00:00'),
+('1048', 44, 34, 'room', 'Room for CS department', 1, 'CS', '08:00:00', '20:00:00'),
+('1045', 50, 35, 'room', 'Room for CS department', 1, 'CS', '08:00:00', '20:00:00'),
+('1050', 46, 36, 'room', 'Room for CS department', 1, 'CS', '08:00:00', '20:00:00'),
+('1043', 39, 37, 'room', 'Room for CS department', 1, 'CS', '08:00:00', '20:00:00'),
+('1052', 42, 38, 'room', 'Room for CS department', 1, 'CS', '08:00:00', '20:00:00'),
+('1042', 100, 39, 'lab', 'Lab for CS department', 1, 'CS', '08:00:00', '20:00:00'),
+('1044', 120, 40, 'lab', 'Lab for CS department', 1, 'CS', '08:00:00', '20:00:00'),
+('1085', 50, 41, 'room', 'Room for CE department', 1, 'CE', '08:00:00', '20:00:00'),
+('1086', 45, 42, 'room', 'Room for CE department', 1, 'CE', '08:00:00', '20:00:00'),
+('1083', 38, 43, 'room', 'Room for CE department', 1, 'CE', '08:00:00', '20:00:00'),
+('1087', 35, 44, 'room', 'Room for CE department', 1, 'CE', '08:00:00', '20:00:00'),
+('1061', 43, 45, 'room', 'Room for CE department', 1, 'CE', '08:00:00', '20:00:00'),
+('1089', 48, 46, 'room', 'Room for CE department', 1, 'CE', '08:00:00', '20:00:00'),
+('1080', 95, 47, 'lab', 'Lab for CE department', 1, 'CE', '08:00:00', '20:00:00'),
+('1082', 110, 48, 'lab', 'Lab for CE department', 1, 'CE', '08:00:00', '20:00:00'),
+('2010', 48, 49, 'room', 'Room for IS department', 2, 'IS', '08:00:00', '20:00:00'),
+('2011', 50, 50, 'room', 'Room for IS department', 2, 'IS', '08:00:00', '20:00:00'),
+('2008', 42, 51, 'room', 'Room for IS department', 2, 'IS', '08:00:00', '20:00:00'),
+('2012', 45, 52, 'room', 'Room for IS department', 2, 'IS', '08:00:00', '20:00:00'),
+('2007', 40, 53, 'room', 'Room for IS department', 2, 'IS', '08:00:00', '20:00:00'),
+('2013', 47, 54, 'room', 'Room for IS department', 2, 'IS', '08:00:00', '20:00:00'),
+('2005', 110, 55, 'lab', 'Lab for IS department', 2, 'IS', '08:00:00', '20:00:00'),
+('2015', 120, 56, 'lab', 'Lab for IS department', 2, 'IS', '08:00:00', '20:00:00'),
+('2048', 48, 57, 'room', 'Room for CS department', 2, 'CS', '08:00:00', '20:00:00'),
+('2049', 50, 58, 'room', 'Room for CS department', 2, 'CS', '08:00:00', '20:00:00'),
+('2045', 45, 59, 'room', 'Room for CS department', 2, 'CS', '08:00:00', '20:00:00'),
+('2050', 49, 60, 'room', 'Room for CS department', 2, 'CS', '08:00:00', '20:00:00'),
+('2045', 44, 61, 'room', 'Room for CS department', 2, 'CS', '08:00:00', '20:00:00'),
+('2051', 46, 62, 'room', 'Room for CS department', 2, 'CS', '08:00:00', '20:00:00'),
+('2043', 100, 63, 'lab', 'Lab for CS department', 2, 'CS', '08:00:00', '20:00:00'),
+('2053', 110, 64, 'lab', 'Lab for CS department', 2, 'CS', '08:00:00', '20:00:00'),
+('2086', 50, 65, 'room', 'Room for CE department', 2, 'CE', '08:00:00', '20:00:00'),
+('2087', 45, 66, 'room', 'Room for CE department', 2, 'CE', '08:00:00', '20:00:00'),
+('2084', 40, 67, 'room', 'Room for CE department', 2, 'CE', '08:00:00', '20:00:00'),
+('2088', 43, 68, 'room', 'Room for CE department', 2, 'CE', '08:00:00', '20:00:00'),
+('2083', 42, 69, 'room', 'Room for CE department', 2, 'CE', '08:00:00', '20:00:00'),
+('2089', 44, 70, 'room', 'Room for CE department', 2, 'CE', '08:00:00', '20:00:00'),
+('2081', 95, 71, 'lab', 'Lab for CE department', 2, 'CE', '08:00:00', '20:00:00'),
+('2091', 110, 72, 'lab', 'Lab for CE department', 2, 'CE', '08:00:00', '20:00:00');
 
 -- --------------------------------------------------------
 
@@ -643,7 +645,7 @@ INSERT INTO `users` (`Role`, `email`, `password`, `name`, `ID`, `ProfilePic`, `P
 ('', 'hey@uob', '$2y$10$dzSCqLsSnqmAiPz7ZoK5zOtDtEWKx9.1ARRyVB53cPGhjnd6YteUq', 'heyy', 9, '0', '+973 982313', '2004-02-29', ''),
 ('', 'test1019321@uob', '$2y$10$tKB76miOIN5fnhU/jNxMIOG6Fkek0CBhXFsyXUGQ1VwZRkQfLvUMS', 'Test1011', 10, '../static/uploads/6749b402e705a0.41528320.jpg', '+973 123', '2024-11-05', 'IS'),
 ('', 'AA@uob', '$2y$10$zTbwL1bvWriFcP.X1tY9l.lMEXbSw4nrjNB/zf2PpSTtw69GFKOIC', 'Ameena', 11, '../static/uploads/6749bd569ccab8.37118584.jpg', '+973 09876', '2024-11-12', 'CS'),
-('Instructor', 'khadija@uob.edu.bh', '$2y$10$Sc0N.Po1ngBCbAJrWJMJ0u.6mLnBx.93JvIgL/JEWXutFwc4t1IRy', 'Khadija', 12, NULL, '+973 00000000', NULL, NULL);
+('Instructor', 'khadija@uob.edu.bh', '$2y$10$Sc0N.Po1ngBCbAJrWJMJ0u.6mLnBx.93JvIgL/JEWXutFwc4t1IRy', 'Khadija', 12, '../static/uploads/6756ca9c966396.61570912.jpg', '+973 00000000', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -684,7 +686,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `Booking_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Booking_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `equipment`
@@ -696,7 +698,7 @@ ALTER TABLE `equipment`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `Room_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `Room_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `users`
