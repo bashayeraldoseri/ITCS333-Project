@@ -13,6 +13,17 @@ body {
 
  }
 
+ h2{
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    margin-left: 10px; 
+    display: inline-block; }
+
+ #UOBLogo {
+    height: 80px; 
+    width: auto;  
+    vertical-align: middle;
+}
+
 .card-link {
     display: block;
     text-decoration: none; 

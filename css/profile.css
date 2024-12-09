@@ -8,7 +8,7 @@ body {
 /* Navbar */
 .navbar {
   background-color: #7ca5b8; /* Blue background */
-  color: white;
+  /* color: white; */
 }
 
 .navbar-brand {
@@ -28,14 +28,14 @@ body {
 
 /* Left Menu (Vertical Tabs) */
 .left-box {
-  background-color: #7ca5b8; /* Blue background */
-  color: white;
+  /* background-color: #7ca5b8;  */
+  color: rgb(9, 0, 0);
   height: 100%;
   padding: 20px 0;
 }
 
 .left-box .nav-link {
-  color: white;
+  color: rgb(0, 0, 0);
   text-align: center;
   border-radius: 10px;
   margin: 10px;
@@ -91,13 +91,19 @@ button:hover {
 }
 
 .card-title {
-  color: #333333; /* Override default text color */
-  font-size: 1.5rem; /* Adjust font size */
+  color: #333333;
+  font-size: 1.5rem; 
 }
 
 .user-info-card {
-  width: 75%; /* Adjust the percentage as needed */
+  width: 70%; 
 }
+
+/* #UOBLogo {
+  height: 80px; 
+  width: auto;  
+  vertical-align: middle;
+} */
 
 .card {
   border: none;

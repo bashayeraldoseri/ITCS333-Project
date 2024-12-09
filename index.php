@@ -21,6 +21,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -29,9 +30,10 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
     <header>
       <div class="container-fluid p-2">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
-          <div class="container-fluid"> 
-            <a class="navbar-brand" href="#">UOB Booking System</a>
-            <img scr="static\University_of_Bahrain_logo (1).png" alt="UOB">
+          <div class="container-fluid">
+          <img src="static\UOBLogo.png" alt="UOB" id="UOBLogo"/>
+            <!-- <a class="navbar-brand" href="#"> UOB Booking System</a> -->
+             <h2>UOB Booking System</h2>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -54,7 +56,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                     <a class="nav-link" href="admin/adminDash.php">Admin</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="AboutUs.html">About Us</a>
+                    <a class="nav-link" href="AboutUs.php">About Us</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="Registration/logout.php">logout</a>
@@ -74,7 +76,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                     <a class="nav-link" href="admin/adminDash.php">Admin</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="AboutUs.html">About Us</a>
+                    <a class="nav-link" href="AboutUs.php">About Us</a>
                   </li>
 
                 <?php endif; ?>
@@ -89,6 +91,22 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
 
 
     <main>
+
+      <?php if (isset($_SESSION['logout_message_shown']) && $_SESSION['logout_message_shown'] === true): ?>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+              icon: 'success',
+              title: 'Logout Successful',
+              text: "You have been logged out successfully."
+            });
+          });
+        </script>
+
+        <?php unset($_SESSION['logout_message_shown']); session_destroy();?>
+
+      <?php endif; ?>
+
       <div class="row g-50">
         <!-- Sidebar Search Menu -->
         <div id="searchSidebar" class="search-sidebar">
@@ -113,18 +131,15 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
 
               <label>Choose a floor:</label>
               <div class="form-check mb-2">
-                <input class="form-check-input " type="checkbox"  id="SecondFloorRadio"
-                  value="2"  />
+                <input class="form-check-input " type="checkbox" id="SecondFloorRadio" value="2" />
                 <label class="form-check-label" for="SecondFloorRadio">Second Floor</label>
               </div>
               <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox"  id="FirstFloorRadio"
-                  value="1" />
+                <input class="form-check-input" type="checkbox" id="FirstFloorRadio" value="1" />
                 <label class="form-check-label" for="FirstFloorRadio">First Floor</label>
               </div>
               <div class="form-check  mb-4">
-                <input class="form-check-input" type="checkbox"  id="GroundFloorRadio"
-                  value="0" />
+                <input class="form-check-input" type="checkbox" id="GroundFloorRadio" value="0" />
                 <label class="form-check-label" for="GroundFloorRadio">Ground Floor</label>
               </div>
 
@@ -141,7 +156,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
 
               <label for="bookingTime">Search by Available Time:</label>
               <input type="datetime-local" id="bookingTime" class="form-control mb-3" />
-              </form>
+            </form>
 
           </div>
 
@@ -171,22 +186,22 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                 // Card content
                 $class_name = $row['department'] . " Class";
                 $class_subtitle = "S40- " . $row['number'];
-                $class_description = $row['Description']; 
+                $class_description = $row['Description'];
 
                 $card_color = "";
                 switch ($row['department']) {
-                    case "CE":
-                        $card_color = " border-color: #023e8a; color: #000000; border-width: medium;"; 
-                        break;
-                    case "CS":
-                        $card_color = " border-color:#F8DE7E ; color: #000000; border-width: medium; "; 
-                        break;
-                    case "IS":
-                        $card_color = " border-color: #c1121f;  color: #000000 ; border-width: medium;"; 
-                        break;
-                    default:
-                        $card_color = " border-color: #fefefe; color: #000000; border-width: medium;"; // Default gray 
-                    }
+                  case "CE":
+                    $card_color = " border-color: #023e8a; color: #000000; border-width: medium;";
+                    break;
+                  case "CS":
+                    $card_color = " border-color:#F8DE7E ; color: #000000; border-width: medium; ";
+                    break;
+                  case "IS":
+                    $card_color = " border-color: #c1121f;  color: #000000 ; border-width: medium;";
+                    break;
+                  default:
+                    $card_color = " border-color: #fefefe; color: #000000; border-width: medium;"; // Default gray 
+                }
                 ?>
                 <div class="col-lg-3 row g-3">
                   <a href="room_details.php?Room_ID=<?php echo $row['Room_ID']; ?>" class="nav-link card-link">
@@ -230,6 +245,8 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
   <script src="search.js"></script>
+  <script src="helpers/alerts.js"></script>
+
 </body>
 
 </html>
