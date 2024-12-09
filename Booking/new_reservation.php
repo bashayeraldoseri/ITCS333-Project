@@ -13,7 +13,7 @@
                 $username = $_SESSION['username'];
             } else {
                 // If the username is not set, redirect to login page
-                header('Location: Registration/login.html');
+                header('Location: ../Registration/login.html');
                 exit();
             }
 

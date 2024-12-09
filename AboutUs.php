@@ -126,9 +126,6 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
                     <a class="nav-link" href="Registration/register.html">Register</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="admin/adminDash.php">Admin</a>
-                  </li>
-                  <li class="nav-item">
                     <a class="nav-link active" href="#">About Us</a>
                   </li>
 
