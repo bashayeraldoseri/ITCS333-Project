@@ -1,9 +1,4 @@
 <?php
-
-/* TODO
-Validate data (Check if we can insert them without conflict)
-*/
-
 session_start();
 include("../database/db.php");
 
@@ -65,24 +60,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // if (!empty($new_password) && $new_password == $rep_password) {
-    //     $hashed_pass = password_hash($new_password, PASSWORD_DEFAULT);
+    if (!empty($new_password) && $new_password == $rep_password) {
+        $hashed_pass = password_hash($new_password, PASSWORD_DEFAULT);
 
-    //     try {
-    //         $stmt = $pdo->prepare("UPDATE users SET password = :password WHERE ID = :ID");
+        try {
+            $stmt = $pdo->prepare("UPDATE users SET password = :password WHERE ID = :ID");
 
-    //         $stmt->bindParam(":password", $hashed_pass);
-    //         $stmt->bindParam(":ID", $id);
+            $stmt->bindParam(":password", $hashed_pass);
+            $stmt->bindParam(":ID", $id);
 
-    //         $stmt->execute();
-    //     } catch (PDOException $e) {
-    //         echo "". $e->getMessage();
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "". $e->getMessage();
 
-    //     }
+        }
 
-    // }else {
-    //     echo "Passwords don't match";
-    // }
+    }else {
+        echo "Passwords don't match";
+    }
 
     if ($new_DoB != null && $new_DoB != $Dob) {
         try {
@@ -171,7 +166,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 }
-
-
-?>
 

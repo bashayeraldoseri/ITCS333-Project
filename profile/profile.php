@@ -8,7 +8,7 @@ include("../database/db.php");
 $username = $_SESSION['username'];
 $id = $_SESSION['user_id'];
 $email = $_SESSION['user_email'];
-$Dob = '0000-00-00';
+$Dob = 'not set';
 $phone = $_SESSION['Phone'];
 $department = $_SESSION['Department'];
 $role = $_SESSION['role'];
@@ -58,7 +58,12 @@ if ($_SESSION['DoB'] != null) {
       <div class="container-fluid p-2">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">UOB Booking System</a>
+          <img src="../static\UOBLogo.png" alt="UOB" id="UOBLogo" style="height: 80px; 
+  width: auto;  
+  vertical-align: middle;"/>
+            <h2 style="font-family: Comic Sans MS, Comic Sans, cursive; margin-left: 10px; display: inline-block;">
+              UOB Booking System
+            </h2>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -76,7 +81,7 @@ if ($_SESSION['DoB'] != null) {
                   <a class="nav-link" href="../dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../AboutUs.html">About Us</a>
+                  <a class="nav-link" href="../AboutUs.php">About Us</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="../Registration/logout.php">logout</a>
@@ -88,8 +93,8 @@ if ($_SESSION['DoB'] != null) {
       </div>
     </header>
 
-    <div class="row">
-      <div class="col-sm-2 left-box d-flex flex-column justify-content-center align-items-center ">
+    <div class="row container-fluid d-flex justify-content-center align-items-center">
+      <div class="col-sm-2 left-box d-flex flex-column justify-content-center align-items-center mx-auto">
         <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab"
             aria-controls="v-pills-profile" aria-selected="true">Profile</a>
@@ -105,14 +110,14 @@ if ($_SESSION['DoB'] != null) {
           </a>
         </div>
       </div>
-      <div class="col-sm-9 right-box h-100">
+      <div class="col-lg-10 ">
         <div class="tab-content" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel"
             aria-labelledby="v-pills-profile-tab">
 
             <div class="row d-flex justify-content-center align-items-center m-2 g-3">
-              <div class="col-sm-4">
-                <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center"
+              <div class="col-sm-3">
+                <div class="card border rounded-4 d-flex justify-content-center align-items-center"
                   id="profile-card">
                   <!-- Profile Pictures here -->
                   <img class="card-img-top rounded-circle mx-auto d-block" src="<?php echo $profilePicture?>" alt="pfp"
@@ -127,30 +132,35 @@ if ($_SESSION['DoB'] != null) {
 
 
               </div>
-              <div class="col-sm-8 ">
+              <div class="col-sm-9">
                 <form action="">
                   <fieldset disabled>
                     <div class="row d-flex justify-content-center align-items-center m-3">
-                      <div class="col-lg-10 ">
-                        <div class="card p-1 d-flex justify-content-center align-items-center m-3 user-info-card">
-                          <div class="mb-3">
+                      <div class="col-lg-12">
+                        <div class="card p-1 d-flex align-items-center justify-content-center user-info-card mx-auto" >
+                          <div class="row mb-3 w-100">
+                          <div class=" col-6 text-center mt-3">
                             <h5>Department</h5>
                             <p><?php echo $department; ?></p>
                           </div>
-                          <div class="row mb-3">
-                            <div class="col-lg-7">
+                          <div class="col-6 text-center mt-3">
+                            <h5>Date of Birth</h5>
+                            <p><?php echo $Dob; ?></p>
+                          </div>
+
+                          </div>
+                          
+                          <div class="row mb-3 w-100">
+                            <div class="col-6 text-center">
                               <h5>Email</h5>
                               <p><?php echo $email ?></p>
                             </div>
-                            <div class="col-lg-5">
+                            <div class="col-6 text-center">
                               <h5>Phone</h5>
                               <p><?php echo $phone ?></p>
                             </div>
                           </div>
-                          <div class="mb-3">
-                            <h5>Date of Birth</h5>
-                            <input type="date" id="dob" class="form-control" value="<?php echo $Dob; ?>" />
-                          </div>
+                          
                         </div>
                       </div>
                     </div>
@@ -334,44 +344,32 @@ if ($_SESSION['DoB'] != null) {
         </div>
 
         <!-- Privacy Settings  -->
-        <div class="col-md-4" >
+        <div class="col-md-4">
+                    <div class="card h-100">
+                      <div class="card-header bg-dark text-white">
+                        Privacy Settings
+                      </div>
+                      <div class="card-body">
+                      <div class="mt-1">
+                        <label for="email" class="form-label">Change Linked Email</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter new email"
+                          value="<?php echo $email; ?>" />
+                      </div>
+                      <div class="mt-3">
+                        <label for="password" class="form-label">Change Password</label>
+                        <input type="password" class="form-control" name="password" id="password"
+                          placeholder="New password" />
+                      </div>
+                      <div class="mt-3 mb-3">
+                        <label for="rp-password" class="form-label">Repeat Password</label>
+                        <input type="password" class="form-control" name="rp-password" id="rp-password"
+                          placeholder="Repeated password" />
+                      </div>
 
-        <div class="card h-100" id="VerificationPass">
-        <div class="card-header bg-dark text-white">
-              Privacy Settings
-            </div>
-            <div class="mt-3 mb-2">
-              <label for="verpassword" class="form-label">Verify Password</label>
-              <input type="password" class="form-control" name="verpassword" id="verpassword"
-                placeholder="Enter your password" />
-            </div>
-            <div class="mt-3 mb-2">
-            <button type="button" class="btn btn-primary" id="verifyPasswordBtn">Verify</button>
-        </div>
-
-
-        </div>
-          <div class="card h-100" id="privacySettings" style="display: none;">
-            <div class="card-header bg-dark text-white">
-              Privacy Settings
-            </div>
-            <div class="mt-3 mb-2">
-              <label for="email" class="form-label">Change Linked Email</label>
-              <input type="email" class="form-control" name="email" id="email" placeholder="Enter new email"
-                value="<?php echo $email; ?>" />
-            </div>
-            <div class="mt-3 mb-2">
-              <label for="password" class="form-label">Change Password</label>
-              <input type="password" class="form-control" name="password" id="password"
-                placeholder="New password" />
-            </div>
-            <div class="mt-3 mb-2">
-              <label for="rp-password" class="form-label">Repeat Password</label>
-              <input type="password" class="form-control" name="rp-password" id="rp-password"
-                placeholder="Repeated password" />
-            </div>
-          </div>
-        </div>
+                      </div>
+                    
+                    </div>
+                  </div>
       </div>
 
       <!-- Submit Button -->
@@ -388,7 +386,7 @@ if ($_SESSION['DoB'] != null) {
 
           <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-help-tab">
             <div class="row">
-              <div class="col-sm-5">
+              <div class="col-sm-12">
                 <div class="card mb-3 border rounded-4 d-flex justify-content-center align-items-center">
                   <div class="card-body"> 
                    
