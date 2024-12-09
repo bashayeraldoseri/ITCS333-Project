@@ -7,7 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_email = $_POST["email"];
     $new_password = $_POST["password"];
     $rep_password = $_POST["rp-password"];
-    $new_department = $_POST["field"];
+
+    if (isset($_POST["field"])) {
+        $new_department = $_POST["field"];
+    }else {
+        $new_department = "";
+    }
     $new_DoB = $_POST["DoB"];
     $new_phone = $_POST["phone"];
     $new_username = $_POST["username"];

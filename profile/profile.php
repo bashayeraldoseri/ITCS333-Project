@@ -336,6 +336,11 @@ if ($_SESSION["DoB"] != null) {
                     </div>
                     <div class="card-body">
                         <!-- Department Selection -->
+                        <div class="form-check" style="display:none;">
+                        <input class="form-check-input" type="radio" name="field" id="empty" value=""
+                        <?php if (empty($department)) echo "checked"; ?>>
+                        <label class="form-check-label" for="empty">Select Department</label>
+                        </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="field" id="CS" value="CS"
                                 <?php if ($department === "Computer Science") echo "checked"; ?>>
