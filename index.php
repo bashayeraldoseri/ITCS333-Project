@@ -30,7 +30,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
           <div class="container-fluid">
             <img src="static\UOBLogo.png" alt="UOB" id="UOBLogo" />
-            <h2>UOB Booking System</h2>
+            <h2 style="font-family: Lucida Console, Courier New, monospace;">UOB Booking System</h2>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>

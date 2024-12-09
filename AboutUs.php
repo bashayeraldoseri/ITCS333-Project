@@ -23,7 +23,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
   <style>
     footer {
       text-align: center;
-      background-color: #8ecae6;
+      background-color: #a0b8cf;
       color: #272727;
       padding: 10px;
       position: fixed;
@@ -83,7 +83,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == 1) {
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
           <div class="container-fluid">
             <img src="static\UOBLogo.png" alt="UOB" id="UOBLogo"  />
-            <h2 style="font-family: Comic Sans MS, Comic Sans, cursive; margin-left: 10px; display: inline-block;">
+            <h2 style="font-family: Lucida Console, Courier New, monospace; margin-left: 10px; display: inline-block;">
               UOB Booking System
             </h2>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

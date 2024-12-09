@@ -177,7 +177,7 @@
                     <img src="../static\UOBLogo.png" alt="UOB" id="UOBLogo"
                         style="height: 80px; width: auto; vertical-align: middle;" />
                     <h2
-                        style="font-family: Comic Sans MS, Comic Sans, cursive; margin-left: 10px; display: inline-block;">
+                        style="font-family: Lucida Console, Courier New, monospace; margin-left: 10px; display: inline-block;">
                         UOB Booking System
                     </h2>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

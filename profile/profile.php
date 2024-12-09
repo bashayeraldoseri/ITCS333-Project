@@ -68,7 +68,7 @@ if ($_SESSION["DoB"] != null) {
           <img src="../static\UOBLogo.png" alt="UOB" id="UOBLogo" style="height: 80px; 
   width: auto;  
   vertical-align: middle;"/>
-            <h2 style="font-family: Comic Sans MS, Comic Sans, cursive; margin-left: 10px; display: inline-block;">
+            <h2 style="font-family: Lucida Console, Courier New, monospace; margin-left: 10px; display: inline-block;">
               UOB Booking System
             </h2>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -305,8 +305,8 @@ if ($_SESSION["DoB"] != null) {
             <!-- Account Settings -->
             <div class="col-md-4">
                 <div class="card h-100">
-                    <div class="card-header bg-dark text-white">
-                        Account Settings
+                    <div class="card-header" style="background-color: #a6cadb">
+                       Account Settings
                     </div>
                     <div class="card-body">
                         <!-- Change Username -->
@@ -331,8 +331,8 @@ if ($_SESSION["DoB"] != null) {
             <!-- Personal Information -->
             <div class="col-md-4">
                 <div class="card h-100">
-                    <div class="card-header bg-dark text-white">
-                        Personal Information
+                    <div class="card-header" style="background-color: #a6cadb">
+                      Personal Information 
                     </div>
                     <div class="card-body">
                         <!-- Department Selection -->
@@ -377,8 +377,8 @@ if ($_SESSION["DoB"] != null) {
             <!-- Privacy Settings -->
             <div class="col-md-4">
                 <div class="card h-100">
-                    <div class="card-header bg-dark text-white">
-                        Privacy Settings
+                    <div class="card-header" style="background-color: #a6cadb">
+                        Privacy Settings 
                     </div>
                     <div class="card-body">
                         <!-- Change Email -->
@@ -425,7 +425,7 @@ if ($_SESSION["DoB"] != null) {
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card border-0 shadow rounded-4">
-                <div class="card-header bg-dark text-white rounded-top-4">
+                <div class="card-header rounded-top-4" style="background-color: #a6cadb">
                     <h4 class="text-center mb-0">Need Help? Contact Us</h4>
                 </div>
                 <div class="card-body p-4">
