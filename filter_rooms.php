@@ -90,22 +90,23 @@ if ($stmt->rowCount() > 0) {
                 $card_color = "border-color: #A3BFEF; color: #000000; border-width: medium;"; // Default gray 
             } 
 
-        echo "
+            echo "
             <div class='col-lg-3 col-md-4 col-sm-6 mb-3'>
               <a href='room_details.php?Room_ID={$row['Room_ID']}' class='nav-link card-link'>
-                  <div class='card' style='{$card_color}'>
+                <div class='card' style='{$card_color}'>
                   <div class='card-body m-3'>
                     <h5 class='card-title'>{$class_name}</h5>
                     <h6 class='card-subtitle mb-2 text-muted'>{$class_subtitle}</h6>
                     <p class='card-text'>{$class_description}</p>
                     <hr>
-                    <a href='new_reservation.php' class='book-link'>
+                    <a href='new_reservation.php?room_id={$row['Room_ID']}' class='book-link'>
                       <p class='book-link'>Book</p>
                     </a>
                   </div>
                 </div>
               </a>
-            </div> ";
+            </div>
+            ";            
     }
 } else {
     echo "<p>No rooms match the selected filters.</p>";

@@ -33,10 +33,11 @@
      
            
             // Set the default room ID to 1
-            $room_id=1;
+            $room_id = 1;
 
             // Check if a specific room ID is passed 
             if(isset($_GET["room_id"])) {
+                
                 $room_id=$_GET["room_id"];
             }
 
@@ -83,6 +84,7 @@
 
         // Check if the form is submitted
         if(isset($_POST['submit'])){
+            // echo $room_id;
 
         // Re-include the database connection for form processing   
         include('database/db.php');
@@ -154,7 +156,7 @@
                                 (Start_Time < ? AND End_Time > ?)
                             )
                         ";
-
+                        echo $room_id;
                         $stmt = $pdo->prepare($query);
                         $stmt->execute([$room_id, $mysqlDateTime, $mysqlDateTime, $mysqlDateTime2, $mysqlDateTime]);
 
