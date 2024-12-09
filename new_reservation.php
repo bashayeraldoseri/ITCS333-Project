@@ -245,7 +245,7 @@
 
         <!-- Reservation form -->
         <div class="container">
-        <form action="new_reservation.php" method="POST">
+        <form action="new_reservation.php?room_id=<?php echo $room_id;?>" method="POST">
 
             <div>
             <p>*The university system does not permit reservations for past dates.</p>
