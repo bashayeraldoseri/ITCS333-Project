@@ -141,6 +141,7 @@ foreach ($noBookingsRooms as $booking) {
                     title: "Number of bookings",
                     includeZero: true,
                     minimum: 0,
+                    interval: 1,
                 },
                 data: [{
                     type: "column",
