@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['get_bookings'])) {
         $stmt->execute([$end_time, $room_id]);
         echo "Room with ID {$room_id} has been updated successfully.";
     }
-    header("Location: adminDash.php");
+    //header("Location: adminDash.php");
 }
 
 //for delete schedule
@@ -69,45 +69,49 @@ if (isset($_GET['delete_schedule'])) {
     <h1 class="text-center mb-4">Manage Rooms' Schedule</h1>
 
     <!-- add schedule form -->
-    <h3>Manage Rooms</h3>
     <form method="post" class="mb-4">
-        <div class="row">
-            <div class="col-md-3">
-                <select name="Room_ID" class="form-select" required>
-                    <option value="">Select Room</option>
-                    <?php foreach ($rooms as $room): ?>
-                        <option value="<?= $room['Room_ID'] ?>"><?= $room['number'] ?></option>
-                    <?php endforeach; ?>
-                </select>
+        <h3>Manage Rooms</h3>
+        <section>
+            <div class="row">
+                <div class="col-md-3">
+                    <select name="Room_ID" class="form-select" required>
+                        <option value="">Select Room</option>
+                        <?php foreach ($rooms as $room): ?>
+                            <option value="<?= $room['Room_ID'] ?>"><?= $room['number'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" name="get_bookings" value="update" class="btn btn-primary">Get
+                        Bookings</button>
+                </div>
+                <div class="col-md-3">
+                    <!-- Redirect to addRoom.php -->
+                    <button type="button" onclick="location.href='addRoom.php'" class="btn btn-success">Add
+                        Room</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" name="delete_room" value="delete" class="btn btn-danger">Delete Room</button>
+                </div>
             </div>
-            <div class="col-md-3">
-                <button type="submit" name="get_bookings" value="update" class="btn btn-primary">Get Bookings</button>
-            </div>
-            <div class="col-md-3">
-                <!-- Redirect to addRoom.php -->
-                <button type="button" onclick="location.href='addRoom.php'" class="btn btn-success">Add Room</button>
-            </div>
-            <div class="col-md-3">
-                <button type="submit" name="delete_room" value="delete" class="btn btn-danger">Delete Room</button>
-            </div>
-        </div>
-    </form>
+        </section>
 
+        <h2>Manage Room's Availability</h2>
+        <section>
+            <div class="col-md-3">
+                <label for="Start_Time"> Start Time</label>
+                <input type="time" name="Start_Time" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label for="End_Time"> End Time</label>
+                <input type="time" name="End_Time" class="form-control">
+            </div>
 
-    <h2>Manage Room's Availability</h2>
-    <form method="POST">
-        <div class="col-md-3">
-            <label for="Start_Time"> Start Time</label>
-            <input type="time" name="Start_Time" class="form-control">
-        </div>
-        <div class="col-md-3">
-            <label for="End_Time"> End Time</label>
-            <input type="time" name="End_Time" class="form-control">
-        </div>
-
-        <div class="col-md-3">
-            <button type="submit" name="modify_availability" value="update" class="btn btn-primary">Modify Time</button>
-        </div>
+            <div class="col-md-3">
+                <button type="submit" name="modify_availability" value="update" class="btn btn-primary">Modify
+                    Time</button>
+            </div>
+        </section>
     </form>
 
     <!-- display schedules -->
