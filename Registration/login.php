@@ -17,6 +17,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
   $username = $_POST["username"];
   $password = $_POST["password"];
+  $email = $_POST["email"];
 
   $errors = [];
 
@@ -26,9 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
   if (empty($password)) {
     $errors[] = "Password is required.";
   }
+  if(empty($email)) {
+    $errors[] = "Email is required.";
+  }
 
   if (empty($errors)) {
-    $user = validate_user($username, $password);
+    $user = validate_user($username, $password, $email);
     if ($user) {
       $_SESSION['loggedin'] = true;
       $_SESSION['username'] = $user['name'];
@@ -44,13 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
       exit;
 
     } else {
-      echo "Invalid username or password";
       $errors[] = "Invalid username or password.";
     }
   }
 }
 
-function validate_user($username, $password)
+function validate_user($username, $password, $email)
 {
   global $pdo;
   require_once '../database/db.php';
@@ -64,11 +67,14 @@ function validate_user($username, $password)
           $user = $stmt->fetch(PDO::FETCH_ASSOC);
           $stored_password = $user['password'];
 
-          // Use password_verify to check the password
-          if (password_verify($password,$stored_password)) {
-            return $user; // Return user data
+          if ($email == $user['email']){
+            if (password_verify($password,$stored_password)) {
+              return $user; // Return user data
+            } else {
+              echo "Invalid username, email or password.";
+            }
           } else {
-            echo "Invalid password.";
+            echo "Invalid username, email or password.";
           }
         } else {
           echo "No matching user found.";
