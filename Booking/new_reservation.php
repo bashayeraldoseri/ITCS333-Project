@@ -101,7 +101,7 @@
             // echo $room_id;
 
         // Re-include the database connection for form processing   
-        include('database/db.php');
+        include('../database/db.php');
 
      
             
@@ -152,7 +152,7 @@
                 }
 
                 // 4. Check if the end time is within university allowed times (8 AM to 8 PM)
-                if ($endHour < Available_From || $endHour >= $Available_To) {
+                if ($endHour < $Available_From || $endHour >= $Available_To) {
                     $error_messages[] = "Error End Time: This room is not available at this time !";
                 }
 
@@ -180,7 +180,6 @@
                                 (Start_Time < ? AND End_Time > ?)
                             )
                         ";
-                        echo $room_id;
                         $stmt = $pdo->prepare($query);
                         $stmt->execute([$room_id, $mysqlDateTime, $mysqlDateTime, $mysqlDateTime2, $mysqlDateTime]);
 
