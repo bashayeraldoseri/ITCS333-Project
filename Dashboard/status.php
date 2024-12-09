@@ -1,5 +1,5 @@
 <?php
-include("database/db.php");
+include("../database/db.php");
 
 // Fetch unoccupied rooms
 $sql = "SELECT Room_ID FROM rooms WHERE Room_ID NOT IN (

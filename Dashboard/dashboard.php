@@ -152,7 +152,7 @@
 
 <body>
     <?php
-    include('database/db.php');
+    include('../database/db.php');
     $query = "SELECT COUNT(*) FROM bookings";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
@@ -173,7 +173,7 @@
         <div class="container-fluid p-2">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <img src="static\UOBLogo.png" alt="UOB" id="UOBLogo" style="height: 80px; width: auto; vertical-align: middle;" />
+                    <img src="../static\UOBLogo.png" alt="UOB" id="UOBLogo" style="height: 80px; width: auto; vertical-align: middle;" />
                     <h2
                         style="font-family: Comic Sans MS, Comic Sans, cursive; margin-left: 10px; display: inline-block;">
                         UOB Booking System
@@ -186,19 +186,19 @@
                         <div class="me-auto"></div>
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="index.php">Home</a>
+                                <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="profile/profile.php">Profile</a>
+                                <a class="nav-link" href="../profile/profile.php">Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="#">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="AboutUs.php">About Us</a>
+                                <a class="nav-link" href="../AboutUs.php">About Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="Registration/logout.php">logout</a>
+                                <a class="nav-link" href="../Registration/logout.php">logout</a>
                             </li>
                         </ul>
                     </div>
