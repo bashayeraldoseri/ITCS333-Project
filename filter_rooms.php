@@ -99,7 +99,7 @@ if ($stmt->rowCount() > 0) {
                     <h6 class='card-subtitle mb-2 text-muted'>{$class_subtitle}</h6>
                     <p class='card-text'>{$class_description}</p>
                     <hr>
-                    <a href='new_reservation.php?room_id={$row['Room_ID']}' class='book-link'>
+                    <a href='Booking/new_reservation.php?room_id={$row['Room_ID']}' class='book-link'>
                       <p class='book-link'>Book</p>
                     </a>
                   </div>

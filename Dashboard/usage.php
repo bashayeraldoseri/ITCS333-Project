@@ -1,5 +1,5 @@
 <?php
-include("database/db.php");
+include("../database/db.php");
 $sql = "SELECT Room_ID, COUNT(*) AS num_bookings FROM bookings GROUP BY Room_ID ORDER BY Room_ID";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();

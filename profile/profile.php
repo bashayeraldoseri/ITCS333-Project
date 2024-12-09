@@ -78,7 +78,7 @@ if ($_SESSION['DoB'] != null) {
                   <a class="nav-link active" href="#">Profile</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../dashboard.php">Dashboard</a>
+                  <a class="nav-link" href="../Dashboard/dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="../AboutUs.php">About Us</a>
@@ -275,10 +275,10 @@ if ($_SESSION['DoB'] != null) {
                     <!-- Charts -->
                     <div class="charts">
                         <div class="chart" id="most-used">
-                            <a href="../userRoomsUsage.php">View Room Usage Chart</a>
+                            <a href="../Dashboard/userRoomsUsage.php">View Room Usage Chart</a>
                         </div>
                         <div class="chart" id="most-timing">
-                            <a href="../userTimingUsage.php">View Timing Chart</a>
+                            <a href="../Dashboard/userTimingUsage.php">View Timing Chart</a>
                         </div>
                     </div>
                 </div>

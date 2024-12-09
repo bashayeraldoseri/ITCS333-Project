@@ -1,5 +1,5 @@
 <?php
-include("database/db.php");
+include("../database/db.php");
 
 $sql = "SELECT DATE(Start_Time) AS date, Room_ID, COUNT(*) AS num_bookings 
 FROM bookings 

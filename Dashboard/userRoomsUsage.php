@@ -1,25 +1,21 @@
 <?php
-include('database/db.php');
+include('../database/db.php');
 
 session_start();
 
-// Retrieve the username from session
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 } else {
-    // If the username is not set, you might want to redirect to login page
-    header('Location: login.php');
+    header('Location: ../Registration/login.php');
     exit();
 }
 
-// Query to get the user ID from the 'users' table
 $sql = "SELECT ID FROM users WHERE name = ?";
 $stmt = $pdo->prepare($sql);
-$stmt->execute([$username]);
+$stmt->execute(params: [$username]);
 $userID = $stmt->fetch();
 
 if ($userID === false) {
-    // Handle case when no user is found
     echo "User not found.";
     exit;
 }
@@ -35,7 +31,7 @@ $sql = "SELECT Room_ID, COUNT(*) AS booking_count
         FROM bookings 
         WHERE user_ID = ? 
         GROUP BY Room_ID 
-        ORDER BY booking_count DESC";  // You can order by count descending if you want to get the most booked rooms
+        ORDER BY booking_count DESC";
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$userID['ID']]);
