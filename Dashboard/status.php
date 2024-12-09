@@ -128,6 +128,10 @@ foreach ($unoccupiedRooms as $room) {
         </div>
     </main>
 
+    <div class="text-center mb-7">
+      <p><a href="dashboard.php" class="btn btn-primary">Return to Dashboard</a></p>
+    </div>   
+    
     <footer>
         <p>&copy; 2024 UOB Booking System. All rights reserved.</p>
     </footer>
@@ -178,7 +182,8 @@ foreach ($unoccupiedRooms as $room) {
 
     <div class="text-center mb-7">
       <p><a href="dashboard.php" class="btn btn-primary">Return to Dashboard</a></p>
-    </div> 
-    </body>
+    </div>  
+
+  </body>
 
 </html>
