@@ -189,11 +189,19 @@ if (isset($_GET['delete_schedule'])) {
                             <td><?= $booking['Start_Time'] ?></td>
                             <td><?= $booking['End_Time'] ?></td>
                             <td>
-                                <a href="?delete_schedule=<?= $booking['Booking_ID'] ?>"
-                                    class="btn btn-danger btn-sm">Cancel</a>
+                                <?php
+                                $currentDateTime = new DateTime(); // Get current date and time
+                                $endTime = new DateTime($booking['End_Time']); // Convert End_Time to DateTime object
+                            
+                                if ($endTime > $currentDateTime): // Compare End_Time with the current time
+                                    ?>
+                                    <a href="?delete_schedule=<?= $booking['Booking_ID'] ?>"
+                                        class="btn btn-danger btn-sm">Cancel</a>
+                                <?php else: ?>
+                                    N/A
+                                <?php endif; ?>
                             </td>
-                        </tr>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
                 </tbody>
             </table>
         </section>
