@@ -185,7 +185,7 @@ if (isset($_GET['delete_schedule'])) {
                             <td><?= $booking['End_Time'] ?></td>
                             <td>
                                 <a href="?delete_schedule=<?= $booking['Booking_ID'] ?>"
-                                    class="btn btn-danger btn-sm">Delete</a>
+                                    class="btn btn-danger btn-sm">Cancel</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
