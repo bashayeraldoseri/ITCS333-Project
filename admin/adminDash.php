@@ -90,9 +90,9 @@ if (isset($_GET['delete_schedule'])) {
                             <li class="nav-item">
                                 <a class="nav-link" href="../Dashboard/dashboard.php">Dashboard</a>
                             </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="#">Admin</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Admin</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="../AboutUs.php">About Us</a>
                             </li>
@@ -125,7 +125,7 @@ if (isset($_GET['delete_schedule'])) {
                     </div>
 
                     <div class="col-md-3">
-                    <button type="submit" name="delete_room" class="btn btn-danger">Delete Room</button>
+                        <button type="submit" name="delete_room" class="btn btn-danger">Delete Room</button>
 
 
                     </div>
@@ -161,18 +161,20 @@ if (isset($_GET['delete_schedule'])) {
             <table class="table table-bordered table-hover">
                 <thead class="table-light">
                     <tr>
-                        <th>Schedule ID</th>
+                        <th>Booking number</th>
                         <th>Room Number</th>
-                        <th>User ID</th>
+                        <th>Booker</th>
                         <th>Start Time</th>
                         <th>End Time</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($bookings as $booking): ?>
+                    <?php $i = 1;
+                    foreach ($bookings as $booking): ?>
                         <tr>
-                            <td><?= $booking['Booking_ID'] ?></td>
+                            <td><?php echo $i;
+                            $i++; ?></td>
                             <td>
                                 <?php
                                 $stmt = $pdo->prepare("SELECT number FROM rooms WHERE Room_ID = ?");
@@ -180,7 +182,10 @@ if (isset($_GET['delete_schedule'])) {
                                 echo $stmt->fetchColumn();
                                 ?>
                             </td>
-                            <td><?= $booking['user_ID'] ?></td>
+                            <td><?php
+                            $stmt = $pdo->prepare("SELECT name FROM users WHERE ID = ?");
+                            $stmt->execute([$booking['user_ID']]);
+                            echo $stmt->fetchColumn(); ?></td>
                             <td><?= $booking['Start_Time'] ?></td>
                             <td><?= $booking['End_Time'] ?></td>
                             <td>
