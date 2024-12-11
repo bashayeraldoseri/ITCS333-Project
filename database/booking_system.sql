@@ -3,16 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2024 at 09:40 PM
+-- Generation Time: Dec 11, 2024 at 08:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-CREATE DATABASE booking_system;
-USE booking_system;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -47,7 +44,16 @@ INSERT INTO `bookings` (`Booking_ID`, `user_ID`, `Room_ID`, `Title`, `Start_Time
 (2, 2, 30, 'Project Discussion', '2024-12-01 09:00:00', '2024-12-05 10:00:00'),
 (5, 12, 26, 'I don\'t know why', '2024-12-30 13:51:00', '2025-01-09 13:52:00'),
 (6, 12, 39, 'Just try', '2024-12-09 14:02:00', '2024-12-24 14:02:00'),
-(7, 12, 3, 'AAAA', '2024-12-24 14:52:00', '2024-12-31 14:52:00');
+(7, 12, 3, 'AAAA', '2024-12-24 14:52:00', '2024-12-31 14:52:00'),
+(9, 15, 11, 'Senior Project meeting', '2024-12-14 13:00:00', '2024-12-14 14:00:00'),
+(10, 15, 76, 'Studying session', '2024-12-12 11:00:00', '2024-12-12 11:05:00'),
+(11, 15, 62, 'Project demo', '2024-12-12 10:00:00', '2024-12-12 10:30:00'),
+(12, 15, 11, 'Presentation demo', '2024-12-13 09:30:00', '2024-12-13 10:00:00'),
+(13, 15, 71, 'Hachathon', '2024-12-20 16:30:00', '2024-12-20 18:30:00'),
+(14, 16, 11, 'ITCS33 Test1', '2024-12-14 10:00:00', '2024-12-14 11:00:00'),
+(15, 16, 4, 'yay', '2024-12-12 09:46:00', '2024-12-12 10:46:00'),
+(16, 16, 1, 'oya oya', '2025-01-01 10:00:00', '2025-01-01 11:00:00'),
+(17, 17, 1, 'planning software2 project with my group', '2024-12-20 09:00:00', '2024-12-20 10:30:00');
 
 -- --------------------------------------------------------
 
@@ -210,7 +216,9 @@ INSERT INTO `rooms` (`number`, `Capacity`, `Room_ID`, `Type`, `Description`, `fl
 ('2083', 42, 69, 'room', 'Room for CE department', 2, 'CE', '08:00:00', '20:00:00'),
 ('2089', 44, 70, 'room', 'Room for CE department', 2, 'CE', '08:00:00', '20:00:00'),
 ('2081', 95, 71, 'lab', 'Lab for CE department', 2, 'CE', '08:00:00', '20:00:00'),
-('2091', 110, 72, 'lab', 'Lab for CE department', 2, 'CE', '08:00:00', '20:00:00');
+('2091', 110, 72, 'lab', 'Lab for CE department', 2, 'CE', '08:00:00', '20:00:00'),
+('1056', 26, 75, 'room', 'test add', 1, 'CS', '08:00:00', '20:00:00'),
+('2222', 30, 76, 'room', 'test2', 2, 'CS', '08:00:00', '20:00:00');
 
 -- --------------------------------------------------------
 
@@ -647,7 +655,11 @@ INSERT INTO `users` (`Role`, `email`, `password`, `name`, `ID`, `ProfilePic`, `P
 ('', 'test1019321@uob', '$2y$10$tKB76miOIN5fnhU/jNxMIOG6Fkek0CBhXFsyXUGQ1VwZRkQfLvUMS', 'Test1011', 10, '../static/uploads/6749b402e705a0.41528320.jpg', '+973 123', '2024-11-05', 'IS'),
 ('', 'AA@uob', '$2y$10$zTbwL1bvWriFcP.X1tY9l.lMEXbSw4nrjNB/zf2PpSTtw69GFKOIC', 'Ameena', 11, '../static/uploads/6749bd569ccab8.37118584.jpg', '+973 09876', '2024-11-12', 'CS'),
 ('Instructor', 'khadija@uob.edu.bh', '$2y$10$Sc0N.Po1ngBCbAJrWJMJ0u.6mLnBx.93JvIgL/JEWXutFwc4t1IRy', 'Khadija', 12, '../static/uploads/6756ca9c966396.61570912.jpg', '+973 00000000', NULL, NULL),
-('Admin', 'Admin1@uob.edu.bh', '$2y$10$T.U91tWK/XMuy.yz1Nm.f.rtRB3dOa0GRGxIobqk4qV33wWSHIxsu', 'Admin1', 13, NULL, '+973 00000000', NULL, NULL);
+('Admin', 'Admin1@uob.edu.bh', '$2y$10$T.U91tWK/XMuy.yz1Nm.f.rtRB3dOa0GRGxIobqk4qV33wWSHIxsu', 'Admin1', 13, NULL, '+973 00000000', NULL, NULL),
+('Instructor', 'zz@uob.edu.bh', '$2y$10$AfkASu3bhIzgRwpazonFMufisCLPkn3BtRRVFUxXNcQ.i0Thy/Mg.', 'zz', 14, NULL, '+973 00000000', NULL, NULL),
+('Student', '202207518@stu.uob.edu.bh', '$2y$10$vyYWre01b7CPNXGurO6jX.At0TwrLFI5nHL2A3JCDY0vFBDAlilC6', 'Nana', 15, '../static/uploads/6759d71d14e913.96331949.jpg', '+973 23456789', '2004-02-21', 'CS'),
+('Instructor', 'passtest@uob.edu.bh', '$2y$10$Er7QR7jjKu59TJd9GfgwS.uAGqZIDFucggrDSY.LXpcm44B2nGTCe', 'passtest', 16, NULL, '+973 00000000', NULL, NULL),
+('Student', 'araed@stu.uob.edu.bh', '$2y$10$ckxuqRo9p8bOxAKuPyXzyO0GqaJWNVHh5XFpPepkLAXxlS8ecbqEC', 'Ameena Raed', 17, '../static/uploads/6759e1f316d049.04725421.jpg', '+973 1093172', '2004-02-21', 'CS');
 
 --
 -- Indexes for dumped tables
@@ -688,7 +700,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `Booking_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Booking_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `equipment`
@@ -700,13 +712,13 @@ ALTER TABLE `equipment`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `Room_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `Room_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables

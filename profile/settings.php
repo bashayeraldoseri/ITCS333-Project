@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($_POST["field"])) {
         $new_department = $_POST["field"];
-    }else {
+    } else {
         $new_department = "";
     }
     $new_DoB = $_POST["DoB"];
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($new_email != $email && !empty($new_email)) {
-    
+
         if (!preg_match('/^[a-zA-Z0-9._%+-]+@(uob\.edu\.bh|stu\.uob\.edu\.bh)$/', $new_email)) {
             $_SESSION['message'] = "Invalid email format. Please use a valid UOB email.";
             $Success = false;
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->bindParam(":email", $new_email);
                 $stmt->execute();
                 $emailExists = $stmt->fetchColumn();
-    
+
                 if ($emailExists > 0) {
                     $_SESSION['message'] = "This email is already taken. Please use a different one.";
                     $Success = false;
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $stmt = $pdo->prepare("UPDATE users SET email = :email WHERE ID = :ID");
                     $stmt->bindParam(":email", $new_email);
                     $stmt->bindParam(":ID", $id);
-    
+
                     if ($stmt->execute()) {
                         $_SESSION['user_email'] = $new_email;
                         $Success = true;
@@ -82,24 +82,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     }
 
-    if (!empty($new_password) ) {
+    if (!empty($new_password)) {
         if ($new_password != $rep_password) {
             $_SESSION['message'] = "Passwords do not match";
-            $Success = false; 
+            $Success = false;
 
-        }else {
+        } else {
             $hashed_pass = password_hash($new_password, PASSWORD_DEFAULT);
 
             try {
                 $stmt = $pdo->prepare("UPDATE users SET password = :password WHERE ID = :ID");
-    
+
                 $stmt->bindParam(":password", $hashed_pass);
                 $stmt->bindParam(":ID", $id);
-    
+
                 $stmt->execute();
             } catch (PDOException $e) {
-                echo "". $e->getMessage();
-    
+                echo "" . $e->getMessage();
+
             }
 
         }
@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $pdo->prepare("UPDATE users SET Department = :Department WHERE ID = :ID");
             $stmt->bindParam(":Department", $new_department);
             $stmt->bindParam("ID", $id);
-    
+
             if ($stmt->execute()) {
                 $_SESSION['Department'] = $new_department;
                 $Success = true;
@@ -161,14 +161,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if a file is uploaded
     if (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === UPLOAD_ERR_OK) {
         $file = $_FILES['fileToUpload'];
-        
+
+        $maxFileSize = 2 * 1024 * 1024; // 2MB
+        if ($file['size'] > $maxFileSize) {
+            echo "File size exceeds the 2MB limit!";
+            exit;
+        }
+
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        $fileType = mime_content_type($file['tmp_name']);
+        if (!in_array($fileType, $allowedTypes)) {
+            echo "Invalid file type!";
+            exit;
+        }
+
         $uploadDir = '../static/uploads/';
+        if (!is_dir($uploadDir) || !is_writable($uploadDir)) {
+            echo "Upload directory does not exist or is not writable!";
+            exit;
+        }
+
         $fileName = uniqid('', true) . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
         $filePath = $uploadDir . $fileName;
 
-        // Move the uploaded file to the server
         if (move_uploaded_file($file['tmp_name'], $filePath)) {
-
             $stmt = $pdo->prepare("UPDATE users SET ProfilePic = :ProfilePic WHERE ID = :ID");
             $stmt->bindParam(':ProfilePic', $filePath);
             $stmt->bindParam(':ID', $id);
@@ -176,22 +192,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($stmt->execute()) {
                 echo "Profile picture updated successfully!";
                 $_SESSION['ProfilePic'] = $filePath;
-                $Success = true;
             } else {
                 echo "Failed to update profile picture in the database.";
             }
         } else {
             echo "Failed to upload the file.";
         }
+    } else {
+        echo "No file was uploaded or there was an upload error.";
     }
+
 
 
     if ($Success) {
         header("Location: profile.php");
         exit;
     }
-    
-    
+
+
 
 }
 
