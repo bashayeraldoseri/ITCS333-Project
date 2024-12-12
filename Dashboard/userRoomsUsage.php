@@ -179,7 +179,7 @@ foreach ($bookings as $booking) {
     </script> 
 
 <div class="text-center mb-7">
-      <p><a href="dashboard.php" class="btn btn-primary">Return to Dashboard</a></p>
+      <p><a href="../profile/profile.php" class="btn btn-primary">Return to Dashboard</a></p>
     </div>
 
 </body>

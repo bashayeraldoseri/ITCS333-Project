@@ -437,6 +437,10 @@ if ($_SESSION["DoB"] != null) {
                             <ul class="list-unstyled">
                                 <li><i class="bi bi-envelope-fill text-primary"></i> Help.123123@info.com</li>
                                 <li><i class="bi bi-envelope-fill text-primary"></i> Help.9910@info.com</li>
+                                <li> <a href="mailto:uobbookingsystem@gmail.com" class="text-decoration-none">
+                                  <i class="bi bi-envelope-fill text-primary"></i> uobbookingsystem@gmail.com</a>
+                                </li>
+
                             </ul>
                         </div>
                         <!-- Call Center -->
